@@ -1,0 +1,8 @@
+- Menus
+  - Main Menu
+  - Settings Menu
+  
+- Game Play
+  - Add generation of small/medium/tiny steroids
+  - Add hazards
+  

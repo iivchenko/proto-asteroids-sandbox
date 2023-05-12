@@ -1,0 +1,9 @@
+# I don't like
+
+- The calculations are made in frames not seconds e.g. alarm[0] = 60 -> will run after 60 frames that mean ~1 second
+- Rooms don't have good scripting support
+
+# I do like
+
+- The code first or code main approach
+- Quite strict and logical entities hierarhy
