@@ -3,6 +3,14 @@
   - Settings Menu
   
 - Game Play
-  - Add generation of small/medium/tiny steroids
+  + Add generation of small/medium/tiny steroids
   - Add hazards
+  - Add stars
+  - Add UFO
+  - Add particle effects to Ship death
+  - Add particle effects to Asteroids death
+  - Add particle effects to UFO death
+  - Add lazer SFX
+  - Add blaster SFX
+  - Add Music
   

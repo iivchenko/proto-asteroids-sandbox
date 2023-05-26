@@ -1,7 +1,8 @@
 # I don't like
 
 - The calculations are made in frames not seconds e.g. alarm[0] = 60 -> will run after 60 frames that mean ~1 second
-- Rooms don't have good scripting support
+- Rooms don't have good scripting 
+- Constantly GPU is exhousted when GMS running
 
 # I do like
 

@@ -64,6 +64,9 @@
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
+  "tags": [
+    "asteroid",
+  ],
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",

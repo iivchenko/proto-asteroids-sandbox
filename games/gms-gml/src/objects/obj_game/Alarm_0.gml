@@ -1,3 +1,6 @@
+// Part of game loop.
+// Generates new asteroids
+
 var h = window_get_height();
 var w = window_get_width();
 var _x = 0;

@@ -1,3 +1,5 @@
+// Part of the game loop. 
+// Each minute reduces asteroids spawn time by 1 sec until it is alreay 1 sec
 next_asteroid -= 60;
 
 if next_asteroid > 60
