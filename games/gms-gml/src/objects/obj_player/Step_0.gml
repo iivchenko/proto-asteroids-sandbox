@@ -14,8 +14,9 @@ var is_right =
 	gamepad_button_check(0, gp_padr);
 	
 var is_fire = 
-	keyboard_check_pressed(vk_space) || 
-	gamepad_button_check_pressed(0, gp_face1);
+	(keyboard_check_pressed(vk_space) || 
+	gamepad_button_check_pressed(0, gp_face1)) &&
+	can_fire;
 
 if is_thrust
 {	
@@ -41,4 +42,6 @@ if is_fire
 	
 	bullet.image_angle = image_angle;
 	bullet.direction = image_angle;
+	can_fire = false;
+	alarm[0] = 20;
 }

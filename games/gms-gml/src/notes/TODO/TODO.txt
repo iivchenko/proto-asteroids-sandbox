@@ -12,5 +12,8 @@
   - Add particle effects to UFO death
   - Add lazer SFX
   - Add blaster SFX
-  - Add Music
+  + Add Music
+  - Add game over
+  - Add ship lives
+  - Introduce ship to asteroids collisions
   
