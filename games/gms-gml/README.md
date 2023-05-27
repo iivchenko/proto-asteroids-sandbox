@@ -10,3 +10,4 @@ Negatives:
 * In order to use font it must be installed in the OS
 * Don't feel comfortable working with frames direclty
 * The Json as always is not readable
+* GML dynamic typing
