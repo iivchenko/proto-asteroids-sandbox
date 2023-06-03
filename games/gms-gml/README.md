@@ -1,13 +1,16 @@
 # Game Maker Studio (GML)
 
-Positives: 
-* Scripts directly existing with objects
-* Posibility to create independant scripts/systms or objects
+Positives:
+* The code first or code main approach
+* Quite strict and logical entities hierarchy
+* Scripts directly existing with or inside objects
+* Possibility to create independent scripts/systems or objects
 Negatives:
 * Missing UI editor
-* Missing Scripts attached to Rooms
+* Rooms has only creation scrips but no other events or other scripting
 * Generates lots of metadata folders/files for assets
 * In order to use font it must be installed in the OS
-* Don't feel comfortable working with frames direclty
+* Don't feel comfortable working with frames directly, I wish I have seconds
 * The Json as always is not readable
 * GML dynamic typing
+* Constantly GPU is exhausted when GMS running

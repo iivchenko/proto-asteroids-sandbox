@@ -15,5 +15,5 @@
   + Add Music
   - Add game over
   - Add ship lives
-  - Introduce ship to asteroids collisions
+  + Introduce ship to asteroids collisions
   
