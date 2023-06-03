@@ -14,3 +14,6 @@ Negatives:
 * The Json as always is not readable
 * GML dynamic typing
 * Constantly GPU is exhausted when GMS running
+* UI of the engine when zooming up/down start to be blury
+* Particle system is not that rich
+* The dynamic nature of Layers that are represented as string in scripts
