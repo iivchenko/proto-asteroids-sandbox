@@ -61,6 +61,7 @@ app:
         #- somelib
         #- somelib: someversion
         #- somelib: git:https://github.com/somelibauthor/somelib.git
+        - random
 
     defines:
         #- some_define

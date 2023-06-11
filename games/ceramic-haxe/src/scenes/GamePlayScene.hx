@@ -20,7 +20,7 @@ class GamePlayScene extends Scene {
 
     override function create() {
 
-        shipSprite = shipSprites[Math.floor(Math.random() * 0.99999 * shipSprites.length)];
+        shipSprite = Random.fromArray(shipSprites);
         var ship = Ship.Create(assets.texture(shipSprite), Math.round(width / 2), Math.round(height / 2));
 
         add(ship);

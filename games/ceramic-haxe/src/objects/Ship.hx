@@ -7,9 +7,9 @@ class Ship extends Quad {
 
     static public function Create(sprite: Texture, x: Int, y: Int) : Ship {
         var ship = new Ship();
-        ship.texture = sprite;
-        ship.x = x;
-        ship.y = y;
+        ship._texture = sprite;
+        ship.anchor(0.5, 0.5);
+        ship.pos(x, y);
 
         return ship;
     }

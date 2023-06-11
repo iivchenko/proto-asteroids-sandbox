@@ -23,8 +23,6 @@ class StarScene extends Scene {
 
     override function create() {
 
-        log.info(Math.random());
-
         var block = 96;
         for (x in 0...Math.round(width/block))
             for (y in 0...Math.round(height/block)) {
@@ -32,15 +30,15 @@ class StarScene extends Scene {
                     continue;
 
                 var star = new Quad();
-                star.texture = assets.texture(stars[Math.floor(Math.random() * 0.99999 * stars.length)]);
+                star.texture = assets.texture(Random.fromArray(stars));
                 star.color = Color.random();
                 star.anchor(0.5, 0.5);
-                star.pos(Math.random() * 96 + x * block, Math.random() * 96 + y * block);
-                star.scale(Math.random() * 1.4);
-                star.rotation = Math.random() * 360;
+                star.pos(Random.int(0, block) + x * block, Random.int(0, block) + y * block);
+                star.scale(Random.float(0.5, 2));
+                star.rotation = Random.int(0, 360);
                 star.alpha = 0.1;
 
-                Timer.delay(this, Math.random() * 10, function () {
+                Timer.delay(this, Random.int(0, 10), function () {
                     show(star);
                 });                
 
