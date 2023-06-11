@@ -10,7 +10,7 @@ class Project extends Entity {
 
         super();
 
-        settings.antialiasing = 2;
+        settings.antialiasing = 0;
         settings.background = Color.BLACK;
         settings.targetWidth = 1920;
         settings.targetHeight = 1080;
@@ -19,14 +19,11 @@ class Project extends Entity {
         settings.fullscreen = true;
 
         app.onceReady(this, ready);
-
     }
 
     function ready() {
 
-        // Set MainScene as the current scene (see MainScene.hx)
-        app.scenes.main = new MainScene();
-
+        app.scenes.set("stars", new scenes.StarScene());
+        app.scenes.main = new scenes.GamePlayScene();
     }
-
 }

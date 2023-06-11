@@ -1,8 +1,8 @@
 app:
-    package: mycompany.ceramic-haxe
-    name: ceramic-haxe
-    displayName: ceramic-haxe
-    author: My Company
+    package: rorck.proto-asteroids-ceramic-haxe
+    name: Proto Asteroid (Ceramic)
+    displayName: proto-asteroids-ceramic-haxe
+    author: Rorck
     version: '1.0'
 
     plugins:
