@@ -17,9 +17,9 @@
     {"name":"UI","order":2,"path":"folders/Sounds/UI.yy",},
     {"name":"Sprites","order":1,"path":"folders/Sprites.yy",},
     {"name":"Menu","order":8,"path":"folders/Sprites/Menu.yy",},
+    {"name":"Stars","order":12,"path":"folders/Sprites/Stars.yy",},
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
-    {"name":"Stars","order":12,"path":"folders/Sprites/Stars.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"obj_game","order":4,"path":"objects/obj_game/obj_game.yy",},
