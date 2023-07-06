@@ -1,19 +1,19 @@
 - Menus
   - Main Menu
-  - Settings Menu
+  / Settings Menu (don't want to do)
   
 - Game Play
-  + Add generation of small/medium/tiny steroids
+
   - Add hazards
-  - Add stars
   - Add UFO
-  - Add particle effects to Ship death
-  - Add particle effects to Asteroids death
   - Add particle effects to UFO death
-  - Add lazer SFX
-  - Add blaster SFX
-  + Add Music
+  - Add blaster SFX  
   - Add game over
   - Add ship lives
   + Introduce ship to asteroids collisions
-  
+  + Add stars
+  + Add generation of small/medium/tiny steroids
+  + Add particle effects to Ship death
+  + Add particle effects to Asteroids death
+  + Add lazer SFX
+  + Add Music
