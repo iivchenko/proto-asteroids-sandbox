@@ -1,1 +1,1 @@
-var text = "Button";
+text = "Button";

@@ -1,6 +1,7 @@
-image_alpha = 1.0;
+is_selected = true;
+select_button();
 
-if (mouse_check_button(mb_left))
-{
-	y = y_initial;
-}
+
+
+
+
