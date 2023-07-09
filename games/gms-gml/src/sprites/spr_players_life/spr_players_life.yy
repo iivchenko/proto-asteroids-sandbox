@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "spr_asteroid_small_01",
+  "name": "spr_players_life",
   "bbox_bottom": 15,
   "bbox_left": 0,
   "bbox_right": 15,
@@ -13,39 +13,16 @@
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"ea973af3-7ab5-4145-8710-df791a95fc86",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"ee217b01-668a-4edd-a8da-805970804b7e",},
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 16,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"2ba224fa-efc2-4591-b1aa-1c043e7284a9","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"9e04bfeb-ade3-4f37-8a49-4f05bebb0225","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
   ],
-  "nineSlice": {
-    "resourceType": "GMNineSliceData",
-    "resourceVersion": "1.0",
-    "bottom": 0,
-    "enabled": false,
-    "guideColour": [
-      4294902015,
-      4294902015,
-      4294902015,
-      4294902015,
-    ],
-    "highlightColour": 1728023040,
-    "highlightStyle": 0,
-    "left": 0,
-    "right": 0,
-    "tileMode": [
-      0,
-      0,
-      0,
-      0,
-      0,
-    ],
-    "top": 0,
-  },
+  "nineSlice": null,
   "origin": 4,
   "parent": {
     "name": "Sprites",
@@ -55,7 +32,7 @@
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "spr_asteroid_small_01",
+    "name": "spr_players_life",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -77,7 +54,7 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ea973af3-7ab5-4145-8710-df791a95fc86","path":"sprites/spr_asteroid_small_01/spr_asteroid_small_01.yy",},},},"Disabled":false,"id":"2f418b61-967e-4c93-adde-5488c1195fb5","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ee217b01-668a-4edd-a8da-805970804b7e","path":"sprites/spr_players_life/spr_players_life.yy",},},},"Disabled":false,"id":"b49f7662-cd98-491a-8b67-311665bfab59","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,
@@ -87,9 +64,6 @@
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
-  "tags": [
-    "asteroid",
-  ],
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
