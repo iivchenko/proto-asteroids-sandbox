@@ -396,3 +396,22 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Godot ====
+.godot/
+.import/
+export.cfg
+
+# Mono-specific ignores
+.mono/
+data_*/
+
+# Net
+bin/
+obj/
+.vs/
+packages/
+
+# Project specific
+.publish/
+.tools/
