@@ -12,3 +12,18 @@ Classical implementation or the [Asteroids Game](https://en.wikipedia.org/wiki/A
 * [Scrutor](https://github.com/khellang/Scrutor)
 * [Comora](https://github.com/dotnet-ad/Comora)
 * [Newton.Json](https://www.newtonsoft.com/json)
+
+Positives:
+* C# language
+* Low level frawework
+  * Takes away low lovel development
+  * Flexible eneugh to build own cool high level frameworks
+
+Negatives:
+* Stale
+  * Very slow evolution
+  * Far behind from the latest .NET
+  * Comunity libs/projects are very outdated
+* No documentation and good samples (hard to learn and very slow progress)
+* No Web export
+* No good libs for generic tasks like UI, ParticleSystem, Camera, Light, Animations, Tween etc.
