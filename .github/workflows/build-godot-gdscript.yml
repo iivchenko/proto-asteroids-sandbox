@@ -1,1 +1,3 @@
 name: Build - Godot/GDScript
+on:
+  workflow_dispatch:
