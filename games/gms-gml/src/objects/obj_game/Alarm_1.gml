@@ -4,14 +4,14 @@ if (pause == false)
 {	
 	next_asteroid -= 60;
 	next_ufo -= 60;
+}
 
-	if next_asteroid > 60
-	{
-		alarm[1] = next_time_decrease;
-	}
-	else
-	{
-		next_asteroid = 60;
-		next_ufo = 5 * 60;
-	}
+if next_asteroid > 60
+{
+	alarm[1] = next_time_decrease;
+}
+else
+{
+	next_asteroid = 60;
+	next_ufo = 5 * 60;
 }

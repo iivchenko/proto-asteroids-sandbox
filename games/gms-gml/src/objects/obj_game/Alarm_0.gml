@@ -18,5 +18,6 @@ if (pause == false)
 	}
 
 	instance_create_layer(_x, _y, "Instances", obj_enemy_asteroid);
-	alarm[0] = next_asteroid;
 }
+
+alarm[0] = next_asteroid;
