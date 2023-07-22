@@ -5,6 +5,7 @@ Positives:
 * Quite strict and logical entities hierarchy
 * Scripts directly existing with or inside objects
 * Possibility to create independent scripts/systems or objects
+
 Negatives:
 * Missing UI editor
 * Rooms has only creation scrips but no other events or other scripting
@@ -17,3 +18,4 @@ Negatives:
 * UI of the engine when zooming up/down start to be blury
 * Particle system is not that rich
 * The dynamic nature of Layers that are represented as string in scripts
+* Notes just dummy txt file - I create such my self in any engine   

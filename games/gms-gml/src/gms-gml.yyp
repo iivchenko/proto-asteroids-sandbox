@@ -92,7 +92,6 @@
     {"id":{"name":"obj_button_restart","path":"objects/obj_button_restart/obj_button_restart.yy",},},
     {"id":{"name":"snd_laser","path":"sounds/snd_laser/snd_laser.yy",},},
     {"id":{"name":"snd_game2_song","path":"sounds/snd_game2_song/snd_game2_song.yy",},},
-    {"id":{"name":"GMS Score","path":"notes/GMS Score/GMS Score.yy",},},
     {"id":{"name":"spr_star_02","path":"sprites/spr_star_02/spr_star_02.yy",},},
     {"id":{"name":"spr_star_03","path":"sprites/spr_star_03/spr_star_03.yy",},},
     {"id":{"name":"fnt_button","path":"fonts/fnt_button/fnt_button.yy",},},
