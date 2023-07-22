@@ -21,7 +21,7 @@ jobs:
       with:
         dotnet-version: 3.1.200
     - name: Publish WinX64
-      run: dotnet publish ./src/Desktop/Desktop.csproj --configuration release --runtime win-x64 --self-contained true -o ./publish/win-x64
+      run: dotnet publish ./games/monogame-csharp/src/Desktop/Desktop.csproj --configuration release --runtime win-x64 --self-contained true -o ./publish/win-x64
     - name: Windows Artifacts
       uses: actions/upload-artifact@v1
       with:
@@ -43,7 +43,7 @@ jobs:
       with:
         dotnet-version: 3.1.200
     - name: Publish LinuxX64
-      run: dotnet publish ./src/Desktop/Desktop.csproj --configuration release --runtime linux-x64 --self-contained true -o ./publish/linux-x64
+      run: dotnet publish ./games/monogame-csharp/src/Desktop/Desktop.csproj --configuration release --runtime linux-x64 --self-contained true -o ./publish/linux-x64
     - name: Linux Artifacts
       uses: actions/upload-artifact@v1
       with:
@@ -64,7 +64,7 @@ jobs:
       with:
         dotnet-version: 3.1.200
     - name: Publish MacOSX64
-      run: dotnet publish ./src/Desktop/Desktop.csproj --configuration release --runtime osx-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:DefineConstants="${{ env.CONFIG }} MacOS" --self-contained true -o ./publish/macos-x64
+      run: dotnet publish ./games/monogame-csharp/src/Desktop/Desktop.csproj --configuration release --runtime osx-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:DefineConstants="${{ env.CONFIG }} MacOS" --self-contained true -o ./publish/macos-x64
     - name: Create Mac App
       run: |
         New-Item -ItemType Directory -Name './mac/Proto Asteroids MonoGame.App/Contents/MacOS'
@@ -72,7 +72,7 @@ jobs:
         Copy-Item -Path './publish/macos-x64/Content' -Destination './mac/Proto Asteroids MonoGame.App/Contents/Resources' -Recurse
         Copy-Item -Path './publish/macos-x64/game-settings.json' -Destination './mac/Proto Asteroids MonoGame.App/Contents/Resources/'
         Copy-Item -Path './publish/macos-x64/*' -Destination './mac/Proto Asteroids MonoGame.App/Contents/MacOS' -Exclude 'Content','game-settings.json'
-        Copy-Item -Path './src/Desktop/Icon.icns' -Destination './mac/Proto Asteroids MonoGame.App/Contents/Resources/'
+        Copy-Item -Path './games/monogame-csharp/src/Desktop/Icon.icns' -Destination './mac/Proto Asteroids MonoGame.App/Contents/Resources/'
         Set-Content -Path './mac/Proto Asteroids MonoGame.App/Contents/Info.plist' -Value '<?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
         <plist version="1.0">
