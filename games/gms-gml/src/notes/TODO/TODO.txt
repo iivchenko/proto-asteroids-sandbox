@@ -8,8 +8,8 @@
   + Add UFO
   + Add particle effects to UFO death
   + Add blaster SFX  
-  - Add game over
-  - Add game play exit
+  + Add game over screen
+  + Add game play exit
   + Add ship lives
   + Introduce ship to asteroids collisions
   + Add stars
