@@ -4,12 +4,25 @@ Classical implementation or the [Asteroids Game](https://en.wikipedia.org/wiki/A
 
 ![Game Screenshot](doc/game-screenshot.png)
 
-## Tech Stack
-* [.net core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1)
-* [MonoGame 3.8](https://www.monogame.net/downloads/)
-* [Scrutor](https://github.com/khellang/Scrutor)
-* [Comora](https://github.com/dotnet-ad/Comora)
-* [Newton.Json](https://www.newtonsoft.com/json)
+# Development Status
+| Engine/Framework  | Status        |
+| -------------     | ------------- |
+| MonoGame/C#       | :green_heart: |
+| MonoGame EC/C#    | :boom:        |
+| MonoGame ECS/C#   | :boom:        |
+| MonoGame ELM/F#   | :boom:        |
+| GMS               | :green_heart: |
+| Godot/C#          | :boom:        |
+| Godot/GDScript    | :snowflake:   |
+| Ceramic/Haxe      | :boom:        |
+| Defold/Lua        | :snowflake:   |
+| Unity/C#          | :snowflake:   |
+
+*Agenda*
+* :green_heart: - Done
+* :recycle: - Under development
+* :boom: - Excited to work
+* :snowflake: - Have no dezire and have no fire!
 
 # License
 * Source Code
