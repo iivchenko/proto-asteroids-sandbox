@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfdtl1dimnaps"]
+[gd_scene load_steps=4 format=3 uid="uid://cfdtl1dimnaps"]
 
 [ext_resource type="Script" path="res://game_objects/PlayerShip.cs" id="1_1tdwd"]
+[ext_resource type="Texture2D" uid="uid://cfpv1010x7r28" path="res://assets/sprites/players_ships/ship-blue-01.png" id="2_g76x7"]
 
-[node name="PlayerShip" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_op5d3"]
+radius = 16.0
+
+[node name="PlayerShip" type="CharacterBody2D"]
 script = ExtResource("1_1tdwd")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_g76x7")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_op5d3")
