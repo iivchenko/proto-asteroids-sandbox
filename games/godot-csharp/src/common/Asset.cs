@@ -4,8 +4,8 @@ using System.Linq;
 
 public static partial class Asset
 {
-	public static string RandomAsset(string path)
-	{
+    public static string RandomAsset(string path)
+    {
         var files =
             DirAccess
                 .Open(path)
