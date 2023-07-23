@@ -1,4 +1,2 @@
-﻿namespace ProtoAsteroidsGodotCSharp.game_objects
-{
-    public interface IOnScreenGameObject : IGameObject { }
-}
+﻿public interface IOnScreenGameObject : IGameObject { }
+

@@ -1,6 +1,4 @@
 using Godot;
-using ProtoAsteroidsGodotCSharp.common;
-using ProtoAsteroidsGodotCSharp.game_objects;
 using System;
 
 public partial class GamePlayScene : Node2D

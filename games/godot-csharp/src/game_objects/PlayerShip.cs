@@ -1,5 +1,4 @@
 using Godot;
-using ProtoAsteroidsGodotCSharp.game_objects;
 using System;
 
 public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
