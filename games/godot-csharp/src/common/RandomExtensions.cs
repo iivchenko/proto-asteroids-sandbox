@@ -12,5 +12,15 @@ public static class RandomExtensions
 
         return items.ElementAt(index);
     }
+
+    public static Vector2 NextDirection(this Random rand)
+    {
+        var xSign = rand.Next(0, 2) == 0 ? 1 : -1;
+        var ySign = rand.Next(0, 2) == 0 ? 1 : -1;
+        var x = rand.NextDouble() * xSign;
+        var y = rand.NextDouble() * ySign;
+
+        return new Vector2((float)x, (float)y).Normalized();
+    }
 }
 

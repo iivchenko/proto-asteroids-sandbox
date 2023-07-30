@@ -15,11 +15,6 @@ config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
 
-[display]
-
-window/size/viewport_width=640
-window/size/viewport_height=480
-
 [dotnet]
 
 project/assembly_name="Proto Asteroids Godot CSharp"

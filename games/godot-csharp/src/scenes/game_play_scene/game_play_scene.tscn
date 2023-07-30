@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cygpqmt5ors3m"]
+[gd_scene load_steps=3 format=3 uid="uid://cygpqmt5ors3m"]
 
 [ext_resource type="Script" path="res://scenes/game_play_scene/GamePlayScene.cs" id="1_1natp"]
+[ext_resource type="PackedScene" uid="uid://byhxkmhuuumi5" path="res://game_objects/asteroid.tscn" id="2_sy6eu"]
 
 [node name="GamePlayScene" type="Node2D"]
 script = ExtResource("1_1natp")
@@ -8,5 +9,17 @@ script = ExtResource("1_1natp")
 [node name="StarSkyLayer" type="Node2D" parent="."]
 
 [node name="GameObjects" type="Node2D" parent="."]
+
+[node name="Asteroid" parent="GameObjects" instance=ExtResource("2_sy6eu")]
+position = Vector2(165, 167)
+
+[node name="Asteroid2" parent="GameObjects" instance=ExtResource("2_sy6eu")]
+position = Vector2(499, 315)
+
+[node name="Asteroid3" parent="GameObjects" instance=ExtResource("2_sy6eu")]
+position = Vector2(528, 59)
+
+[node name="Asteroid4" parent="GameObjects" instance=ExtResource("2_sy6eu")]
+position = Vector2(112, 319)
 
 [node name="Hud" type="Node2D" parent="."]
