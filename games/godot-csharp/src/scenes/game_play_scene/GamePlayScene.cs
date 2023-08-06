@@ -59,7 +59,12 @@ public partial class GamePlayScene : Node2D
         var path = Asset.RandomAsset("res://assets/sprites/players_ships/");
 
         instance.Texture = GD.Load<Texture2D>(path);
-        instance.GlobalPosition = new Vector2(_viewSize.X / 2.0f, _viewSize.Y / 2.0f);		
+        instance.GlobalPosition = new Vector2(_viewSize.X / 2.0f, _viewSize.Y / 2.0f);
+        instance.Died += () =>
+        {
+            instance.GlobalPosition = new Vector2(_viewSize.X / 2.0f, _viewSize.Y / 2.0f);
+            instance.Reset();
+        };
 
         _objectsLayer.AddChild(instance);
     }

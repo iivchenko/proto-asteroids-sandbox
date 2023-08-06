@@ -4,6 +4,13 @@ using Godot;
 
 public partial class Asteroid : Area2D, IOnScreenGameObject
 {
+    private enum State
+    {
+        Live,
+        Dies,
+        Dead
+    }
+
     private static readonly IDictionary<AsteroidType, AsteroidMeta> Metadata = new Dictionary<AsteroidType, AsteroidMeta>()
     {
         {
@@ -48,16 +55,24 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
         }
     };
 
+    private State _state = State.Live;
     private Vector2 _speed;
     private float _rotationSpeed;
     private Sprite2D _sprite;
+    private CollisionShape2D _body;
+    private Node2D _death;
 
     public override void _Ready()
     {
         base._Ready();
 
         InitializeAsteroid();
+
+        BodyEntered += OnCollide;
+        AreaEntered += OnCollide;
     }
+
+    public Vector2 Size => _sprite.Texture.GetSize();
 
     private void InitializeAsteroid()
     {
@@ -74,7 +89,9 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
 
         _sprite = GetNode<Sprite2D>(type + "Sprite");
         _sprite.Visible = true;
-        GetNode<CollisionShape2D>(type + "Body").Disabled = false;
+        _body = GetNode<CollisionShape2D>(type + "Body");
+        _body.Disabled = false;
+        _death = GetNode<Node2D>("Death");
 
         _rotationSpeed = Random.Shared.Next(meta.MinRotation, meta.MaxRotation) / 100.0f;
         var speed = Random.Shared.Next(meta.MinSpeed, meta.MaxSpeed);
@@ -85,11 +102,60 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
     {
         var deltaF = (float)delta;
 
-        Rotation += _rotationSpeed * deltaF;
-        Position += _speed * deltaF;
+        switch (_state)
+        {
+            case State.Live:
+                ProcessLive(deltaF);
+                break;
+            case State.Dies:
+                ProcessDies(deltaF);
+                break;
+            case State.Dead:
+                break;
+            default:
+                break;
+        }
     }
 
-    public Vector2 Size => _sprite.Texture.GetSize();
+    private void ProcessLive(float delta)
+    {
+        Rotation += _rotationSpeed * delta;
+        Position += _speed * delta;
+    }
+
+    private void ProcessDies(float _)
+    {
+        var isDead =
+                  _death.GetNode<CpuParticles2D>("Particles1").Emitting == false &&
+                  _death.GetNode<CpuParticles2D>("Particles2").Emitting == false &&
+                  _death.GetNode<CpuParticles2D>("Particles3").Emitting == false;
+
+        if (isDead)
+        {
+            _state = State.Dead;
+
+            QueueFree();
+        }
+    }    
+
+    private void OnCollide(Node2D body)
+    {
+        switch (body)
+        {
+            case PlayerShip player:
+                player.Destroy();
+                break;
+        }
+
+        _state = State.Dies;
+
+        _sprite.Visible = false;
+        _body.SetDeferred("Disabled", true);
+
+        _death.GetNode<CpuParticles2D>("Particles1").Emitting = true;
+        _death.GetNode<CpuParticles2D>("Particles2").Emitting = true;
+        _death.GetNode<CpuParticles2D>("Particles3").Emitting = true;
+    }
 
     public enum AsteroidType
     {

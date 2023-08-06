@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfdtl1dimnaps"]
+[gd_scene load_steps=7 format=3 uid="uid://cfdtl1dimnaps"]
 
 [ext_resource type="Script" path="res://game_objects/PlayerShip.cs" id="1_1tdwd"]
 [ext_resource type="Texture2D" uid="uid://cfpv1010x7r28" path="res://assets/sprites/players_ships/ship-blue-01.png" id="2_g76x7"]
+[ext_resource type="Texture2D" uid="uid://by55qsriq4v0h" path="res://assets/sprites/debris/debri-01.png" id="3_1wijw"]
+[ext_resource type="Texture2D" uid="uid://bxfgc6hrjmacn" path="res://assets/sprites/debris/debri-02.png" id="4_sekgc"]
+[ext_resource type="Texture2D" uid="uid://dek2xdx1d7udk" path="res://assets/sprites/debris/debri-03.png" id="5_kdyug"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_op5d3"]
 radius = 16.0
@@ -15,3 +18,50 @@ texture = ExtResource("2_g76x7")
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_op5d3")
+
+[node name="Death" type="Node2D" parent="."]
+
+[node name="Particles1" type="CPUParticles2D" parent="Death"]
+emitting = false
+amount = 2
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource("3_1wijw")
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 50.0
+angular_velocity_min = 50.0
+angular_velocity_max = 100.0
+
+[node name="Particles2" type="CPUParticles2D" parent="Death"]
+emitting = false
+amount = 2
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource("4_sekgc")
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 50.0
+angular_velocity_min = 50.0
+angular_velocity_max = 100.0
+
+[node name="Particles3" type="CPUParticles2D" parent="Death"]
+emitting = false
+amount = 2
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.5
+texture = ExtResource("5_kdyug")
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 50.0
+angular_velocity_min = 50.0
+angular_velocity_max = 100.0
