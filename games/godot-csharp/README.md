@@ -14,13 +14,13 @@ TODO:
 - [ ] Main Menu
 - [ ] Settings Menu
 - [ ] Game Play
-  - [ ] Add star sky
-  - [ ] Add players ship
-  - [ ] Add playses ship death particles
-  - [ ] Add asteroids
-  - [ ] Add generation of small/medium/tiny steroids
-  - [ ] Add particle effects to Asteroids death
-  - [ ] Introduce ship to asteroids collisions
+  - [X] Add star sky
+  - [X] Add players ship
+  - [X] Add playses ship death particles
+  - [X] Add asteroids
+  - [X] Add generation of small/medium/tiny steroids
+  - [X] Add particle effects to Asteroids death
+  - [X] Introduce ship to asteroids collisions
   - [ ] Add hazards
   - [ ] Add UFO
   - [ ] Add particle effects to UFO death
