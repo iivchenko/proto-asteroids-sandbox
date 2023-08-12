@@ -83,7 +83,7 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
         Velocity = Vector2.Zero;
 
         _sprite.Visible = false;
-        _body.Disabled = true;
+        _body.SetDeferred("Disabled", true);
 
         _death.GetNode<CpuParticles2D>("Particles1").Emitting = true;
         _death.GetNode<CpuParticles2D>("Particles2").Emitting = true;

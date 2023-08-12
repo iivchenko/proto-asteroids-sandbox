@@ -62,6 +62,12 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
     private CollisionShape2D _body;
     private Node2D _death;
 
+    public static Asteroid Instantiate()
+    {
+        var scene = (PackedScene)ResourceLoader.Load("res://game_objects/asteroid.tscn");
+        return scene.Instantiate<Asteroid>();
+    }
+
     public override void _Ready()
     {
         base._Ready();

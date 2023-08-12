@@ -14,12 +14,12 @@ script = ExtResource("1_1natp")
 position = Vector2(165, 167)
 
 [node name="Asteroid2" parent="GameObjects" instance=ExtResource("2_sy6eu")]
-position = Vector2(499, 315)
+position = Vector2(935, 530)
 
 [node name="Asteroid3" parent="GameObjects" instance=ExtResource("2_sy6eu")]
-position = Vector2(528, 59)
+position = Vector2(900, 74)
 
 [node name="Asteroid4" parent="GameObjects" instance=ExtResource("2_sy6eu")]
-position = Vector2(112, 319)
+position = Vector2(145, 522)
 
 [node name="Hud" type="Node2D" parent="."]

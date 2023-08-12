@@ -1,18 +1,25 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class GamePlayScene : Node2D
 {
+    private int _nextAsteroid = 5000;
+    private int _nextAsteroidDecrease = 60000;
     private Node2D _objectsLayer;
     private Node2D _skyLayer;
     private Node2D _player;
     private Vector2 _viewSize;
 
-    public override void _Ready()
+    public override async void _Ready()
     {
         InitializeNodes();
         GenerateStarSky();
         InitializePlayer();
+
+        await Task.WhenAll(
+            NextAsteroid(),
+            NextAsteroidDecrease());
     }
 
     public override void _Process(double delta)
@@ -92,5 +99,55 @@ public partial class GamePlayScene : Node2D
                         }
                     );	
             });
+    }
+
+    private async Task NextAsteroid()
+    {
+        static float Rand(float size)
+        {
+            return Random.Shared.Next((int)size + 1);
+        }
+
+        await Task.Delay(_nextAsteroid);
+
+        var asteroid = Asteroid.Instantiate();
+
+        asteroid.GlobalPosition = Random.Shared.Next(4) switch
+        {
+            // UP
+            0 => new Vector2(Rand(_viewSize.X), 0),
+
+            // RIGHT
+            1 => new Vector2(_viewSize.X, Rand(_viewSize.Y)),
+
+            // DOWN
+            2 => new Vector2(Rand(_viewSize.X), _viewSize.Y),
+
+            // LEFT
+            _ => new Vector2(0, Rand(_viewSize.Y))
+        };
+
+        _objectsLayer.AddChild(asteroid);
+
+        await NextAsteroid();
+    }
+
+    private async Task NextAsteroidDecrease()
+    {
+        await Task.Delay(_nextAsteroidDecrease);
+
+        if (_nextAsteroid > 1000) 
+        {
+            _nextAsteroid -= 1000;
+
+            if (_nextAsteroid >= 1000)
+            {
+                await NextAsteroidDecrease();
+            }
+            else
+            {
+                _nextAsteroid = 1000;
+            }
+        }
     }
 }
