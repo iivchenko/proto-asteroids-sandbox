@@ -4,6 +4,9 @@ using Godot;
 
 public partial class Asteroid : Area2D, IOnScreenGameObject
 {
+    [Signal]
+    public delegate void KilledByPlayerEventHandler(AsteroidType type);
+
     private enum State
     {
         Live,
@@ -56,6 +59,7 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
     };
 
     private State _state = State.Live;
+    private AsteroidType _type;
     private Vector2 _speed;
     private float _rotationSpeed;
     private Sprite2D _sprite;
@@ -82,8 +86,8 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
 
     private void InitializeAsteroid()
     {
-        var type = Random.Shared.Pick(Enum.GetValues<AsteroidType>());
-        var meta = Metadata[type];
+        _type = Random.Shared.Pick(Enum.GetValues<AsteroidType>());
+        var meta = Metadata[_type];
 
         this
             .OnlyChildren<Sprite2D>()
@@ -93,9 +97,9 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
             .OnlyChildren<CollisionShape2D>()
             .Iter(node => node.Disabled = true);
 
-        _sprite = GetNode<Sprite2D>(type + "Sprite");
+        _sprite = GetNode<Sprite2D>(_type + "Sprite");
         _sprite.Visible = true;
-        _body = GetNode<CollisionShape2D>(type + "Body");
+        _body = GetNode<CollisionShape2D>(_type + "Body");
         _body.Disabled = false;
         _death = GetNode<Node2D>("Death");
 
@@ -158,8 +162,7 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
                 break;
 
             case Laser _:
-                // TODO: Implement scoring here
-                GD.Print("Score");
+                EmitSignal(SignalName.KilledByPlayer, (int)_type);
                 break;
         }
 

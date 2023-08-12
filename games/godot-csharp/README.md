@@ -35,7 +35,7 @@ TODO:
   - [ ] Add game over screen
   - [ ] Add game play exit  
   - [ ] Add Music
-  - [ ] Implement HUD
-    - [ ] Add scores
-    - [ ] Add lives
+  - [X] Implement HUD
+    - [X] Add scores
+    - [X] Add lives
 - [ ] Add controller support

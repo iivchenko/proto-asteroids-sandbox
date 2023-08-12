@@ -7,15 +7,23 @@ public partial class GamePlayScene : Node2D
 {
     private int _nextAsteroid = 5000;
     private int _nextAsteroidDecrease = 60000;
+
+    private int _score = 0;
+    private int _live = 3;
+
     private Node2D _objectsLayer;
     private Node2D _skyLayer;
     private Node2D _player;
     private Vector2 _viewSize;
 
+    private Label _scoreLabel;
+    private Label _liveLabel;
+
     public override async void _Ready()
     {
         InitializeNodes();
         GenerateStarSky();
+        InitializeInitialAsteroids();
         InitializePlayer();
 
         await Task.WhenAll(
@@ -33,6 +41,11 @@ public partial class GamePlayScene : Node2D
     {
         _objectsLayer = GetNode<Node2D>("GameObjects");
         _skyLayer = GetNode<Node2D>("StarSkyLayer");
+
+        _scoreLabel = GetNode<Label>("%ScoreLabel");
+        _liveLabel = GetNode<Label>("%LiveLabel");
+        _scoreLabel.Text = $"x {_score}";
+        _liveLabel.Text = $"x {_live}";
 
         _viewSize = GetViewport().GetVisibleRect().Size;
     }
@@ -71,11 +84,27 @@ public partial class GamePlayScene : Node2D
         instance.GlobalPosition = new Vector2(_viewSize.X / 2.0f, _viewSize.Y / 2.0f);
         instance.Died += () =>
         {
+            _live--;
+            _liveLabel.Text = $"x {_live}";
+
+            if (_live <= 0)
+            {
+                // TODO: Game Over
+            }
+
             instance.GlobalPosition = new Vector2(_viewSize.X / 2.0f, _viewSize.Y / 2.0f);
             instance.Reset();
         };
 
         _objectsLayer.AddChild(instance);
+    }
+
+    private void InitializeInitialAsteroids()
+    {
+        RandomAsteroid();
+        RandomAsteroid();
+        RandomAsteroid();
+        RandomAsteroid();
     }
 
     private void ScreenWrap()
@@ -121,14 +150,12 @@ public partial class GamePlayScene : Node2D
             });
     }
 
-    private async Task NextAsteroid()
+    private void RandomAsteroid()
     {
         static float Rand(float size)
         {
             return Random.Shared.Next((int)size + 1);
         }
-
-        await Task.Delay(_nextAsteroid);
 
         var asteroid = Asteroid.Instantiate();
 
@@ -147,7 +174,35 @@ public partial class GamePlayScene : Node2D
             _ => new Vector2(0, Rand(_viewSize.Y))
         };
 
+        asteroid.KilledByPlayer += (type) => {
+            GD.Print("Shoty 1");
+            switch (type)
+            {
+                case Asteroid.AsteroidType.Tiny:
+                    _score += 4;
+                    break;
+                case Asteroid.AsteroidType.Small:
+                    _score += 3;
+                    break;
+                case Asteroid.AsteroidType.Medium:
+                    _score += 2;
+                    break;
+                case Asteroid.AsteroidType.Big:
+                    _score += 1;
+                    break;
+            }
+
+            _scoreLabel.Text = $"x {_score}";
+        };
+
         _objectsLayer.AddChild(asteroid);
+    }
+
+    private async Task NextAsteroid()
+    {
+        await Task.Delay(_nextAsteroid);
+
+        RandomAsteroid();
 
         await NextAsteroid();
     }
