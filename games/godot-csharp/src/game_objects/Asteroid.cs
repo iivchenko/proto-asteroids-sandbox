@@ -146,10 +146,20 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
 
     private void OnCollide(Node2D body)
     {
+        if (_state != State.Live)
+        {
+            return;
+        }
+
         switch (body)
         {
             case PlayerShip player:
                 player.Destroy();
+                break;
+
+            case Laser _:
+                // TODO: Implement scoring here
+                GD.Print("Score");
                 break;
         }
 

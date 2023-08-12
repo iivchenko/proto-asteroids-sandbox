@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
 {
@@ -18,9 +19,11 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
     private const float MaxAcceleration = 15.0f;
 
     private State _state = State.Live;
+    private bool _canFire = true;
 
     private Sprite2D _sprite;
     private CollisionShape2D _body;
+    private Marker2D _firePoint;
     private Node2D _death;
 
     public Texture2D Texture
@@ -44,17 +47,18 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
     {
         _sprite = GetNode<Sprite2D>("Sprite");
         _body = GetNode<CollisionShape2D>("Body");
+        _firePoint = GetNode<Marker2D>("FirePoint");
         _death = GetNode<Node2D>("Death");
     }
 
-    public override void _Process(double delta)
+    public async override void _Process(double delta)
     {
         var deltaF = (float)delta;
        
         switch (_state)
         {
             case State.Live:
-                ProcessLive(deltaF);
+                await ProcessLive(deltaF);
                 break;
             case State.Dies:
                 ProcessDies(deltaF);
@@ -93,7 +97,7 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
     public static Vector2 ToDirection(float angle)
         => new Vector2(MathF.Sin(angle), -MathF.Cos(angle)).Normalized();
 
-    private void ProcessLive(float delta)
+    private async Task ProcessLive(float delta)
     {
         var turn = Input.GetActionStrength("player_turn_left") - Input.GetActionStrength("player_turn_right");
 
@@ -113,9 +117,21 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
             Velocity = velocity.Length() > MaxSpeed ? velocity.Normalized() * MaxSpeed : velocity;
         }
 
-        if (Input.IsActionJustPressed("player_fire"))
+        if (Input.IsActionJustPressed("player_fire") && _canFire)
         {
-            // Fire code
+            _canFire = false;
+            var laser = Laser.Instantiate();
+
+            laser.GlobalPosition = _firePoint.GlobalPosition;
+            laser.Rotation = Rotation;
+
+            GetParent().AddChild(laser);
+
+            await Task.Run(async () =>
+            {
+                await Task.Delay(500);
+                _canFire = true;
+            });
         }
 
         MoveAndSlide();
@@ -133,6 +149,6 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
             _state = State.Dead;
 
             EmitSignal(SignalName.Died);
-        }    
+        }
     }
 }

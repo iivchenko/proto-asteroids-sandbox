@@ -28,6 +28,6 @@ TODO:
   - [ ] Add game over screen
   - [ ] Add game play exit
   - [ ] Add ship lives
-  - [ ] Add lazer SFX
+  - [X] Add lazer SFX
   - [ ] Add Music
 - [ ] Add controller support

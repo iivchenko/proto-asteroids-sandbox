@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 public partial class GamePlayScene : Node2D
@@ -24,7 +25,8 @@ public partial class GamePlayScene : Node2D
 
     public override void _Process(double delta)
     {
-        Wrap();
+        ScreenWrap();
+        ScreenClean();
     }
 
     private void InitializeNodes()
@@ -76,7 +78,7 @@ public partial class GamePlayScene : Node2D
         _objectsLayer.AddChild(instance);
     }
 
-    private void Wrap()
+    private void ScreenWrap()
     {
         _objectsLayer
             .OnlyChildren<IOnScreenGameObject>()
@@ -98,6 +100,24 @@ public partial class GamePlayScene : Node2D
                             _ => obj.Position.Y
                         }
                     );	
+            });
+    }
+
+    private void ScreenClean()
+    {
+        _objectsLayer
+            .OnlyChildren<IGameObject>()
+            .Where(obj => obj is not IOnScreenGameObject)
+            .Where(obj =>
+                obj.Position.X < 0 ||
+                obj.Position.Y < 0 ||
+                obj.Position.X > _viewSize.X ||
+                obj.Position.Y > _viewSize.Y
+            )
+            .Cast<Node>() // TODO: Think on avoid casts
+            .Iter(obj =>
+            {
+                obj.QueueFree();
             });
     }
 

@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://eeci4lumd2qn"]
+[gd_scene load_steps=4 format=3 uid="uid://eeci4lumd2qn"]
 
-[node name="laser" type="Node2D"]
+[ext_resource type="Script" path="res://game_objects/Laser.cs" id="1_3d5j8"]
+[ext_resource type="Texture2D" uid="uid://cc6suxw6ccuk8" path="res://assets/sprites/lazers/laser-blue-01.png" id="1_weu60"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mwepu"]
+radius = 2.0
+height = 14.0
+
+[node name="Laser" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_3d5j8")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("1_weu60")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_mwepu")
