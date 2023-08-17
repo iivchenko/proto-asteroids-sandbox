@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 
 public partial class GamePlayScene : Node2D
 {
-    private int _nextAsteroid = 5000;
-    private int _nextAsteroidDecrease = 60000;
-
     private int _score = 0;
     private int _live = 3;
 
@@ -19,6 +16,20 @@ public partial class GamePlayScene : Node2D
     private Label _scoreLabel;
     private Label _liveLabel;
 
+
+    [Export]
+    public int NextAsteroid { get; set; } = 5000;
+
+    [Export]
+    public int NextAsteroidDecrease { get; set; } = 60000;
+
+
+    [Export]
+    public int NextUfo { get; set; } = 60000;
+
+    [Export]
+    public int NextUfoDecrease { get; set; } = 60000;
+
     public override async void _Ready()
     {
         InitializeNodes();
@@ -27,8 +38,10 @@ public partial class GamePlayScene : Node2D
         InitializePlayer();
 
         await Task.WhenAll(
-            NextAsteroid(),
-            NextAsteroidDecrease());
+            ProcessNextAsteroid(),
+            ProcessNextAsteroidDecrease(),
+            ProcessNextUfo(),
+            ProcessNextUfoDecrease());
     }
 
     public override void _Process(double delta)
@@ -198,30 +211,90 @@ public partial class GamePlayScene : Node2D
         _objectsLayer.AddChild(asteroid);
     }
 
-    private async Task NextAsteroid()
+    private void RandomUfo()
     {
-        await Task.Delay(_nextAsteroid);
+        static float Rand(float size)
+        {
+            return Random.Shared.Next((int)size + 1);
+        }
+
+        var ufo = Ufo.Instantiate();
+
+        ufo.GlobalPosition = Random.Shared.Next(4) switch
+        {
+            // UP
+            0 => new Vector2(Rand(_viewSize.X), 0),
+
+            // RIGHT
+            1 => new Vector2(_viewSize.X, Rand(_viewSize.Y)),
+
+            // DOWN
+            2 => new Vector2(Rand(_viewSize.X), _viewSize.Y),
+
+            // LEFT
+            _ => new Vector2(0, Rand(_viewSize.Y))
+        };
+
+        ufo.KilledByPlayer += () => {
+            _score += 10;
+            _scoreLabel.Text = $"x {_score}";
+        };
+
+        _objectsLayer.AddChild(ufo);
+    }
+
+    private async Task ProcessNextAsteroid()
+    {
+        await Task.Delay(NextAsteroid);
 
         RandomAsteroid();
 
-        await NextAsteroid();
+        await ProcessNextAsteroid();
     }
 
-    private async Task NextAsteroidDecrease()
+    private async Task ProcessNextAsteroidDecrease()
     {
-        await Task.Delay(_nextAsteroidDecrease);
+        await Task.Delay(NextAsteroidDecrease);
 
-        if (_nextAsteroid > 1000) 
+        if (NextAsteroid > 1000) 
         {
-            _nextAsteroid -= 1000;
+            NextAsteroid -= 1000;
 
-            if (_nextAsteroid >= 1000)
+            if (NextAsteroid >= 1000)
             {
-                await NextAsteroidDecrease();
+                await ProcessNextAsteroidDecrease();
             }
             else
             {
-                _nextAsteroid = 1000;
+                NextAsteroid = 1000;
+            }
+        }
+    }
+
+    private async Task ProcessNextUfo()
+    {
+        await Task.Delay(NextUfo);
+
+        RandomUfo();
+
+        await ProcessNextUfo();
+    }
+
+    private async Task ProcessNextUfoDecrease()
+    {
+        await Task.Delay(NextUfoDecrease);
+
+        if (NextUfo > 1000)
+        {
+            NextUfo -= 1000;
+
+            if (NextUfo >= 1000)
+            {
+                await ProcessNextUfoDecrease();
+            }
+            else
+            {
+                NextUfo = 1000;
             }
         }
     }

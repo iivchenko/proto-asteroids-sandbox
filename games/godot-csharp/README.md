@@ -15,23 +15,28 @@ TODO:
 - [ ] Settings Menu
 - [ ] Game Play
   - [X] Add star sky
-  - [X] Add players ship
+  - [ ] Add players ship
     - [X] Basics
     - [X] Add playses ship death particles
-    - [X] Add lazer SFX
-  - [X] Add asteroids
+    - [X] Add lazer
+    - [ ] Add lazer sfx
+    - [ ] Add death sound
+  - [ ] Add asteroids
     - [X] Introduce ship to asteroids collisions
     - [X] Add particle effects to Asteroids death
+    - [ ] Add death sound
   - [ ] Add UFO
-    - [ ] Implement basics
-    - [ ] Implement collision with asteroid
-    - [ ] Add particle effects to UFO death
-    - [ ] Add blaster SFX
-      - [ ] Collision with Player ship
-      - [ ] Collision with Asteroids
+    - [X] Implement basics
+    - [X] Implement collision with asteroid
+    - [X] Add particle effects to UFO death
+    - [ ] Add Death sound
+    - [ ] Add blaster
+      - [X] Collision with Player ship
+      - [X] Collision with Asteroids
+      - [ ] Add sfx
   - [ ] Game Loop
-    - [X] Add generation of small/medium/tiny steroids 
-    - [ ] Add hazards
+    - [X] Add generation of small/medium/tiny steroids
+    - [X] Add ufo generation
   - [ ] Add game over screen
   - [ ] Add game play exit  
   - [ ] Add Music

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3x4mwd6liwnt"]
+
+[ext_resource type="Script" path="res://game_objects/Blaster.cs" id="1_ffwow"]
+[ext_resource type="Texture2D" uid="uid://chybhjkykfjd6" path="res://assets/sprites/balsters/blaster-red-01.png" id="2_04p3v"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mwepu"]
+radius = 3.0
+height = 11.1892
+
+[node name="Blaster" type="Area2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_ffwow")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0.00159645, 0.0444384)
+texture = ExtResource("2_04p3v")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0.53209, -0.0248353)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mwepu")
