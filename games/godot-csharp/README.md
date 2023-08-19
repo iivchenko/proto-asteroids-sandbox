@@ -14,8 +14,11 @@ Negatives:
 * Godot constanclty do something with newlines in none code files
 
 TODO: 
-- [ ] Main Menu
-- [ ] Settings Menu
+- [X] Main Menu
+  - [X] Add Start Sky
+  - [X] Add and implement layout
+  - [X] Add Music
+- [_] Settings Menu
 - [ ] Game Play
   - [X] Add star sky
   - [X] Add players ship

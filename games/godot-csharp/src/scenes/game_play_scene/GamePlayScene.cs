@@ -30,6 +30,11 @@ public partial class GamePlayScene : Node2D
     [Export]
     public int NextUfoDecrease { get; set; } = 60000;
 
+    public static PackedScene Load()
+    {
+        return (PackedScene)ResourceLoader.Load("res://scenes/game_play_scene/game_play_scene.tscn");
+    }
+
     public override async void _Ready()
     {
         InitializeNodes();

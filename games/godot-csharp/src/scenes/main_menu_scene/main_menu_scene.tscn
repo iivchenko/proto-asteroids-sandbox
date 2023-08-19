@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmc2huf3n8687"]
+
+[ext_resource type="Script" path="res://scenes/main_menu_scene/MainMenuScene.cs" id="1_2angy"]
+[ext_resource type="PackedScene" uid="uid://05elnhux42lg" path="res://scenes/main_menu_scene/main_menu_component.tscn" id="2_g1gql"]
+[ext_resource type="AudioStream" uid="uid://bhf0r3awyrfut" path="res://assets/music/menu.song.mp3" id="3_jbv7w"]
+
+[node name="MainMenuScene" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2angy")
+
+[node name="Stars" type="Node2D" parent="."]
+
+[node name="MainMenu" parent="." instance=ExtResource("2_g1gql")]
+layout_mode = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jbv7w")
+autoplay = true
