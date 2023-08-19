@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfdtl1dimnaps"]
+[gd_scene load_steps=9 format=3 uid="uid://cfdtl1dimnaps"]
 
 [ext_resource type="Script" path="res://game_objects/PlayerShip.cs" id="1_1tdwd"]
 [ext_resource type="Texture2D" uid="uid://cfpv1010x7r28" path="res://assets/sprites/players_ships/ship-blue-01.png" id="2_g76x7"]
 [ext_resource type="Texture2D" uid="uid://by55qsriq4v0h" path="res://assets/sprites/debris/debri-01.png" id="3_1wijw"]
 [ext_resource type="Texture2D" uid="uid://bxfgc6hrjmacn" path="res://assets/sprites/debris/debri-02.png" id="4_sekgc"]
 [ext_resource type="Texture2D" uid="uid://dek2xdx1d7udk" path="res://assets/sprites/debris/debri-03.png" id="5_kdyug"]
+[ext_resource type="AudioStream" uid="uid://c4mv7pqrv1gha" path="res://assets/sfx/laser.sound.ogg" id="6_j7g8y"]
+[ext_resource type="AudioStream" uid="uid://dtiqp02d2r6gt" path="res://assets/sfx/asteroid-explosion.sound.wav" id="7_2rw7a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_op5d3"]
 radius = 16.0
@@ -69,3 +71,9 @@ initial_velocity_min = 15.0
 initial_velocity_max = 50.0
 angular_velocity_min = 50.0
 angular_velocity_max = 100.0
+
+[node name="LaserSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_j7g8y")
+
+[node name="DeathSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_2rw7a")

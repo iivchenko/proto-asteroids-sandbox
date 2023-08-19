@@ -188,7 +188,6 @@ public partial class GamePlayScene : Node2D
         };
 
         asteroid.KilledByPlayer += (type) => {
-            GD.Print("Shoty 1");
             switch (type)
             {
                 case Asteroid.AsteroidType.Tiny:

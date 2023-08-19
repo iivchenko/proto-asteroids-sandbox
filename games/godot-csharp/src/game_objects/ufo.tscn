@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://be8wafmv1i28h"]
+[gd_scene load_steps=9 format=3 uid="uid://be8wafmv1i28h"]
 
 [ext_resource type="Script" path="res://game_objects/Ufo.cs" id="1_abb3f"]
 [ext_resource type="Texture2D" uid="uid://bf0kwlcrk4dn3" path="res://assets/sprites/ufo/ufo-01.png" id="1_np0ll"]
+[ext_resource type="AudioStream" uid="uid://c4mv7pqrv1gha" path="res://assets/sfx/laser.sound.ogg" id="3_uh51k"]
+[ext_resource type="AudioStream" uid="uid://dtiqp02d2r6gt" path="res://assets/sfx/asteroid-explosion.sound.wav" id="4_nqgxq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3ein"]
 radius = 16.0
@@ -74,3 +76,9 @@ initial_velocity_min = 15.0
 initial_velocity_max = 50.0
 angular_velocity_min = 50.0
 angular_velocity_max = 100.0
+
+[node name="BlasterSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uh51k")
+
+[node name="DeathSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nqgxq")

@@ -25,6 +25,8 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
     private CollisionShape2D _body;
     private Marker2D _firePoint;
     private Node2D _death;
+    private AudioStreamPlayer _deathSfx;
+    private AudioStreamPlayer _lazerSfx;
 
     public Texture2D Texture
     {
@@ -49,6 +51,8 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
         _body = GetNode<CollisionShape2D>("Body");
         _firePoint = GetNode<Marker2D>("FirePoint");
         _death = GetNode<Node2D>("Death");
+        _deathSfx = GetNode<AudioStreamPlayer>("DeathSfx");
+        _lazerSfx = GetNode<AudioStreamPlayer>("LaserSfx");
     }
 
     public async override void _Process(double delta)
@@ -92,6 +96,9 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
         _death.GetNode<CpuParticles2D>("Particles1").Emitting = true;
         _death.GetNode<CpuParticles2D>("Particles2").Emitting = true;
         _death.GetNode<CpuParticles2D>("Particles3").Emitting = true;
+
+        _deathSfx.PitchScale = Random.Shared.Next(70, 120) / 100.0f;
+        _deathSfx.Play();
     }
 
     public static Vector2 ToDirection(float angle)
@@ -126,7 +133,8 @@ public partial class PlayerShip : CharacterBody2D, IOnScreenGameObject
             laser.Rotation = Rotation;
 
             GetParent().AddChild(laser);
-
+            _lazerSfx.PitchScale = Random.Shared.Next(70, 120) / 100.0f;
+            _lazerSfx.Play();
             await Task.Run(async () =>
             {
                 await Task.Delay(500);

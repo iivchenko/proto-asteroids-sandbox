@@ -22,6 +22,8 @@ public partial class Ufo : Area2D, IOnScreenGameObject
     private Marker2D _firePoint;
     private CollisionShape2D _body;
     private Node2D _death;
+    private AudioStreamPlayer _deathSfx;
+    private AudioStreamPlayer _blasterSfx;
 
     private bool _canFire = true;
 
@@ -49,6 +51,8 @@ public partial class Ufo : Area2D, IOnScreenGameObject
         _firePoint = GetNode<Marker2D>("FirePoint");
         _body = GetNode<CollisionShape2D>("Body");
         _death = GetNode<Node2D>("Death");
+        _deathSfx = GetNode<AudioStreamPlayer>("DeathSfx");
+        _blasterSfx = GetNode<AudioStreamPlayer>("BlasterSfx");
 
         _speed = Random.Shared.NextDirection() * Speed;
     }
@@ -120,6 +124,9 @@ public partial class Ufo : Area2D, IOnScreenGameObject
                 _death.GetNode<CpuParticles2D>("Particles2").Emitting = true;
                 _death.GetNode<CpuParticles2D>("Particles3").Emitting = true;
 
+                _deathSfx.PitchScale = Random.Shared.Next(70, 120) / 100.0f;
+                _deathSfx.Play();
+
                 EmitSignal(SignalName.KilledByPlayer);
 
                 break;
@@ -133,6 +140,9 @@ public partial class Ufo : Area2D, IOnScreenGameObject
                 _death.GetNode<CpuParticles2D>("Particles1").Emitting = true;
                 _death.GetNode<CpuParticles2D>("Particles2").Emitting = true;
                 _death.GetNode<CpuParticles2D>("Particles3").Emitting = true;
+
+                _deathSfx.PitchScale = Random.Shared.Next(70, 120) / 100.0f;
+                _deathSfx.Play();
 
                 break;
         }
@@ -149,9 +159,10 @@ public partial class Ufo : Area2D, IOnScreenGameObject
         blaster.Direction = (player.GlobalPosition - GlobalPosition).Normalized();
         blaster.Rotation = direcrtion.Angle();
 
-        GD.Print(blaster.Direction);
-
         GetParent().AddChild(blaster);
+
+        _blasterSfx.PitchScale = Random.Shared.Next(30, 70) / 100.0f;
+        _blasterSfx.Play();
 
         await Task.Run(async () =>
         {

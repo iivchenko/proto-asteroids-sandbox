@@ -65,6 +65,7 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
     private Sprite2D _sprite;
     private CollisionShape2D _body;
     private Node2D _death;
+    private AudioStreamPlayer _deathSfx;
 
     public static Asteroid Instantiate()
     {
@@ -102,6 +103,7 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
         _body = GetNode<CollisionShape2D>(_type + "Body");
         _body.Disabled = false;
         _death = GetNode<Node2D>("Death");
+        _deathSfx = GetNode<AudioStreamPlayer>("DeathSfx");
 
         _rotationSpeed = Random.Shared.Next(meta.MinRotation, meta.MaxRotation) / 100.0f;
         var speed = Random.Shared.Next(meta.MinSpeed, meta.MaxSpeed);
@@ -174,6 +176,9 @@ public partial class Asteroid : Area2D, IOnScreenGameObject
         _death.GetNode<CpuParticles2D>("Particles1").Emitting = true;
         _death.GetNode<CpuParticles2D>("Particles2").Emitting = true;
         _death.GetNode<CpuParticles2D>("Particles3").Emitting = true;
+
+        _deathSfx.PitchScale = Random.Shared.Next(70, 120) / 100.0f;
+        _deathSfx.Play();
     }
 
     public enum AsteroidType

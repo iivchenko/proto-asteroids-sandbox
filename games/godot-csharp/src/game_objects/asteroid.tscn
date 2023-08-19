@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://byhxkmhuuumi5"]
+[gd_scene load_steps=11 format=3 uid="uid://byhxkmhuuumi5"]
 
 [ext_resource type="Texture2D" uid="uid://kluxbu1ucx5h" path="res://assets/sprites/asteroids/asteroid-tiny-01.png" id="1_qiee7"]
 [ext_resource type="Script" path="res://game_objects/Asteroid.cs" id="1_v45e4"]
 [ext_resource type="Texture2D" uid="uid://cre4w26x58vli" path="res://assets/sprites/asteroids/asteroid-medium-01.png" id="3_fr67x"]
 [ext_resource type="Texture2D" uid="uid://cmd06rjy1l5sw" path="res://assets/sprites/asteroids/asteroid-big-01.png" id="3_ngrkt"]
+[ext_resource type="AudioStream" uid="uid://dtiqp02d2r6gt" path="res://assets/sfx/asteroid-explosion.sound.wav" id="5_8fcdt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qrc8l"]
 radius = 6.0
@@ -107,3 +108,6 @@ angular_velocity_min = 50.0
 angular_velocity_max = 100.0
 scale_amount_min = 0.1
 scale_amount_max = 0.5
+
+[node name="DeathSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8fcdt")
