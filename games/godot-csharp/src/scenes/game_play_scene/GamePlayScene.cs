@@ -18,7 +18,9 @@ public partial class GamePlayScene : Node2D
     private Container _pauseScreen;
     private Button _pauseResumeBtn;
     private Button _pauseExitBtn;
-
+    private Container _gameoverScreen;
+    private Button _gameoverRestartBtn;
+    private Button _gameoverExitBtn;
 
     [Export]
     public int NextAsteroid { get; set; } = 5000;
@@ -84,6 +86,19 @@ public partial class GamePlayScene : Node2D
             GetTree().ChangeSceneToPacked(MainMenuScene.Load());
         };
 
+        _gameoverScreen = GetNode<Container>("Hud/GamePlayOverComponent");
+        _gameoverRestartBtn = _gameoverScreen.GetNode<Button>("%RestartBtn");
+        _gameoverRestartBtn.Pressed += () =>
+        {
+            GetTree().ReloadCurrentScene();
+        };
+
+        _gameoverExitBtn = _gameoverScreen.GetNode<Button>("%ExitBtn");
+        _gameoverExitBtn.Pressed += () =>
+        {
+            GetTree().ChangeSceneToPacked(MainMenuScene.Load());
+        };
+
         _viewSize = GetViewport().GetVisibleRect().Size;
     }
 
@@ -126,7 +141,12 @@ public partial class GamePlayScene : Node2D
 
             if (_live <= 0)
             {
-                // TODO: Game Over
+                _objectsLayer.ProcessMode = ProcessModeEnum.Disabled;
+                _gameoverScreen.GetNode<Label>("%ScoreLbl").Text = "Score: " + _score;
+                _gameoverScreen.ProcessMode = ProcessModeEnum.Always;
+                _gameoverScreen.Visible = true;
+               
+                return;
             }
 
             instance.GlobalPosition = new Vector2(_viewSize.X / 2.0f, _viewSize.Y / 2.0f);
@@ -189,7 +209,7 @@ public partial class GamePlayScene : Node2D
 
     private void InputProcess()
     {
-        if (Input.IsActionJustPressed("ui_cancel"))
+        if (Input.IsActionJustPressed("ui_cancel") && _gameoverScreen.Visible == false)
         {
             if (_pauseScreen.ProcessMode == ProcessModeEnum.Disabled)
             {

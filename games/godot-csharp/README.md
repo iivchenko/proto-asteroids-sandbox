@@ -43,8 +43,8 @@ TODO:
   - [X] Game Loop
     - [X] Add generation of small/medium/tiny steroids
     - [X] Add ufo generation
-  - [ ] Add game over screen
-  - [ ] Add game play exit  
+  - [X] Add game over screen
+  - [X] Add game play exit  
   - [ ] Add Music
   - [X] Implement HUD
     - [X] Add scores

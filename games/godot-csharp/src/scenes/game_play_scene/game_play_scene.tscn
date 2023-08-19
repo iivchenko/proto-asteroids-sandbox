@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cygpqmt5ors3m"]
+[gd_scene load_steps=7 format=3 uid="uid://cygpqmt5ors3m"]
 
 [ext_resource type="Script" path="res://scenes/game_play_scene/GamePlayScene.cs" id="1_1natp"]
 [ext_resource type="Texture2D" uid="uid://kluxbu1ucx5h" path="res://assets/sprites/asteroids/asteroid-tiny-01.png" id="3_vcoli"]
 [ext_resource type="PackedScene" uid="uid://be8wafmv1i28h" path="res://game_objects/ufo.tscn" id="4_q7fls"]
 [ext_resource type="Texture2D" uid="uid://bj610vvfev3yj" path="res://assets/sprites/players_life.png" id="4_yr7bu"]
 [ext_resource type="PackedScene" uid="uid://b3dsjhs8ynpp6" path="res://scenes/game_play_scene/game_play_pause_component.tscn" id="5_ecyjj"]
+[ext_resource type="PackedScene" uid="uid://dmvqphsl15s53" path="res://scenes/game_play_scene/game_play_over_component.tscn" id="6_2p2qr"]
 
 [node name="GamePlayScene" type="Node2D"]
 script = ExtResource("1_1natp")
@@ -61,5 +62,9 @@ layout_mode = 2
 text = "x X"
 
 [node name="GamePlayPauseComponent" parent="Hud" instance=ExtResource("5_ecyjj")]
+process_mode = 4
+visible = false
+
+[node name="GamePlayOverComponent" parent="Hud" instance=ExtResource("6_2p2qr")]
 process_mode = 4
 visible = false

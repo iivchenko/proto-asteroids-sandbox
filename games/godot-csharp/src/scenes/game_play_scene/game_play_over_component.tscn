@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dmvqphsl15s53"]
+
+[node name="GamePlayOverComponent" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Center" type="CenterContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Center"]
+layout_mode = 2
+
+[node name="GameOverLbl" type="Label" parent="VBox/Center/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 72
+text = "GAME OVER"
+
+[node name="ScoreLbl" type="Label" parent="VBox/Center/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 72
+text = "Socre: XXX"
+
+[node name="Center2" type="CenterContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Center2"]
+layout_mode = 2
+
+[node name="RestartBtn" type="Button" parent="VBox/Center2/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../ExitBtn")
+text = "Restart"
+
+[node name="ExitBtn" type="Button" parent="VBox/Center2/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../RestartBtn")
+text = "Exit"
