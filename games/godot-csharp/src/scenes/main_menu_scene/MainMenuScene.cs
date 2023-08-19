@@ -9,6 +9,11 @@ public partial class MainMenuScene : Container
     private Button _startBtn;
     private Button _exitBtn;
 
+    public static PackedScene Load()
+    {
+        return (PackedScene)ResourceLoader.Load("res://scenes/main_menu_scene/main_menu_scene.tscn");
+    }
+
     public override void _Ready()
     {
         _stars = GetNode<Node2D>("Stars");

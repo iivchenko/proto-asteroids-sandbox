@@ -15,6 +15,9 @@ public partial class GamePlayScene : Node2D
 
     private Label _scoreLabel;
     private Label _liveLabel;
+    private Container _pauseScreen;
+    private Button _pauseResumeBtn;
+    private Button _pauseExitBtn;
 
 
     [Export]
@@ -53,6 +56,7 @@ public partial class GamePlayScene : Node2D
     {
         ScreenWrap();
         ScreenClean();
+        InputProcess();
     }
 
     private void InitializeNodes()
@@ -64,6 +68,21 @@ public partial class GamePlayScene : Node2D
         _liveLabel = GetNode<Label>("%LiveLabel");
         _scoreLabel.Text = $"x {_score}";
         _liveLabel.Text = $"x {_live}";
+
+        _pauseScreen = GetNode<Container>("Hud/GamePlayPauseComponent");
+        _pauseResumeBtn = _pauseScreen.GetNode<Button>("%ResumeBtn");
+        _pauseResumeBtn.Pressed += () =>
+        {
+            _pauseScreen.Visible = false;
+            _pauseScreen.ProcessMode = ProcessModeEnum.Disabled;
+            _objectsLayer.ProcessMode = ProcessModeEnum.Inherit;
+        };
+
+        _pauseExitBtn = _pauseScreen.GetNode<Button>("%ExitBtn");
+        _pauseExitBtn.Pressed += () =>
+        {
+            GetTree().ChangeSceneToPacked(MainMenuScene.Load());
+        };
 
         _viewSize = GetViewport().GetVisibleRect().Size;
     }
@@ -166,6 +185,25 @@ public partial class GamePlayScene : Node2D
             {
                 obj.QueueFree();
             });
+    }
+
+    private void InputProcess()
+    {
+        if (Input.IsActionJustPressed("ui_cancel"))
+        {
+            if (_pauseScreen.ProcessMode == ProcessModeEnum.Disabled)
+            {
+                _pauseScreen.Visible = true;
+                _pauseScreen.ProcessMode = ProcessModeEnum.Always;
+                _objectsLayer.ProcessMode = ProcessModeEnum.Disabled;
+            }
+            else
+            {
+                _pauseScreen.Visible = false;
+                _pauseScreen.ProcessMode = ProcessModeEnum.Disabled;
+                _objectsLayer.ProcessMode = ProcessModeEnum.Inherit;
+            }
+        }
     }
 
     private void RandomAsteroid()
