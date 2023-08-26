@@ -19,7 +19,7 @@ TODO:
   - [X] Add and implement layout
   - [X] Add Music
 - [_] Settings Menu
-- [ ] Game Play
+- [X] Game Play
   - [X] Add star sky
   - [X] Add players ship
     - [X] Basics
@@ -45,8 +45,8 @@ TODO:
     - [X] Add ufo generation
   - [X] Add game over screen
   - [X] Add game play exit  
-  - [ ] Add Music
+  - [X] Add Music
   - [X] Implement HUD
     - [X] Add scores
     - [X] Add lives
-- [ ] Add controller support
+- [X] Add controller support

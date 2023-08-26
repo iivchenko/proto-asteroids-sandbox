@@ -151,6 +151,7 @@ public partial class GamePlayScene : Node2D
                 _gameoverScreen.GetNode<Label>("%ScoreLbl").Text = "Score: " + _score;
                 _gameoverScreen.ProcessMode = ProcessModeEnum.Always;
                 _gameoverScreen.Visible = true;
+                _gameoverRestartBtn.GrabFocus();
                
                 return;
             }
@@ -226,13 +227,14 @@ public partial class GamePlayScene : Node2D
 
     private void InputProcess()
     {
-        if (Input.IsActionJustPressed("ui_cancel") && _gameoverScreen.Visible == false)
+        if (Input.IsActionJustPressed("game_pause") && _gameoverScreen.Visible == false)
         {
             if (_pauseScreen.ProcessMode == ProcessModeEnum.Disabled)
             {
                 _pauseScreen.Visible = true;
                 _pauseScreen.ProcessMode = ProcessModeEnum.Always;
                 _objectsLayer.ProcessMode = ProcessModeEnum.Disabled;
+                _pauseResumeBtn.GrabFocus();
             }
             else
             {
