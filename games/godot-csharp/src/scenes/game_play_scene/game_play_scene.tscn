@@ -68,3 +68,5 @@ visible = false
 [node name="GamePlayOverComponent" parent="Hud" instance=ExtResource("6_2p2qr")]
 process_mode = 4
 visible = false
+
+[node name="Music" type="AudioStreamPlayer" parent="."]

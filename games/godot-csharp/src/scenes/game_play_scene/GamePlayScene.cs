@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,6 +22,8 @@ public partial class GamePlayScene : Node2D
     private Container _gameoverScreen;
     private Button _gameoverRestartBtn;
     private Button _gameoverExitBtn;
+
+    private AudioStreamPlayer _music;
 
     [Export]
     public int NextAsteroid { get; set; } = 5000;
@@ -46,6 +49,7 @@ public partial class GamePlayScene : Node2D
         GenerateStarSky();
         InitializeInitialAsteroids();
         InitializePlayer();
+        InitializeMusic();
 
         await Task.WhenAll(
             ProcessNextAsteroid(),
@@ -98,6 +102,8 @@ public partial class GamePlayScene : Node2D
         {
             GetTree().ChangeSceneToPacked(MainMenuScene.Load());
         };
+
+        _music = GetNode<AudioStreamPlayer>("Music");
 
         _viewSize = GetViewport().GetVisibleRect().Size;
     }
@@ -162,6 +168,17 @@ public partial class GamePlayScene : Node2D
         RandomAsteroid();
         RandomAsteroid();
         RandomAsteroid();
+    }
+
+    private void InitializeMusic()
+    {
+        var path = Asset.RandomAsset("res://assets/music/game_music/");
+
+        var audio = GD.Load<AudioStream>(path);
+
+        _music.Stream = audio;
+
+        _music.Play();
     }
 
     private void ScreenWrap()

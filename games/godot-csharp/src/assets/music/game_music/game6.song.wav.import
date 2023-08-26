@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://jje51oppyu2k"
-path="res://.godot/imported/game6.song.wav-0eb306200d7e4a38e46a0881057ca95e.sample"
+path="res://.godot/imported/game6.song.wav-135f495d828535b3e8fdbb0435417f99.sample"
 
 [deps]
 
-source_file="res://assets/music/game6.song.wav"
-dest_files=["res://.godot/imported/game6.song.wav-0eb306200d7e4a38e46a0881057ca95e.sample"]
+source_file="res://assets/music/game_music/game6.song.wav"
+dest_files=["res://.godot/imported/game6.song.wav-135f495d828535b3e8fdbb0435417f99.sample"]
 
 [params]
 
@@ -18,7 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop_mode=0
+edit/loop_mode=2
 edit/loop_begin=0
 edit/loop_end=-1
 compress/mode=0
