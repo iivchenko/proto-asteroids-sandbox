@@ -2,16 +2,21 @@
 
 
 Positives:
-* You don't need to install engine it self,  just download binaries
-* The metdata files siple/easy to read/modify
+* You don't need to install engine it self, just download binaries
+* The metadata files simple/easy to read/modify
 * C# Support
+* Easy/flexible UI system
+
 
 Negatives:
 * You have to install export sdks locally for each engine version
 * C# code editor in Godot IDE bad: no intelicense, default scripts are bad etc.
 * Some of runtime exeptions doesn't fail the game (e.g. when can't set body disabled true)
-* The pop up about reloading scrip every time I edit it in VS is annoying
-* Godot constanclty do something with newlines in none code files
+* The pop up about reloading script every time I edit it in VS is annoying
+* Godot constantly do something with newlines in none code files
+* UI system not exaclty intuitive and sometimes frustrating
+* String literals everywhere: load resource, create scene instance, get a node in script
+* Particle system is not reach enough for my needs
 
 TODO: 
 - [X] Main Menu
