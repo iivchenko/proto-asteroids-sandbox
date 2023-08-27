@@ -12,7 +12,7 @@ Classical implementation or the [Asteroids Game](https://en.wikipedia.org/wiki/A
 | MonoGame ECS/C#   | :boom:        |
 | MonoGame ELM/F#   | :boom:        |
 | GMS               | :green_heart: |
-| Godot/C#          | :boom:        |
+| Godot/C#          | :green_heart: |
 | Godot/GDScript    | :snowflake:   |
 | Ceramic/Haxe      | :boom:        |
 | Defold/Lua        | :snowflake:   |
