@@ -17,6 +17,7 @@ Negatives:
 * UI system not exaclty intuitive and sometimes frustrating
 * String literals everywhere: load resource, create scene instance, get a node in script
 * Particle system is not reach enough for my needs
+* Exported version of a game works different from one runs in the editor
 
 TODO: 
 - [X] Main Menu

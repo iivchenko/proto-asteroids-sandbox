@@ -10,7 +10,8 @@ public static partial class Asset
             DirAccess
                 .Open(path)
                 .GetFiles()
-                .Where(x => !x.EndsWith(".import"));
+                .Where(x => x.EndsWith(".import"))
+                .Select(x => x.Replace(".import", string.Empty));
 
         return path + Random.Shared.Pick(files);
     }
