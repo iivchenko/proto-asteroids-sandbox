@@ -18,7 +18,7 @@ TODO:
 - [ ] Game Play
   - [ ] Add star sky
   - [ ] Add players ship
-    - [ ] Basics
+    - [X] Basics (Keyboard control, Movement, Sprite Selection)
     - [ ] Add playses ship death particles
     - [ ] Add lazer
     - [ ] Add lazer sfx

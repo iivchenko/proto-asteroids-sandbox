@@ -1,4 +1,4 @@
-use bevy::{prelude::*, window::PrimaryWindow, audio::* };
+use bevy::{ prelude::*, window::PrimaryWindow };
 use rand::prelude::*;
 
 pub const PLAYER_ACCELERATION: f32 = 50.0;
@@ -23,7 +23,8 @@ fn main() {
 
 #[derive(Component)]
 pub struct Movable {
-    velocity: Vec3
+    velocity: Vec3,
+    angular_velocity: f32
 }
 
 #[derive(Component)]
@@ -65,14 +66,20 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_query: Q
         ..default()
     });
 
+    // TODO: Improve code here
+    let sprites = ["sprites/players_ships/ship-blue-01.png", "sprites/players_ships/ship-blue-02.png"];
+    let mut rng = thread_rng();
+    let sprite = sprites.choose(&mut rng).unwrap();
+
     commands.spawn((
         PlayerShip {},
         Movable {
-            velocity: Vec3::ZERO
+            velocity: Vec3::ZERO,
+            angular_velocity: 0.0
         },
         OnScreenEntity {},
         SpriteBundle {
-            texture: asset_server.load("sprites/players_ships/ship-blue-01.png"), 
+            texture: asset_server.load(*sprite), 
             transform: Transform::from_xyz(window.width() / 2.0, window.height() / 2.0, 0.0),
             ..default()
         }
@@ -84,8 +91,9 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_query: Q
         let direction_x = random::<f32>() * if random::<bool>() { 1.0 } else { -1.0 };
         let direction_y = random::<f32>() * if random::<bool>() { 1.0 } else { -1.0 };
         let speed = (random::<f32>() + 0.1) * 300.0;
-        let velocity = Vec3::new(direction_x, direction_y, 0.0) * speed;
-
+        let velocity = Vec3::new(direction_x, direction_y, 0.0) * speed;        
+        let mut rng = rand::thread_rng();
+        let angular_velocity = f32::to_radians(rng.gen_range(-50..50) as f32);
 
         commands.spawn(
             (
@@ -96,7 +104,8 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_query: Q
                 },
                 Enemy {},
                 Movable {
-                     velocity: velocity
+                     velocity: velocity,
+                     angular_velocity: angular_velocity
                 },
                 OnScreenEntity {}
             )
@@ -107,6 +116,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_query: Q
 pub fn entity_movement(mut entity_query: Query<(&mut Transform, &Movable)>, time: Res<Time>) {
     for (mut transform, movable) in entity_query.iter_mut() {
         transform.translation += movable.velocity * time.delta_seconds();
+        transform.rotate_z(movable.angular_velocity * time.delta_seconds());
     }
 } 
 
@@ -129,8 +139,8 @@ pub fn entity_collision_system(mut commands: Commands, mut entity_query: Query<(
     }
 }
 
-pub fn player_control (keyboard_input: Res<Input<KeyCode>>, mut player_query: Query<(&mut Transform, &mut Movable), With<PlayerShip>>, timer: Res<Time>) {
-    if let Ok((mut transform, mut movable)) = player_query.get_single_mut(){
+pub fn player_control (keyboard_input: Res<Input<KeyCode>>, mut player_query: Query<(&Transform, &mut Movable), With<PlayerShip>>) {
+    if let Ok((transform, mut movable)) = player_query.get_single_mut(){
 
         let mut rotation_factor = 0.0;
 
@@ -149,7 +159,7 @@ pub fn player_control (keyboard_input: Res<Input<KeyCode>>, mut player_query: Qu
             movable.velocity = if velocity.length() > PLAYER_MAX_SPEED { velocity.normalize() * PLAYER_MAX_SPEED } else { velocity };
         }
 
-        transform.rotate_z(rotation_factor * f32::to_radians(360.0) * timer.delta_seconds());
+        movable.angular_velocity = rotation_factor * f32::to_radians(360.0);
     }
 }
 
@@ -197,6 +207,8 @@ pub fn spawn_asteroids(mut commands: Commands, window_query: Query<&Window, With
         let direction_y = random::<f32>() * if random::<bool>() { 1.0 } else { -1.0 };
         let speed = (random::<f32>() + 0.1) * 300.0;
         let velocity = Vec3::new(direction_x, direction_y, 0.0) * speed;
+        let mut rng = rand::thread_rng();
+        let angular_velocity = f32::to_radians(rng.gen_range(-50..50) as f32);
 
         commands.spawn(
             (
@@ -207,7 +219,9 @@ pub fn spawn_asteroids(mut commands: Commands, window_query: Query<&Window, With
                 },
                 Enemy {},
                 Movable {
-                     velocity: velocity
+                     velocity: velocity,
+                     angular_velocity: angular_velocity
+
                 },
                 OnScreenEntity {}
             )
