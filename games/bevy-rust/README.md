@@ -8,6 +8,8 @@ Positives:
 
 Negatives:
 * You have to install rust/cargo locally
+* Very slow on initial compile
+* Slow on next compiles 
 
 TODO: 
 - [ ] Main Menu

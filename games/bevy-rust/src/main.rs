@@ -1,23 +1,20 @@
+mod star_sky_plugin;
 mod components;
 mod events;
 mod resources;
 mod systems;
 
+use star_sky_plugin::SkyPlugin;
+use bevy::prelude::*;
 use events::*;
 use resources::*;
 use systems::*;
 
-use bevy::app::AppExit; 
-use bevy::{ prelude::*, window::PrimaryWindow };
-use rand::prelude::*;
-
-pub const PLAYER_ACCELERATION: f32 = 50.0;
-pub const PLAYER_MAX_SPEED: f32 = 600.0;
-pub const PLAYER_SIZE: f32 = 32.0;
-
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
+        .add_plugins(SkyPlugin)
+        .insert_resource(ClearColor(Color::BLACK))
         .init_resource::<Score>()
         .init_resource::<AsteroidSpawnTimer>()
         .add_event::<GameOver>()
