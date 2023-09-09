@@ -1,3 +1,5 @@
+
+use bevy::app::AppExit; 
 use bevy::{ prelude::*, window::PrimaryWindow };
 use rand::prelude::*;
 
@@ -10,6 +12,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .init_resource::<Score>()
         .init_resource::<AsteroidSpawnTimer>()
+        .add_event::<GameOver>()
         .add_systems(Startup, setup)
         .add_systems(Update, entity_movement)
         .add_systems(Update, player_control)
@@ -18,6 +21,8 @@ fn main() {
         .add_systems(Update, update_score)
         .add_systems(Update, initiate_asteroids_spawn)
         .add_systems(Update, spawn_asteroids)
+        .add_systems(Update, exit_game)
+        .add_systems(Update, handle_game_over)
         .run();
 }
 
@@ -46,6 +51,11 @@ impl Default for Score {
         Score { value: 0 }
     }
 } 
+
+#[derive(Event)]
+pub struct GameOver {
+    score: u32
+}
 
 #[derive(Resource)]
 pub struct AsteroidSpawnTimer { 
@@ -120,11 +130,11 @@ pub fn entity_movement(mut entity_query: Query<(&mut Transform, &Movable)>, time
     }
 } 
 
-pub fn entity_collision_system(mut commands: Commands, mut entity_query: Query<(Entity, &Transform), With<OnScreenEntity>>){
-    for (entity, transform) in entity_query.iter() {
-        for (entity2, transform2) in entity_query.iter() {
+pub fn entity_collision_system(mut commands: Commands, mut entity_query: Query<(Entity, &Transform, Option<&PlayerShip>), With<OnScreenEntity>>, mut game_over_event_writer: EventWriter<GameOver>, score: Res<Score>){
+    for (entity, transform, maybe_player) in entity_query.iter() {
+        for (entity2, transform2, maybe_player2) in entity_query.iter() {
 
-            if (entity == entity2)
+            if entity == entity2
             {
                 continue;
             }
@@ -133,6 +143,11 @@ pub fn entity_collision_system(mut commands: Commands, mut entity_query: Query<(
 
             if distance < 32.0 { // TODO: make radius calculation dynimic
                 commands.entity(entity).despawn();
+
+                if maybe_player.is_some() {
+                    game_over_event_writer.send(GameOver { score: score.value })
+
+                }
             }
 
         }
@@ -226,5 +241,17 @@ pub fn spawn_asteroids(mut commands: Commands, window_query: Query<&Window, With
                 OnScreenEntity {}
             )
         );
+    }
+}
+
+pub fn exit_game(keyboard_input: Res<Input<KeyCode>>, mut app_exit_event_writer: EventWriter<AppExit> ) {
+    if keyboard_input.just_pressed(KeyCode::Escape) {
+        app_exit_event_writer.send(AppExit);
+    }
+}
+
+pub fn handle_game_over(mut game_over_event_reader: EventReader<GameOver>) {
+    for event in game_over_event_reader.iter() {
+        print!("Game Over. Score: {}", event.score);
     }
 }
