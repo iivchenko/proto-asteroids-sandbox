@@ -1,5 +1,5 @@
-use bevy::{ prelude::*, window::PrimaryWindow };
 use bevy::app::AppExit;
+use bevy::{ prelude::*, window::PrimaryWindow };
 use rand::prelude::*;
 
 use crate::components::*;
@@ -24,7 +24,8 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_quer
     let sprite = sprites.choose(&mut rng).unwrap();
 
     commands.spawn((
-        PlayerShip {},
+        PlayerShip { fire_delay: 0.0 },
+        EntityDescriptor { entity_type: EntityDescriptorType::PlayerShip },
         Movable {
             velocity: Vec3::ZERO,
             angular_velocity: 0.0
@@ -43,18 +44,19 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_quer
         let direction_x = random::<f32>() * if random::<bool>() { 1.0 } else { -1.0 };
         let direction_y = random::<f32>() * if random::<bool>() { 1.0 } else { -1.0 };
         let speed = (random::<f32>() + 0.1) * 300.0;
-        let velocity = Vec3::new(direction_x, direction_y, 0.0) * speed;        
+        let velocity = Vec3::new(direction_x, direction_y, 0.0) * speed;
         let mut rng = rand::thread_rng();
         let angular_velocity = f32::to_radians(rng.gen_range(-50..50) as f32);
 
         commands.spawn(
             (
+                EntityDescriptor { entity_type: EntityDescriptorType::Asteroid },
+                Enemy {},
                 SpriteBundle {
                     transform: Transform::from_xyz(random_x, random_y, 0.0),
                     texture: asset_server.load("sprites/asteroids/asteroid-big-01.png"),
                     ..default() 
                 },
-                Enemy {},
                 Movable {
                      velocity: velocity,
                      angular_velocity: angular_velocity
@@ -72,9 +74,14 @@ pub fn entity_movement(mut entity_query: Query<(&mut Transform, &Movable)>, time
     }
 } 
 
-pub fn entity_collision_system(mut commands: Commands, mut entity_query: Query<(Entity, &Transform, Option<&PlayerShip>), With<OnScreenEntity>>, mut game_over_event_writer: EventWriter<GameOver>, score: Res<Score>){
-    for (entity, transform, maybe_player) in entity_query.iter() {
-        for (entity2, transform2, maybe_player2) in entity_query.iter() {
+pub fn entity_collision_system (
+    mut entity_query: Query<(Entity, &EntityDescriptor, &Transform)>, 
+    mut commands: Commands,    
+    mut game_over_event_writer: EventWriter<GameOver>, 
+    score: Res<Score>
+) {
+    for (entity, descriptor, transform) in entity_query.iter() {
+        for (entity2, descriptor2, transform2) in entity_query.iter() {
 
             if entity == entity2
             {
@@ -83,21 +90,40 @@ pub fn entity_collision_system(mut commands: Commands, mut entity_query: Query<(
 
             let distance = transform.translation.distance(transform2.translation);
 
-            if distance < 32.0 { // TODO: make radius calculation dynimic
-                commands.entity(entity).despawn();
+            if distance < 32.0 { // TODO: make radius calculation dynamic
 
-                if maybe_player.is_some() {
-                    game_over_event_writer.send(GameOver { score: score.value })
-
-                }
+                match (&descriptor.entity_type, &descriptor2.entity_type) {
+                    (EntityDescriptorType::PlayerShip, EntityDescriptorType::Asteroid) => {
+                        commands.entity(entity).despawn();
+                        game_over_event_writer.send(GameOver { score: score.value })
+                    },
+                    (EntityDescriptorType::Asteroid, EntityDescriptorType::PlayerShip) => {
+                        commands.entity(entity).despawn();
+                    },
+                    (EntityDescriptorType::PlayerBullet, EntityDescriptorType::Asteroid) => {
+                        commands.entity(entity).despawn();
+                    },
+                    (EntityDescriptorType::Asteroid, EntityDescriptorType::PlayerBullet) => {
+                        commands.entity(entity).despawn();
+                    },
+                    (EntityDescriptorType::Asteroid, EntityDescriptorType::Asteroid) => {
+                        commands.entity(entity).despawn();
+                    },
+                    _  => { }
+                };
             }
-
         }
     }
 }
 
-pub fn player_control (keyboard_input: Res<Input<KeyCode>>, mut player_query: Query<(&Transform, &mut Movable), With<PlayerShip>>) {
-    if let Ok((transform, mut movable)) = player_query.get_single_mut(){
+pub fn player_control (
+    mut player_query: Query<(&Transform, &mut Movable, &mut PlayerShip), With<PlayerShip>>,
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    keyboard_input: Res<Input<KeyCode>>,
+    time: Res<Time>
+) {
+    if let Ok((transform, mut movable, mut player)) = player_query.get_single_mut(){
 
         let mut rotation_factor = 0.0;
 
@@ -117,10 +143,40 @@ pub fn player_control (keyboard_input: Res<Input<KeyCode>>, mut player_query: Qu
         }
 
         movable.angular_velocity = rotation_factor * f32::to_radians(360.0);
+
+        if keyboard_input.pressed(KeyCode::Space) && player.fire_delay <= 0.0 { // TODO: move away delay check
+            
+            player.fire_delay = 0.5; // sec
+
+            let direction = (transform.rotation * Vec3::Y).normalize();
+            let velocity = direction * 1000.0;
+
+            commands.spawn((
+                EntityDescriptor { entity_type: EntityDescriptorType::PlayerBullet },
+                PlayerBullet {},
+                Movable { velocity: velocity, angular_velocity: 0.0 },
+                SpriteBundle {
+                    texture: asset_server.load("sprites/lazers/laser-blue-01.png"),
+                    transform: Transform {
+                        translation: Vec3 { x: transform.translation.x, y: transform.translation.y, z: 0.0 },
+                        rotation: transform.rotation,
+                        ..default()
+                    },
+                    ..default()
+                }
+            ));
+        }
+
+        if player.fire_delay > 0.0 {
+            player.fire_delay -= time.delta_seconds();
+        }
     }
 }
 
-pub fn wrap_screen(mut query: Query<&mut Transform, With<OnScreenEntity>>, window_query: Query<&Window, With<PrimaryWindow>>) {
+pub fn wrap_screen(
+    mut query: Query<&mut Transform, With<OnScreenEntity>>, 
+    window_query: Query<&Window, With<PrimaryWindow>>
+) {
 
     let window = window_query.get_single().unwrap();
 
@@ -143,6 +199,27 @@ pub fn wrap_screen(mut query: Query<&mut Transform, With<OnScreenEntity>>, windo
         }
     }
 }
+
+pub fn clear_out_screen (
+    query: Query<(Entity, &Transform), With<OutScreenEntity>>, 
+    window_query: Query<&Window, With<PrimaryWindow>>,
+    mut commands: Commands
+) {
+
+    let window = window_query.get_single().unwrap();
+
+    for (entity, transform) in query.iter() {
+
+        if 
+            transform.translation.x < 0.0 ||
+            transform.translation.x > window.width() ||
+            transform.translation.y < 0.0 ||
+            transform.translation.y > window.height() {
+                commands.entity(entity).despawn();
+        }
+    }
+}
+
 
 pub fn update_score(score: Res<Score>) {
     if score.is_changed() {
@@ -169,6 +246,7 @@ pub fn spawn_asteroids(mut commands: Commands, window_query: Query<&Window, With
 
         commands.spawn(
             (
+                EntityDescriptor { entity_type: EntityDescriptorType::Asteroid },
                 SpriteBundle {
                     transform: Transform::from_xyz(random_x, random_y, 0.0),
                     texture: asset_server.load("sprites/asteroids/asteroid-big-01.png"),

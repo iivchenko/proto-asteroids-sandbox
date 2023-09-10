@@ -13,16 +13,16 @@ Negatives:
 
 TODO: 
 - [ ] Main Menu
-  - [ ] Add Start Sky
+  - [X] Add Start Sky
   - [ ] Add and implement layout
   - [ ] Add Music
 - [ ] Settings Menu
 - [ ] Game Play
-  - [ ] Add star sky
+  - [X] Add star sky
   - [ ] Add players ship
     - [X] Basics (Keyboard control, Movement, Sprite Selection)
     - [ ] Add playses ship death particles
-    - [ ] Add lazer
+    - [X] Add lazer
     - [ ] Add lazer sfx
     - [ ] Add death sound (sfx https://www.youtube.com/watch?v=4TjEo-gDgAg)
   - [ ] Add asteroids

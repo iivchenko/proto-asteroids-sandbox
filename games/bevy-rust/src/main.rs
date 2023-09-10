@@ -21,6 +21,7 @@ fn main() {
         .add_systems(Startup, setup)
         .add_systems(Update, entity_movement)
         .add_systems(Update, player_control)
+        .add_systems(Update, clear_out_screen)
         .add_systems(Update, wrap_screen)
         .add_systems(Update, entity_collision_system)
         .add_systems(Update, update_score)
