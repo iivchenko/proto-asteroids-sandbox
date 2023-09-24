@@ -1,13 +1,15 @@
 use bevy::{ prelude::*, window::PrimaryWindow };
 use rand::prelude::*;
 
+use crate::AppState;
+
 pub struct SkyPlugin;
 
 impl Plugin for SkyPlugin {
     fn build (&self, app: &mut App) {
         app
-            .add_systems(Startup, setup_sky_system)
-            .add_systems(Update, update_sky_system);
+            .add_systems(OnEnter(AppState::MainMenu), setup_sky_system)
+            .add_systems(Update, update_sky_system.run_if(in_state(AppState::MainMenu)));
     }
 }
 

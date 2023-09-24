@@ -2,9 +2,9 @@ use bevy::app::AppExit;
 use bevy::{ prelude::*, window::PrimaryWindow };
 use rand::prelude::*;
 
-use crate::components::*;
-use crate::resources::*;
-use crate::events::*;
+use super::{components::*, GameState}; 
+use super::resources::*;
+use super::events::*;
 
 pub const PLAYER_ACCELERATION: f32 = 50.0;
 pub const PLAYER_MAX_SPEED: f32 = 600.0;
@@ -12,11 +12,6 @@ pub const PLAYER_SIZE: f32 = 32.0;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_query: Query<&Window, With<PrimaryWindow>>) {
     let window = window_query.get_single().unwrap();
-
-    commands.spawn(Camera2dBundle {
-        transform: Transform::from_xyz(window.width() / 2.0, window.height() / 2.0, 0.0),
-        ..default()
-    });
 
     // TODO: Improve code here
     let sprites = ["sprites/players_ships/ship-blue-01.png", "sprites/players_ships/ship-blue-02.png"];
@@ -274,4 +269,22 @@ pub fn handle_game_over(mut game_over_event_reader: EventReader<GameOver>) {
     for event in game_over_event_reader.iter() {
         print!("Game Over. Score: {}", event.score);
     }
+}
+
+pub fn toggle_state (
+    keyboard_input: Res<Input<KeyCode>>,
+    game_state: Res<State<GameState>>,
+    mut next_state: ResMut<NextState<GameState>>
+) {
+    let &state: &GameState = game_state.get();
+
+    if keyboard_input.just_pressed(KeyCode::P) {
+        if state == GameState::Running {
+            next_state.set(GameState::Paused);
+            println!("Paused");
+        } else if state == GameState::Paused {
+            next_state.set(GameState::Running);
+            println!("Resumed")
+        }
+    }   
 }
