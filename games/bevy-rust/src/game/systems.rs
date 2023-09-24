@@ -1,16 +1,20 @@
-use bevy::app::AppExit;
-use bevy::{ prelude::*, window::PrimaryWindow };
+use bevy:: { prelude::*, window::PrimaryWindow };
 use rand::prelude::*;
 
-use super::{components::*, GameState}; 
+use crate::AppState;
+
+use super::{ components::*, GameState }; 
 use super::resources::*;
 use super::events::*;
 
 pub const PLAYER_ACCELERATION: f32 = 50.0;
 pub const PLAYER_MAX_SPEED: f32 = 600.0;
-pub const PLAYER_SIZE: f32 = 32.0;
 
-pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_query: Query<&Window, With<PrimaryWindow>>) {
+pub fn setup(
+    window_query: Query<&Window, With<PrimaryWindow>>,
+    mut commands: Commands, 
+    asset_server: Res<AssetServer>
+) {
     let window = window_query.get_single().unwrap();
 
     // TODO: Improve code here
@@ -19,8 +23,12 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>, window_quer
     let sprite = sprites.choose(&mut rng).unwrap();
 
     commands.spawn((
-        PlayerShip { fire_delay: 0.0 },
-        EntityDescriptor { entity_type: EntityDescriptorType::PlayerShip },
+        PlayerShip { 
+            fire_delay: 0.0 
+        },
+        EntityDescriptor { 
+            entity_type: EntityDescriptorType::PlayerShip 
+        },
         Movable {
             velocity: Vec3::ZERO,
             angular_velocity: 0.0
@@ -259,12 +267,6 @@ pub fn spawn_asteroids(mut commands: Commands, window_query: Query<&Window, With
     }
 }
 
-pub fn exit_game(keyboard_input: Res<Input<KeyCode>>, mut app_exit_event_writer: EventWriter<AppExit> ) {
-    if keyboard_input.just_pressed(KeyCode::Escape) {
-        app_exit_event_writer.send(AppExit);
-    }
-}
-
 pub fn handle_game_over(mut game_over_event_reader: EventReader<GameOver>) {
     for event in game_over_event_reader.iter() {
         print!("Game Over. Score: {}", event.score);
@@ -287,4 +289,32 @@ pub fn toggle_state (
             println!("Resumed")
         }
     }   
+}
+
+pub fn exit_system (
+    keyboard_input: Res<Input<KeyCode>>,
+    mut app_state: ResMut<NextState<AppState>>,
+) {
+    if keyboard_input.just_pressed(KeyCode::Escape) {
+        app_state.set(AppState::MainMenu);
+    }
+}
+
+pub fn cleanup_system(
+    player_query: Query<Entity, With<PlayerShip>>,
+    player_bullet_query: Query<Entity, With<PlayerBullet>>,
+    enemy_query: Query<Entity, With<Enemy>>,
+    mut commands: Commands
+) {
+    for entity in player_query.iter(){
+        commands.entity(entity).despawn();
+    }
+
+    for entity in player_bullet_query.iter(){
+        commands.entity(entity).despawn();
+    }
+
+    for entity in enemy_query.iter(){
+        commands.entity(entity).despawn();
+    }
 }

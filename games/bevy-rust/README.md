@@ -4,12 +4,11 @@
 Positives:
 * You don't need to install engine to your mahince, it will be part of the your poject dependency
 
-
-
 Negatives:
 * You have to install rust/cargo locally
 * Very slow on initial compile
 * Slow on next compiles 
+* UI is painful, very flexible but very painful.
 
 TODO: 
 - [ ] Main Menu

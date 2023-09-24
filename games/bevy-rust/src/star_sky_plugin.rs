@@ -8,8 +8,8 @@ pub struct SkyPlugin;
 impl Plugin for SkyPlugin {
     fn build (&self, app: &mut App) {
         app
-            .add_systems(OnEnter(AppState::MainMenu), setup_sky_system)
-            .add_systems(Update, update_sky_system.run_if(in_state(AppState::MainMenu)));
+            .add_systems(OnEnter(AppState::Bootstrup), setup_sky_system)
+            .add_systems(Update, update_sky_system);
     }
 }
 
@@ -69,7 +69,10 @@ fn setup_sky_system(window_query: Query<&Window, With<PrimaryWindow>>, mut comma
     }
 } 
 
-fn update_sky_system(mut stars_query: Query<(&mut Sprite, &Star), With<Star>>, time: Res<Time>) {
+fn update_sky_system(
+    mut stars_query: Query<(&mut Sprite, &Star), With<Star>>, 
+    time: Res<Time>
+) {
     for (mut sprite, star) in stars_query.iter_mut() {
         sprite.color = star.initial_color * ((time.elapsed_seconds() + star.speed * 5000.0).sin() * 0.75).abs();
     }

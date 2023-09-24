@@ -16,7 +16,7 @@ pub struct GamePlugin;
 pub enum GameState {
     #[default]
     Running, 
-    Paused                                                  
+    Paused
 }
 
 impl Plugin for GamePlugin {
@@ -31,17 +31,18 @@ impl Plugin for GamePlugin {
                 Update,
                     (
                         entity_movement,
-					    player_control,
-					    clear_out_screen.before(wrap_screen),
-					    wrap_screen,
-					    entity_collision_system,
-					    update_score,
-					    initiate_asteroids_spawn,
-					    spawn_asteroids,
-					    exit_game,
-					    handle_game_over,
-                        toggle_state
+                        player_control,
+                        clear_out_screen.before(wrap_screen),
+                        wrap_screen,
+                        entity_collision_system,
+                        update_score,
+                        initiate_asteroids_spawn,
+                        spawn_asteroids,
+                        handle_game_over,
+                        toggle_state,
+                        exit_system,
                     ).run_if(in_state(AppState::Game))
-            );
+            )
+            .add_systems(OnExit(AppState::Game), cleanup_system);
     }
 }

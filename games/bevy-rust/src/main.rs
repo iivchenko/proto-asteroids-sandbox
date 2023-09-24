@@ -11,11 +11,11 @@ use game::GamePlugin;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_state::<AppState>()        
-        .add_plugins(MainMenuPlugin)        
+        .add_state::<AppState>()
         .add_plugins(SkyPlugin)
-        .add_systems(Startup, bootstrup_system)
-        .add_plugins(GamePlugin)        
+        .add_plugins(MainMenuPlugin)
+        .add_plugins(GamePlugin)
+        .add_systems(Startup, bootstrup_system)        
         .insert_resource(ClearColor(Color::BLACK))     
         .run();
 }
@@ -33,12 +33,10 @@ pub fn bootstrup_system(
     mut commands: Commands,
     mut next_state: ResMut<NextState<AppState>>
 ) {
-    println!("Bootstrap start");
     let window = window_query.get_single().unwrap();    
     commands.spawn(Camera2dBundle {
         transform: Transform::from_xyz(window.width() / 2.0, window.height() / 2.0, 0.0),
         ..default()
     });
     next_state.set(AppState::MainMenu);
-    print!("Bootstrap finish");
 }

@@ -15,12 +15,13 @@ impl Plugin for MainMenuPlugin {
                     interact_with_play_button,
                     interact_with_exit_button
                 ).run_if(in_state(AppState::MainMenu))
-            );
-            //  .add_systems(
-            //      Update, 
-            //      (start_game_system).run_if(in_state(AppState::MainMenu)));
+            )
+            .add_systems(OnExit(AppState::MainMenu), cleanup_system);
     }
 }
+
+#[derive(Component)]
+pub struct Menu { }
 
 #[derive(Component)]
 pub struct PlayButton {}
@@ -33,12 +34,12 @@ fn setup_system (
     asset_server: Res<AssetServer>
 ) {
     print!("Main Menu");
-    let main_menu_entity = commands.spawn((
+    commands.spawn((
         NodeBundle {
                 style: Style {
                 flex_direction: FlexDirection::Column,
                 justify_content: JustifyContent::Center,
-                align_items: AlignItems::Center,                
+                align_items: AlignItems::Center,
                 width: Val::Percent(100.0),
                 height: Val::Percent(100.0),
                 column_gap: Val::Px(8.0),
@@ -47,7 +48,7 @@ fn setup_system (
             },
             ..default()
         },
-        //MainMenu {}
+        Menu {}
     ))
     .with_children(|parent|{
         // === Title ===
@@ -150,8 +151,7 @@ fn setup_system (
                     ..default()
                 });
         });
-    })
-    .id();
+    });
 }
 
 
@@ -192,5 +192,14 @@ fn interact_with_exit_button (
                 *background_color = Color::rgb(0.25,  0.25, 0.25).into();
             }
         }
+    }
+}
+
+fn cleanup_system(
+    menu_query: Query<Entity, With<Menu>>,
+    mut commands: Commands
+) {
+    for entity in menu_query.iter(){
+        commands.entity(entity).despawn();
     }
 }
