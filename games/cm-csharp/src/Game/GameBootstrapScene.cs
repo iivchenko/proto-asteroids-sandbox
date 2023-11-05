@@ -1,6 +1,7 @@
 ﻿using Engine;
 using Engine.Entities;
 using Game.Entities;
+using System.Numerics;
 
 namespace Game;
 
@@ -8,9 +9,13 @@ public sealed class GameBootstrapScene : IScene
 {
     private Asteroid _asteroid;
 
-    public GameBootstrapScene(IEntityFactory entityFactory)
+    public GameBootstrapScene(IEntityBuilderFactory<AsteroidBuilder> asteroidsBuilderFactory)
     {
-        _asteroid = entityFactory.CreateAsteroid(AsteroidType.Medium, new System.Numerics.Vector2(0, 800), -100);
+        _asteroid = 
+            asteroidsBuilderFactory
+                .Create()
+                .WithType(AsteroidType.Medium)
+                .Build(new Vector2(0, 800), -100);
     }
 
     public void Update(float time)
