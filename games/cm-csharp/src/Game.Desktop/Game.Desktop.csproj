@@ -1,9 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Engine.Backends.Raylib\Engine.Backends.Raylib.csproj" />
+    <ProjectReference Include="..\Engine.Game\Engine.Game.csproj" />
+    <ProjectReference Include="..\Game\Game.csproj" />
+  </ItemGroup>
 
 </Project>
