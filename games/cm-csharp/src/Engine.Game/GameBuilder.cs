@@ -5,13 +5,13 @@ namespace Engine.Game;
 public sealed class GameBuilder
 {
     private readonly ServiceCollection _container;
-    private readonly Configuration _configuration;
+    private readonly GameConfiguration _configuration;
     private Type _scene;
 
     private GameBuilder()
     {
         _container = new ServiceCollection();
-        _configuration = new Configuration();
+        _configuration = new GameConfiguration();
     }
 
     public static GameBuilder CreateBuilder()
@@ -26,7 +26,7 @@ public sealed class GameBuilder
         return this;
     }
 
-    public GameBuilder WithConfiguration(Action<Configuration> configure)
+    public GameBuilder WithConfiguration(Action<GameConfiguration> configure)
     {
         configure(_configuration);
 

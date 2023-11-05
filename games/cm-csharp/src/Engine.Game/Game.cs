@@ -8,7 +8,7 @@ namespace Engine.Game;
 
 internal sealed class Game : IGame, IPainter
 {
-    private readonly Configuration _configuration;
+    private readonly GameConfiguration _configuration;
     private readonly IWindowsSystem _windowsSystem;
     private readonly IGraphicsSystem _graphicsSystem;
     private readonly SceneBootstraper _bootstraper;
@@ -17,7 +17,7 @@ internal sealed class Game : IGame, IPainter
     private readonly List<SpriteDescriptor> _sprites;
 
     public Game(
-        Configuration configuration,
+        GameConfiguration configuration,
         IWindowsSystem windowsSystem,
         IGraphicsSystem graphicsSystem, 
         SceneBootstraper bootstraper)

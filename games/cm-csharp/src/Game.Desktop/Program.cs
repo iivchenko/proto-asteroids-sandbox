@@ -19,10 +19,12 @@ public static class Program
                 })
                 .WithConfiguration(config =>
                 {
-                    // TODO: Add window config
-                    config.WindowHeader = "Proto Asteroids";
-                    config.WindowWidth = 1024;
-                    config.WindowHeight = 800;
+                    config.Window = new()
+                    {
+                        Header = "Proto Asteroids",
+                        Width = 1024,
+                        Height = 800
+                    };
                 })
                 .WithBootstrapScene<TempScene>()
                 .Build();
