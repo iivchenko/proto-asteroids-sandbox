@@ -26,7 +26,7 @@ public static class Program
                         Height = 800
                     };
                 })
-                .WithBootstrapScene<TempScene>()
+                .WithBootstrapScene<GameBootstrapScene>()
                 .Build();
 
         using (game)

@@ -1,5 +1,5 @@
 ﻿//using Core.Screens.GamePlay;
-using Engine;
+using Engine.Entities;
 //using Engine.Audio;
 //using Engine.Collisions;
 using Engine.Graphics;
@@ -9,7 +9,7 @@ using System.Numerics;
 
 namespace Game.Entities;
 
-public sealed class Asteroid : IEntity<Guid>, IUpdatable//, IDrawable, IBody
+public sealed class Asteroid : IEntity<Guid>, IUpdatable, IDrawable //, IBody
 {
     private readonly IPainter _draw;
     //private readonly IAudioPlayer _player;
@@ -82,13 +82,12 @@ public sealed class Asteroid : IEntity<Guid>, IUpdatable//, IDrawable, IBody
     void IUpdatable.Update(float time)
     {
         _state.Update(time);
-        _state.Draw(time);
     }
 
-    //void IDrawable.Draw(float time)
-    //{
-    //    _state.Draw(time);
-    //}
+    void IDrawable.Draw(float time)
+    {
+        _state.Draw(time);
+    }
 
     public void Destroy()
     {

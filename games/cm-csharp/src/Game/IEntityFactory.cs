@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
+using Game.Entities;
 
-namespace Game.Entities;
+namespace Game;
 
 public interface IEntityFactory
 {

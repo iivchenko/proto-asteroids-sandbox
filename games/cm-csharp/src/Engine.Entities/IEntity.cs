@@ -1,4 +1,4 @@
-﻿namespace Game.Entities
+﻿namespace Engine.Entities
 {
     public interface IEntity<TId> : IEntity
     {

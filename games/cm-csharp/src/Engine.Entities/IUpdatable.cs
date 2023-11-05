@@ -1,4 +1,4 @@
-﻿namespace Game;
+﻿namespace Engine.Entities;
 
 public interface IUpdatable
 {

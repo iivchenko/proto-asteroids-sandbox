@@ -1,4 +1,4 @@
-﻿using Game.Entities;
+﻿using Game;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

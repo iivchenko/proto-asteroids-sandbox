@@ -1,9 +1,11 @@
 ﻿using Engine.Assets;
 using Engine.Graphics;
+using Game.Entities;
 using System.Numerics;
 
-namespace Game.Entities;
+namespace Game;
 
+// TODO: Use builders per entity instead of generic factory
 public sealed class EntityFactory : IEntityFactory
 {
     private const int TinyAsteroidMinSpeed = 400;
@@ -43,7 +45,7 @@ public sealed class EntityFactory : IEntityFactory
         //IProjectileFactory projectileFactory,
         //IEventPublisher eventService,
         IPainter draw)
-        //IAudioPlayer player)
+    //IAudioPlayer player)
     {
         _assetProvider = assetProvider;
         //_collisionService = collisionService;

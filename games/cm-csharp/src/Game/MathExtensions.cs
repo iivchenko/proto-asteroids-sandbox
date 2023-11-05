@@ -2,6 +2,9 @@
 
 namespace Game;
 
+// TODO: Move to Engine.Math and split into
+// Vector extensions, introduce Angle struct
+// and introduce Angle extensions
 public static class MathExtensions
 {
     public static Vector2 ToDirection(this float angle)
