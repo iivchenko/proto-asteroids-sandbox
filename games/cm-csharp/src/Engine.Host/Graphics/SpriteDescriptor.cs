@@ -1,7 +1,7 @@
 ﻿using Engine.Graphics;
 using System.Numerics;
 
-namespace Engine.Game.Graphics;
+namespace Engine.Host.Graphics;
 
 public sealed record SpriteDescriptor(
     Sprite Sprite, 

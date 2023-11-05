@@ -1,4 +1,4 @@
-﻿namespace Engine.Game.Windows;
+﻿namespace Engine.Host.Windows;
 
 public interface IWindowsSystem
 {

@@ -1,4 +1,4 @@
-﻿namespace Engine.Game.Graphics;
+﻿namespace Engine.Host.Graphics;
 
 public interface IGraphicsSystem
 {

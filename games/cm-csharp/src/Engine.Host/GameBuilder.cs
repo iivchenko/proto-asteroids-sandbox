@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Engine.Game;
+namespace Engine.Host;
 
 public sealed class GameBuilder
 {

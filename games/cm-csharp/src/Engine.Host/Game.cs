@@ -1,10 +1,10 @@
-﻿using Engine.Game.Graphics;
-using Engine.Game.Windows;
+﻿using Engine.Host.Graphics;
+using Engine.Host.Windows;
 using Engine.Graphics;
 using System.Diagnostics;
 using System.Numerics;
 
-namespace Engine.Game;
+namespace Engine.Host;
 
 internal sealed class Game : IGame, IPainter
 {
@@ -32,7 +32,7 @@ internal sealed class Game : IGame, IPainter
 
     public void Run()
     {
-        var window = _windowsSystem.Create(_configuration.WindowWidth, _configuration.WindowHeight, _configuration.WindowHeader);
+        var window = _windowsSystem.Create(_configuration.Window.Width, _configuration.Window.Height, _configuration.Window.Header);
         var scene = _bootstraper.Create();
         var stopwatch = new Stopwatch();
         var frame = (long) (1.0 / 60.0) * 1000;

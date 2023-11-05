@@ -1,8 +1,8 @@
-﻿namespace Engine.Game;
+﻿namespace Engine.Host;
 
 public sealed class GameConfiguration
 {
-    public WindowConfiguraiton Window { get; init; } = new WindowConfiguraiton();
+    public WindowConfiguraiton Window { get; set; } = new WindowConfiguraiton();
 }
 
 public sealed class WindowConfiguraiton

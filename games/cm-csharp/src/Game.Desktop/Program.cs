@@ -1,4 +1,4 @@
-﻿using Engine.Game;
+﻿using Engine.Host;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Game.Desktop;

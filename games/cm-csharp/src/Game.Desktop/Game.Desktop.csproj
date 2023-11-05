@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Engine.Backends.Raylib\Engine.Backends.Raylib.csproj" />
-    <ProjectReference Include="..\Engine.Game\Engine.Game.csproj" />
+    <ProjectReference Include="..\Engine.Host\Engine.Host.csproj" />
     <ProjectReference Include="..\Game\Game.csproj" />
   </ItemGroup>
 

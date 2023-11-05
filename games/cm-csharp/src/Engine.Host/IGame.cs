@@ -1,4 +1,4 @@
-﻿namespace Engine.Game;
+﻿namespace Engine.Host;
 
 public interface IGame : IDisposable
 {

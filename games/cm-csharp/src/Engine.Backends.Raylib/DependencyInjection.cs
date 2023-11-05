@@ -2,8 +2,8 @@
 using Engine.Backends.Raylib.Assets;
 using Engine.Backends.Raylib.Graphics;
 using Engine.Backends.Raylib.Windows;
-using Engine.Game.Graphics;
-using Engine.Game.Windows;
+using Engine.Host.Graphics;
+using Engine.Host.Windows;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
