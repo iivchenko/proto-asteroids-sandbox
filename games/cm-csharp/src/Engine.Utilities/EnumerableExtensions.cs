@@ -1,4 +1,4 @@
-﻿namespace Game;
+﻿namespace Engine.Utilities;
 
 public static class EnumerableExtensions
 {

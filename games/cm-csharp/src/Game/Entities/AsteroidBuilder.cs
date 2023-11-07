@@ -1,6 +1,8 @@
 ﻿using Engine.Assets;
 using Engine.Graphics;
 using System.Numerics;
+using Engine.Math;
+using Engine.Utilities;
 
 namespace Game.Entities;
 

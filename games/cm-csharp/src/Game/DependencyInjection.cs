@@ -1,5 +1,4 @@
 ﻿using Engine.Entities;
-using Game;
 using Game.Entities;
 
 namespace Microsoft.Extensions.DependencyInjection;

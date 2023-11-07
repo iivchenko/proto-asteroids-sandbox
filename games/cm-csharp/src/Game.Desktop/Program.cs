@@ -3,6 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Game.Desktop;
 
+// Simple
+// Modular
+// Extensible
+// Modern
+// Cross platform
+// 2d
 public static class Program
 {
     public static void Main()
