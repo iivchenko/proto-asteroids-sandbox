@@ -10,10 +10,11 @@ public static class Program
         var game =
             GameBuilder
                 .CreateBuilder()
+                 //.WithRayLibBackend() // TODO: Thinks on moving backend application to the builder level
                 .WithServices(services =>
                 {
                     services
-                        .WithRayLibBackend()
+                        .WithRayLibBackend() // TODO: Thinks on moving backend application to the builder level
                         .WithHostServices()
                         .WithGameServices();
                 })

@@ -7,18 +7,18 @@ namespace Game.Entities;
 public sealed class AsteroidsBuilderFactory : IEntityBuilderFactory<AsteroidBuilder>
 {
     private readonly IPainter _draw;
-    private readonly IAssetProvider _assetProvider;
+    private readonly IAssetLoader<Sprite> _spriteLoader;
 
     public AsteroidsBuilderFactory(
-       IAssetProvider assetProvider,
+       IAssetLoader<Sprite> spriteLoader,
        IPainter draw)
     {
-        _assetProvider = assetProvider;
+        _spriteLoader = spriteLoader;
         _draw = draw;
     }
 
     public AsteroidBuilder Create()
     {
-        return new AsteroidBuilder(_assetProvider, _draw);
+        return new AsteroidBuilder(_spriteLoader, _draw);
     }
 }

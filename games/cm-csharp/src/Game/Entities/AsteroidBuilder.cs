@@ -27,17 +27,17 @@ public sealed class AsteroidBuilder
     private const int BigAsteroidMaxRotationSpeed = 25;
 
     private readonly IPainter _draw;
-    private readonly IAssetProvider _assetProvider;
+    private readonly IAssetLoader<Sprite> _spriteLoader;
 
     private readonly Random _random;
 
     private AsteroidType _type = AsteroidType.Tiny;
 
     public AsteroidBuilder(
-        IAssetProvider assetProvider,
+        IAssetLoader<Sprite> spriteLoader,
         IPainter draw)
     {
-        _assetProvider = assetProvider;       
+        _spriteLoader = spriteLoader;       
         _draw = draw;
         _random = new Random();
     }
@@ -71,7 +71,7 @@ public sealed class AsteroidBuilder
         switch (_type)
         {
             case AsteroidType.Tiny:
-                sprite = _assetProvider.Load<Sprite>("Sprites/Asteroids/Tiny/AsteroidTiny01");
+                sprite = _spriteLoader.Load("Sprites/Asteroids/Tiny/AsteroidTiny01");
                 speedX = _random.Next(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
                 speedY = _random.Next(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
                 rotationSpeed = _random.Next(TinyAsteroidMinRotationSpeed, TinyAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
@@ -79,7 +79,7 @@ public sealed class AsteroidBuilder
                 break;
 
             case AsteroidType.Small:
-                sprite = _assetProvider.Load<Sprite>("Sprites/Asteroids/Small/AsteroidSmall01");
+                sprite = _spriteLoader.Load("Sprites/Asteroids/Small/AsteroidSmall01");
                 speedX = _random.Next(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
                 speedY = _random.Next(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
                 rotationSpeed = _random.Next(SmallAsteroidMinRotationSpeed, SmallAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
@@ -87,7 +87,7 @@ public sealed class AsteroidBuilder
                 break;
 
             case AsteroidType.Medium:
-                sprite = _assetProvider.Load<Sprite>("asteroid-big-01.png");
+                sprite = _spriteLoader.Load("asteroid-big-01.png");
                 speedX = _random.Next(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
                 speedY = _random.Next(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
                 rotationSpeed = _random.Next(MediumAsteroidMinRotationSpeed, MediumAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
@@ -95,7 +95,7 @@ public sealed class AsteroidBuilder
                 break;
 
             case AsteroidType.Big:
-                sprite = _assetProvider.Load<Sprite>("Sprites/Asteroids/Big/AsteroidBig01");
+                sprite = _spriteLoader.Load("Sprites/Asteroids/Big/AsteroidBig01");
                 speedX = _random.Next(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
                 speedY = _random.Next(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
                 rotationSpeed = _random.Next(BigAsteroidMinRotationSpeed, BigAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
@@ -104,7 +104,7 @@ public sealed class AsteroidBuilder
             default:
                 throw new InvalidOperationException($"Unknown asteroid type {_type}!");
         }
-        var debri = _assetProvider.Load<Sprite>("Sprites/Asteroids/Tiny/AsteroidTiny01"); // TODO: Create own asteroid debri
+        var debri = _spriteLoader.Load("Sprites/Asteroids/Tiny/AsteroidTiny01"); // TODO: Create own asteroid debri
 
         //var asteroid = new Asteroid(_draw, _player, _publisher, type, sprite, debri, _explosion, velocity, new Vector2(GameRoot.Scale), rotationSpeed)
         //{
