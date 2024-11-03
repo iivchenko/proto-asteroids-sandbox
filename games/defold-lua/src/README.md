@@ -6,6 +6,7 @@ Positives:
 * You don't need to install engine it self, just download binaries
 * Game engine have a small size
 * The metadata files simple/easy to read/modify
+* Doesn't really have compilation errors
 
 
 Negatives:

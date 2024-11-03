@@ -1,0 +1,84 @@
+local function rnd(min, max)
+	return math.random(min, max) / 100 * (math.random() > 0.5 and 1 or -1)
+end
+
+function init(self)
+	self.min_speed = 10
+	self.max_speed = 100
+	self.min_rotation = 10
+	self.max_rotation = 30
+
+	math.randomseed(os.time())
+	self.rotation_speed = 30 --math.random(self.min_rotation, self.max_rotation) / 100
+
+	
+	self.speed = 100 * vmath.vector3(rnd(self.min_speed, self.max_speed), rnd(self.min_speed, self.max_speed), 0) -- math.random(self.min_speed, self.max_speed) 100 * vmath.vector3(1, 1, 0)
+	
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	local rotation = go.get_rotation() * vmath.quat_rotation_z(math.rad(self.rotation_speed * dt))
+	local position = go.get_position() + self.speed * dt
+	local wx, wy = window.get_size()
+	local x = position.x
+	local y = position.y
+	local size = go.get("#sprite", "size")
+
+	if x + size.x / 2.0 < 0 then
+		x = wx + size.x / 2.0
+	elseif x - size.x / 2.0 > wx then
+		x = -size.x / 2.0
+	end
+
+	if y + size.y / 2.0 < 0 then
+		y = wy + size.y / 2.0
+	elseif y - size.y / 2.0 > wy then
+		y = -size.y / 2.0
+	end
+
+	position.x = x
+	position.y = y
+	
+	go.set_rotation(rotation)
+	go.set_position(position)
+	
+end
+
+function fixed_update(self, dt)
+	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
+	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
+	-- Physics section of game.project
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

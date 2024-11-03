@@ -1,4 +1,12 @@
 name: "main"
+instances {
+  id: "asteroid_big"
+  prototype: "/main/asteroid_big.go"
+  position {
+    x: 556.0
+    y: 324.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "brain"
@@ -16,5 +24,6 @@ embedded_instances {
 }
 embedded_instances {
   id: "objects_layer"
+  children: "asteroid_big"
   data: ""
 }
