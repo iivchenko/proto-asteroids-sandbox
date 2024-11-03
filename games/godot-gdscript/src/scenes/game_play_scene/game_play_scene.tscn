@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://8tocddkve5ex"]
+
+[ext_resource type="Script" path="res://scenes/game_play_scene/game_play_scene.gd" id="1_fnre8"]
+
+[node name="GamePlayScene" type="Node2D"]
+script = ExtResource("1_fnre8")
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="NextAsteroidTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true

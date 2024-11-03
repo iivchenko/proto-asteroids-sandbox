@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7hgrx0njqhuo"]
+
+[ext_resource type="Script" path="res://game_objects/asteroid.gd" id="1_bpill"]
+[ext_resource type="Texture2D" uid="uid://cre4w26x58vli" path="res://assets/sprites/asteroids/asteroid-medium-01.png" id="2_kb8ww"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a8xud"]
+
+[node name="Asteroid" type="Area2D"]
+script = ExtResource("1_bpill")
+min_speed = 50
+max_speed = 150
+min_rotation = 30
+max_rotation = 50
+
+[node name="Visual" type="Sprite2D" parent="."]
+texture = ExtResource("2_kb8ww")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a8xud")
