@@ -1,0 +1,55 @@
+images {
+  image: "/assets/sprites/asteroid-big-01.png"
+}
+images {
+  image: "/assets/sprites/asteroid-medium-01.png"
+}
+images {
+  image: "/assets/sprites/asteroid-small-01.png"
+}
+images {
+  image: "/assets/sprites/asteroid-tiny-01.png"
+}
+images {
+  image: "/assets/sprites/blaster-red-01.png"
+}
+images {
+  image: "/assets/sprites/debri-01.png"
+}
+images {
+  image: "/assets/sprites/debri-02.png"
+}
+images {
+  image: "/assets/sprites/debri-03.png"
+}
+images {
+  image: "/assets/sprites/laser-blue-01.png"
+}
+images {
+  image: "/assets/sprites/ship-blue-01.png"
+}
+images {
+  image: "/assets/sprites/ship-blue-02.png"
+}
+images {
+  image: "/assets/sprites/spr_players_life.png"
+}
+images {
+  image: "/assets/sprites/star-01.png"
+}
+images {
+  image: "/assets/sprites/star-02.png"
+}
+images {
+  image: "/assets/sprites/star-03.png"
+}
+images {
+  image: "/assets/sprites/star-04.png"
+}
+images {
+  image: "/assets/sprites/star-05.png"
+}
+images {
+  image: "/assets/sprites/ufo-01.png"
+}
+extrude_borders: 2

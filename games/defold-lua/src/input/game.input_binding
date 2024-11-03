@@ -1,0 +1,16 @@
+key_trigger {
+  input: KEY_A
+  action: "turn_left"
+}
+key_trigger {
+  input: KEY_D
+  action: "turn_right"
+}
+key_trigger {
+  input: KEY_W
+  action: "accelerate"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_1
+  action: "touch"
+}

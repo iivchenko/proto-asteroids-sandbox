@@ -1,0 +1,51 @@
+local rotation_speed = 500.0
+local max_speed = 500.0
+local max_acceleration = 25.0
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	self.input = vmath.vector3()
+	self.velocity = vmath.vector3()
+	
+end
+
+function update(self, dt)
+	local rot = go.get_rotation() * vmath.quat_rotation_z(math.rad(rotation_speed * self.input.x * dt))
+	go.set_rotation(rot)
+
+	local angle = go.get(".", "euler.z")	
+	local direction = vmath.normalize(vmath.vector3(-math.sin(angle * (math.pi/180.0)), math.cos(angle * (math.pi/180.0)), 0))
+	local velocity = self.velocity + direction * max_acceleration * self.input.y
+	self.velocity = (vmath.length(velocity) > max_speed) and vmath.normalize(velocity) * max_speed or velocity
+
+	go.set_position(go.get_position() + self.velocity * dt)
+	
+end
+
+function on_input(self, action_id, action)
+	
+	if action_id == hash("accelerate") then
+		if action.pressed then
+			self.input.y = 1
+		elseif action.released then
+			self.input.y = 0
+		end
+	end
+
+	if action_id == hash("turn_left") then
+		if action.pressed then
+			self.input.x = 1
+		elseif action.released then
+			self.input.x = 0
+		end
+	end
+
+	if action_id == hash("turn_right") then
+		if action.pressed then
+			self.input.x = -1
+		elseif action.released then
+			self.input.x = 0
+		end
+	end
+end
