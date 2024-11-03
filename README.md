@@ -13,9 +13,9 @@ Classical implementation or the [Asteroids Game](https://en.wikipedia.org/wiki/A
 | MonoGame ELM/F#   | :boom:        |
 | GMS               | :green_heart: |
 | Godot/C#          | :green_heart: |
-| Godot/GDScript    | :snowflake:   |
+| Godot/GDScript    | :recycle:     |
 | Ceramic/Haxe      | :boom:        |
-| Defold/Lua        | :snowflake:   |
+| Defold/Lua        | :recycle:     |
 | Unity/C#          | :snowflake:   |
 
 *Agenda*
