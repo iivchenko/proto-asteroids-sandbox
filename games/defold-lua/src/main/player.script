@@ -19,8 +19,30 @@ function update(self, dt)
 	local velocity = self.velocity + direction * max_acceleration * self.input.y
 	self.velocity = (vmath.length(velocity) > max_speed) and vmath.normalize(velocity) * max_speed or velocity
 
-	go.set_position(go.get_position() + self.velocity * dt)
+	local position = go.get_position() + self.velocity * dt
+
+	local wx, wy = window.get_size()
+	local x = position.x
+	local y = position.y
+	local size = go.get("#sprite", "size")
+
+	if x + size.x / 2.0 < 0 then
+		x = wx + size.x / 2.0
+	elseif x - size.x / 2.0 > wx then
+		x = -size.x / 2.0
+	end
+
+	if y + size.y / 2.0 < 0 then
+		y = wy + size.y / 2.0
+	elseif y - size.y / 2.0 > wy then
+		y = -size.y / 2.0
+	end
+
+	position.x = x
+	position.y = y
 	
+	go.set_position(position)
+
 end
 
 function on_input(self, action_id, action)
