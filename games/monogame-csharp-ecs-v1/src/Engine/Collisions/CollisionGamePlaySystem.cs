@@ -21,6 +21,7 @@ namespace Engine.Collisions
             ICollisionService collisionService, 
             uint priority)
         {
+            
             _publisher = publisher;
             _world = world;
             _collisionService = collisionService;
