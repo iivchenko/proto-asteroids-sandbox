@@ -7,6 +7,9 @@ const ROTATION_SPEED = 10.0
 const MAX_SPEED = 500.0
 const MAX_ACCELERATION = 15.0
 
+@onready var visual: Sprite2D = $Visual
+@onready var death_particles: CPUParticles2D = $DeathParticles
+
 var velocity : Vector2
 
 func _ready() -> void:
@@ -27,6 +30,12 @@ func _process(delta: float) -> void:
     position = position + velocity * delta
     
 func _on_collide(_body: Node2D) -> void:
-    area_entered.disconnect(_on_collide)    
+    set_deferred("monitoring", false)
+    set_deferred("monitorable", false)
+    visual.visible = false
+
+    death_particles.emitting = true
+    await death_particles.finished
+    
     destroyed.emit(self)
     queue_free()

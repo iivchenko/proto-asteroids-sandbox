@@ -27,7 +27,7 @@ TODO:
   - [ ] Add star sky
   - [ ] Add players ship
     - [X] Basics
-    - [ ] Add playses ship death particles
+    - [X] Add playses ship death particles
     - [ ] Add lazer
     - [ ] Add lazer sfx
     - [ ] Add death sound
