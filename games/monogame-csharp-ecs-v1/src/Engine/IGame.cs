@@ -1,7 +1,6 @@
-﻿namespace Engine
+﻿namespace Engine;
+
+public interface IGame
 {
-    public interface IGame
-    {
-        void Run();
-    }
+    public void Run();
 }

@@ -1,41 +1,32 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
 
-namespace Engine
+namespace Engine;
+
+public sealed class GameBuilder
 {
-    public sealed class GameBuilder
+    private readonly ServiceCollection _container;
+
+    private GameBuilder()
     {
-        private readonly ServiceCollection _container;
-        private readonly GameConfiguration _configuration;
+        _container = new ServiceCollection();
+    }
 
-        private GameBuilder()
-        {
-            _container = new ServiceCollection();
-            _configuration = new GameConfiguration();
-        }
+    public static GameBuilder CreateBuilder()
+    {
+        return new GameBuilder();
+    }
 
-        public static GameBuilder CreateBuilder()
-        {
-            return new GameBuilder();
-        }
+    public GameBuilder WithServices(Action<IServiceCollection> configure)
+    {
+        configure(_container);
 
-        public GameBuilder WithServices(Action<IServiceCollection> configure)
-        {
-            configure(_container);
+        return this;
+    }
 
-            return this;
-        }
+    public IGame Build()
+    {
+        var provider = _container.BuildServiceProvider();
 
-        public GameBuilder WithConfiguration(Action<GameConfiguration> configure)
-        {
-            configure(_configuration);
-
-            return this;
-        }
-
-        public IGame Build(Func<ServiceCollection, GameConfiguration, IGame> build)
-        {
-            return build(_container, _configuration);
-        }
+        return provider.GetRequiredService<IGame>();
     }
 }
