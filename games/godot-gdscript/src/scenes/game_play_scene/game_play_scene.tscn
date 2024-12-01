@@ -1,9 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://8tocddkve5ex"]
+[gd_scene load_steps=3 format=3 uid="uid://8tocddkve5ex"]
 
 [ext_resource type="Script" path="res://scenes/game_play_scene/game_play_scene.gd" id="1_fnre8"]
 
+[sub_resource type="GDScript" id="GDScript_c3s8n"]
+resource_name = "stars"
+script/source = "extends Node2D
+
+@onready var star_scene = preload(\"res://game_objects/star.tscn\")
+@onready var stars = $\"../Stars\"
+
+func _ready() -> void:
+    var block = 96;
+    var view_size = get_viewport_rect().size
+    var ix  = 0
+    var iy = 0
+    
+    while ix < view_size.x / block:
+        while iy < view_size.y / block:
+            if randi_range(0, 1) == 0:
+                continue
+            
+            var scale = randi_range(30, 150) / 100.0
+            var star = star_scene.instantiate()
+            star.global_position = Vector2(randi_range(0, block) + ix * block, randi_range(0, block) + iy * block);
+            star.rotation = randi_range(0, 314) / 100.0
+            star.scale = Vector2(scale, scale)
+
+            stars.add_child(star)
+                
+            iy += 1
+        
+        ix += 1
+        iy = 0
+"
+
 [node name="GamePlayScene" type="Node2D"]
 script = ExtResource("1_fnre8")
+
+[node name="Stars" type="Node2D" parent="."]
+script = SubResource("GDScript_c3s8n")
 
 [node name="Objects" type="Node2D" parent="."]
 

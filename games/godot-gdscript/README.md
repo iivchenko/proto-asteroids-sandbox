@@ -24,7 +24,7 @@ TODO:
   - [ ] Add Music
 - [ ] Settings Menu
 - [ ] Game Play
-  - [ ] Add star sky
+  - [X] Add star sky
   - [X] Add players ship
     - [X] Basics
     - [X] Add playses ship death particles
