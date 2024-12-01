@@ -7,6 +7,8 @@
 radius = 7.07107
 
 [node name="Asteroid" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_pyi5f")
 min_speed = 80
 max_speed = 300

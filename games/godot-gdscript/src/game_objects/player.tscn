@@ -15,13 +15,16 @@ offsets = PackedFloat32Array(0, 0.891304)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Player" type="Area2D"]
+collision_mask = 4
 script = ExtResource("1_m2xfw")
+
+[node name="Weapon" type="Marker2D" parent="."]
+position = Vector2(14, 0)
 
 [node name="Visual" type="Sprite2D" parent="."]
 texture = ExtResource("1_re6vf")
 
 [node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_3bfhp")
 
 [node name="DeathParticles" type="CPUParticles2D" parent="."]

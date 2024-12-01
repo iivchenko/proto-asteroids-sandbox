@@ -28,8 +28,8 @@ TODO:
   - [ ] Add players ship
     - [X] Basics
     - [X] Add playses ship death particles
-    - [ ] Add lazer
-    - [ ] Add lazer sfx
+    - [X] Add lazer
+    - [X] Add lazer sfx
     - [ ] Add death sound
   - [ ] Add asteroids
     - [X] Introduce ship to asteroids collisions

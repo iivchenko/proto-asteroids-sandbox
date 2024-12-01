@@ -11,13 +11,28 @@ func _ready() -> void:
     next_asteroid_timer.timeout.connect(_on_next_asteroid)
 
 func _process(_delta: float) -> void:
+    out_of_screen_bullets()
     screen_wrap()
 
 func create_player() -> void:
     var player = player_factory.instantiate()
     player.position = Vector2(view_size.x / 2.0, view_size.y / 2.0)    
     player.destroyed.connect(_on_player_destroyed)
+    player.objects = objects
     objects.add_child(player)
+    
+func out_of_screen_bullets() -> void:
+    for object: Node2D in objects.get_children():
+        if object is Laser:
+            var obj_size = object.get_node("Visual").texture.get_size()
+            if object.position.x + obj_size.x / 2.0 < 0:
+                object.queue_free()
+            elif object.position.x - obj_size.x / 2.0 > view_size.x:
+                 object.queue_free()  
+            elif object.position.y + obj_size.y / 2.0 < 0:
+                object.queue_free()
+            elif object.position.y - obj_size.y / 2.0 > view_size.y:
+                object.queue_free()
     
 func screen_wrap() -> void:
     for object: Node2D in objects.get_children():

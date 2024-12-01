@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cohsgxfklcqtw"]
+
+[ext_resource type="Script" path="res://game_objects/laser.gd" id="1_73af2"]
+[ext_resource type="Texture2D" uid="uid://cc6suxw6ccuk8" path="res://assets/sprites/lazers/laser-blue-01.png" id="1_n6nbh"]
+[ext_resource type="AudioStream" uid="uid://c4mv7pqrv1gha" path="res://assets/sfx/laser.sound.ogg" id="3_u476w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6m7h8"]
+radius = 2.0
+height = 12.0
+
+[node name="Laser" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_73af2")
+
+[node name="Visual" type="Sprite2D" parent="."]
+texture = ExtResource("1_n6nbh")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6m7h8")
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_u476w")
+autoplay = true
