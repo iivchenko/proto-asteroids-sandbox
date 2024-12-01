@@ -6,6 +6,10 @@ extends Area2D
 @export var min_rotation : int = 0
 @export var max_rotation : int = 0
 
+@onready var visual: Sprite2D = $Visual
+@onready var death_sound : AudioStreamPlayer = $DeathSound
+@onready var death_particles: CPUParticles2D = $DeathParticles
+
 var rotation_speed : float
 var velocity : Vector2
 
@@ -24,8 +28,16 @@ func _process(delta: float) -> void:
     rotation = rotation + rotation_speed * delta
     position = position + velocity * delta
     
-func on_collide(body: Node2D) -> void:
+func on_collide(_body: Node2D) -> void:  
     
-    if typeof(body) == typeof(Player) or typeof(body) == typeof(Asteroid):
-        body_entered.disconnect(on_collide)
-        queue_free()
+    set_deferred("monitoring", false)
+    set_deferred("monitorable", false)
+    visual.visible = false
+    
+
+    death_sound.play()
+    death_particles.emitting = true
+    await death_sound.finished
+    await death_particles.finished
+    
+    queue_free()

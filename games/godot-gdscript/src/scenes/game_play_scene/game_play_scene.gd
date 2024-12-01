@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var objects = $Objects
+@onready var objects : Node2D = $Objects
 @onready var next_asteroid_timer = $NextAsteroidTimer
 @onready var player_factory = preload("res://game_objects/player.tscn")
 @onready var view_size : Vector2 = get_viewport().get_visible_rect().size

@@ -25,16 +25,16 @@ TODO:
 - [ ] Settings Menu
 - [ ] Game Play
   - [ ] Add star sky
-  - [ ] Add players ship
+  - [X] Add players ship
     - [X] Basics
     - [X] Add playses ship death particles
     - [X] Add lazer
     - [X] Add lazer sfx
-    - [ ] Add death sound
-  - [ ] Add asteroids
+    - [X] Add death sound
+  - [X] Add asteroids
     - [X] Introduce ship to asteroids collisions
-    - [ ] Add particle effects to Asteroids death
-    - [ ] Add death sound
+    - [X] Add particle effects to Asteroids death
+    - [X] Add death sound
   - [ ] Add UFO
     - [ ] Implement basics
     - [ ] Implement collision with asteroid

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjtjr6j4p18ll"]
+[gd_scene load_steps=7 format=3 uid="uid://bjtjr6j4p18ll"]
 
 [ext_resource type="Script" path="res://game_objects/player.gd" id="1_m2xfw"]
 [ext_resource type="Texture2D" uid="uid://cfpv1010x7r28" path="res://assets/sprites/players_ships/ship-blue-01.png" id="1_re6vf"]
 [ext_resource type="Texture2D" uid="uid://by55qsriq4v0h" path="res://assets/sprites/debris/debri-01.png" id="3_0mjax"]
+[ext_resource type="AudioStream" uid="uid://dtiqp02d2r6gt" path="res://assets/sfx/asteroid-explosion.sound.wav" id="4_qisxe"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3bfhp"]
 radius = 14.0
@@ -44,3 +45,6 @@ angular_velocity_max = 150.0
 damping_min = 5.0
 damping_max = 35.0
 color_ramp = SubResource("Gradient_cn2in")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qisxe")

@@ -10,6 +10,7 @@ const FIRE_RATE = 0.75
 
 @onready var visual: Sprite2D = $Visual
 @onready var weapon: Marker2D = $Weapon
+@onready var death_sound: AudioStreamPlayer = $DeathSound
 @onready var death_particles: CPUParticles2D = $DeathParticles
 
 var objects: Node2D
@@ -51,7 +52,9 @@ func _on_collide(_body: Node2D) -> void:
     set_deferred("monitorable", false)
     visual.visible = false
 
+    death_sound.play()
     death_particles.emitting = true
+    await death_sound.finished
     await death_particles.finished
     
     destroyed.emit(self)
