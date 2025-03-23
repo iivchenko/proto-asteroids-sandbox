@@ -3,6 +3,7 @@
 public sealed class Vec(float x, float y)
 {
     public static readonly Vec Zero = new(0, 0);
+    public static readonly Vec One = new(1, 1);
 
     public Vec(float value) 
         : this(value, value)

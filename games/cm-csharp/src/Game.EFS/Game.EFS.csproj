@@ -17,4 +17,6 @@
     <ProjectReference Include="..\Engine.Utilities\Engine.Utilities.csproj" />
   </ItemGroup>
 
+  <Import Project="..\Game.Assets\Game.Assets.projitems" Label="Shared" />
+
 </Project>

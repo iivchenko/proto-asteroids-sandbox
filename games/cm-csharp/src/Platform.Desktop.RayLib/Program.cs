@@ -25,15 +25,10 @@ Use classes to describe GameObjects (no components or nodes etc.)
 Use Interfaces to specialize functionality of the GameObjects (IBody  for collision etc., IDrawable for Sprite drawing)
 Use Systems to consume this Interfaces and proivce outside the GameObject functionality
 What about IEntity to have OnMsg method so any system can send a message or event to an entity for instance Collision System will send msgs/events about collision with other objects
-Get rid of the DI and Container, game settings, score board etc.
-Introduce code generation to make acces to the assets compile time
 
 TODO:
-- Migrate to latest MonoGame
-- Break depenency with Comora
-- Break game an engine depenency from MonoGame libs
-- Implement second back end - Raylib
-- May be even third - JavaScript
+- Introduce Source Generators to wrap assets pathes and make it Compile Time Access
+- Implement JavaScript backend
   
  */
 public static class Program
@@ -53,7 +48,7 @@ public static class Program
                 {
                     config.Window = new()
                     {
-                        Header = "Proto Asteroids",
+                        Header = "Proto Asteroids [RayLib]",
                         Width = 1024,
                         Height = 800
                     };

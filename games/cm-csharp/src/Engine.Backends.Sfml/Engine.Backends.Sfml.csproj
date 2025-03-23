@@ -1,16 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engine.Backends.Raylib\Engine.Backends.Raylib.csproj" />
+    <PackageReference Include="SFML.Net" Version="2.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Engine.Host\Engine.Host.csproj" />
-    <ProjectReference Include="..\Game.EFS\Game.EFS.csproj" />
   </ItemGroup>
 
 </Project>

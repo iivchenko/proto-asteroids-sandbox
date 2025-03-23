@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engine.Backends.Raylib\Engine.Backends.Raylib.csproj" />
+    <ProjectReference Include="..\Engine.Backends.Sfml\Engine.Backends.Sfml.csproj" />
     <ProjectReference Include="..\Engine.Host\Engine.Host.csproj" />
     <ProjectReference Include="..\Game.EFS\Game.EFS.csproj" />
   </ItemGroup>

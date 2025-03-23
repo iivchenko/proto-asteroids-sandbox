@@ -134,7 +134,7 @@ public sealed class AsteroidBuilder
         //    Position = position
         //};
 
-        var asteroid = new Asteroid(_draw, _type, sprite, debri, velocity, new Vec(GameRoot.Scale), rotationSpeed)
+        var asteroid = new Asteroid(_draw, _type, sprite, debri, velocity, Vec.One, rotationSpeed)
         {
             Position = position
         };
