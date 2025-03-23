@@ -9,7 +9,7 @@ using System;
 //using Engine.Particles;
 //using Engine.Events;
 
-namespace Game.Entities;
+namespace Game.EIS.Entities;
 
 public sealed class Asteroid : Entity, IUpdatable, IDrawable //, IBody
 {

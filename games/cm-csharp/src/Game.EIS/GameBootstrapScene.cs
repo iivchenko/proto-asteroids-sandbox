@@ -1,9 +1,8 @@
 ﻿using Engine;
 using Engine.EIS;
-using Game.Entities;
-using System.Numerics;
+using Game.EIS.Entities;
 
-namespace Game;
+namespace Game.EIS;
 
 public sealed class GameBootstrapScene : IScene
 {
@@ -15,7 +14,7 @@ public sealed class GameBootstrapScene : IScene
             asteroidsBuilderFactory
                 .Create()
                 .WithType(AsteroidType.Medium)
-                .Build(new Vec(0, 800), -100);
+                .Build(new Vec(0, 800), new Angle(-100, AngleType.Degrees));
     }
 
     public void Update(float time)

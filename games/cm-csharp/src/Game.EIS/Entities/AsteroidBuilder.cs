@@ -3,7 +3,7 @@ using Engine.Utilities;
 using Engine.Services;
 using Engine;
 
-namespace Game.Entities;
+namespace Game.EIS.Entities;
 
 public sealed class AsteroidBuilder
 {
@@ -61,7 +61,7 @@ public sealed class AsteroidBuilder
         return this;
     }
 
-    public Asteroid Build(Vec position, float direction)
+    public Asteroid Build(Vec position, Angle direction)
     {
         Sprite sprite;
         int speedX;
@@ -75,32 +75,54 @@ public sealed class AsteroidBuilder
                 sprite = _spriteLoader.Load("Sprites/Asteroids/Tiny/AsteroidTiny01");
                 speedX = _random.Next(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
                 speedY = _random.Next(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
-                rotationSpeed = _random.Next(TinyAsteroidMinRotationSpeed, TinyAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
-                velocity = direction.ToDirection() * new Vec(speedX, speedY);
+                var tmpAngle1 = new Angle
+                    (
+                        _random.Next(TinyAsteroidMinRotationSpeed, TinyAsteroidMaxRotationSpeed),
+                        AngleType.Degrees
+                    );
+
+                rotationSpeed = tmpAngle1.ToRadians().Value * _random.NextDouble() > 0.5 ? 1 : -1;
+                velocity = direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
             case AsteroidType.Small:
                 sprite = _spriteLoader.Load("Sprites/Asteroids/Small/AsteroidSmall01");
                 speedX = _random.Next(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
                 speedY = _random.Next(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
-                rotationSpeed = _random.Next(SmallAsteroidMinRotationSpeed, SmallAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
-                velocity = direction.ToDirection() * new Vec(speedX, speedY);
+                var tmpAngle2 = new Angle
+                (
+                    _random.Next(SmallAsteroidMinRotationSpeed, SmallAsteroidMaxRotationSpeed),
+                    AngleType.Degrees
+                );
+
+                rotationSpeed = tmpAngle2.ToRadians().Value * _random.NextDouble() > 0.5 ? 1 : -1;
+                velocity = direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
             case AsteroidType.Medium:
                 sprite = _spriteLoader.Load("asteroid-big-01.png");
                 speedX = _random.Next(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
                 speedY = _random.Next(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
-                rotationSpeed = _random.Next(MediumAsteroidMinRotationSpeed, MediumAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
-                velocity = direction.ToDirection() * new Vec(speedX, speedY);
+                var tmpAngle3 = new Angle
+                (
+                   _random.Next(MediumAsteroidMinRotationSpeed, MediumAsteroidMaxRotationSpeed),
+                    AngleType.Degrees
+                );
+                rotationSpeed = tmpAngle3.ToRadians().Value * _random.NextDouble() > 0.5 ? 1 : -1;
+                velocity = direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
             case AsteroidType.Big:
                 sprite = _spriteLoader.Load("Sprites/Asteroids/Big/AsteroidBig01");
                 speedX = _random.Next(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
                 speedY = _random.Next(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
-                rotationSpeed = _random.Next(BigAsteroidMinRotationSpeed, BigAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
-                velocity = direction.ToDirection() * new Vec(speedX, speedY);
+                var tmpAngle4 = new Angle
+                (
+                    _random.Next(BigAsteroidMinRotationSpeed, BigAsteroidMaxRotationSpeed),
+                    AngleType.Degrees
+                );
+                rotationSpeed = tmpAngle4.ToRadians().Value * _random.NextDouble() > 0.5 ? 1 : -1;
+                velocity = direction.ToVector() * new Vec(speedX, speedY);
                 break;
             default:
                 throw new InvalidOperationException($"Unknown asteroid type {_type}!");

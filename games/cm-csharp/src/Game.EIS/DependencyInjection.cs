@@ -1,5 +1,5 @@
 ﻿using Engine.EIS;
-using Game.Entities;
+using Game.EIS.Entities;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

@@ -2,7 +2,7 @@
 using Engine.EIS;
 using Engine.Services;
 
-namespace Game.Entities;
+namespace Game.EIS.Entities;
 
 public sealed class AsteroidsBuilderFactory : IEntityBuilderFactory<AsteroidBuilder>
 {
