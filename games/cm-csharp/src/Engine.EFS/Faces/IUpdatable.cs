@@ -1,4 +1,4 @@
-﻿namespace Engine.EIS;
+﻿namespace Engine.EFS.Faces;
 
 public interface IUpdatable
 {

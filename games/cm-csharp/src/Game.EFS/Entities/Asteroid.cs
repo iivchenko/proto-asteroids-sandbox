@@ -1,6 +1,8 @@
 ﻿//using Core.Screens.GamePlay;
 using Engine;
-using Engine.EIS;
+using Engine.EFS;
+using Engine.EFS.Faces;
+
 //using Engine.Audio;
 //using Engine.Collisions;
 using Engine.Services;
@@ -9,7 +11,7 @@ using System;
 //using Engine.Particles;
 //using Engine.Events;
 
-namespace Game.EIS.Entities;
+namespace Game.EFS.Entities;
 
 public sealed class Asteroid : Entity, IUpdatable, IDrawable //, IBody
 {

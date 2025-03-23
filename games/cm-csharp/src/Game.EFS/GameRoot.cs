@@ -1,4 +1,4 @@
-﻿namespace Game.EIS;
+﻿namespace Game.EFS;
 
 public static class GameRoot
 {

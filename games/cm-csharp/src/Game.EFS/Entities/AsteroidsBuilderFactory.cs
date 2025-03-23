@@ -1,8 +1,8 @@
 ﻿using Engine;
-using Engine.EIS;
+using Engine.EFS;
 using Engine.Services;
 
-namespace Game.EIS.Entities;
+namespace Game.EFS.Entities;
 
 public sealed class AsteroidsBuilderFactory : IEntityBuilderFactory<AsteroidBuilder>
 {

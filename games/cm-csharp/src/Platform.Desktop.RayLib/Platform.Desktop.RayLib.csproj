@@ -8,9 +8,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Sprites\Asteroids\Big\AsteroidBig01.png" />
+    <None Remove="Assets\Sprites\Asteroids\Medium\AsteroidMedium01.png" />
+    <None Remove="Assets\Sprites\Asteroids\Small\AsteroidSmall01.png" />
+    <None Remove="Assets\Sprites\Asteroids\Tiny\AsteroidTiny01.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Sprites\Asteroids\Big\AsteroidBig01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Sprites\Asteroids\Medium\AsteroidMedium01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Sprites\Asteroids\Small\AsteroidSmall01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Sprites\Asteroids\Tiny\AsteroidTiny01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Engine.Backends.Raylib\Engine.Backends.Raylib.csproj" />
     <ProjectReference Include="..\Engine.Host\Engine.Host.csproj" />
-    <ProjectReference Include="..\Game.EIS\Game.EIS.csproj" />
+    <ProjectReference Include="..\Game.EFS\Game.EFS.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,9 @@
 ﻿using Engine;
-using Engine.EIS;
-using Game.EIS.Entities;
+using Engine.EFS;
+using Engine.EFS.Faces;
+using Game.EFS.Entities;
 
-namespace Game.EIS;
+namespace Game.EFS;
 
 public sealed class GameBootstrapScene : IScene
 {

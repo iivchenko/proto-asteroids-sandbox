@@ -1,7 +1,8 @@
-﻿using Engine.EIS;
-using Game.EIS.Entities;
+﻿using Engine.EFS;
+using Game.EFS.Entities;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace Game.EFS;
 
 public static class DependencyInjection
 {
