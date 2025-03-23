@@ -1,8 +1,7 @@
-﻿using Engine.Assets;
-using Engine.Graphics;
-using System.Numerics;
-using Engine.Math;
+﻿using Engine.Math;
 using Engine.Utilities;
+using Engine.Services;
+using Engine;
 
 namespace Game.Entities;
 
@@ -28,16 +27,16 @@ public sealed class AsteroidBuilder
     private const int BigAsteroidMinRotationSpeed = 5;
     private const int BigAsteroidMaxRotationSpeed = 25;
 
-    private readonly IPainter _draw;
-    private readonly IAssetLoader<Sprite> _spriteLoader;
+    private readonly IGraphicsService _draw;
+    private readonly IAssetService<Sprite> _spriteLoader;
 
     private readonly Random _random;
 
     private AsteroidType _type = AsteroidType.Tiny;
 
     public AsteroidBuilder(
-        IAssetLoader<Sprite> spriteLoader,
-        IPainter draw)
+        IAssetService<Sprite> spriteLoader,
+        IGraphicsService draw)
     {
         _spriteLoader = spriteLoader;       
         _draw = draw;
@@ -62,13 +61,13 @@ public sealed class AsteroidBuilder
         return this;
     }
 
-    public Asteroid Build(Vector2 position, float direction)
+    public Asteroid Build(Vec position, float direction)
     {
         Sprite sprite;
         int speedX;
         int speedY;
         int rotationSpeed;
-        Vector2 velocity;
+        Vec velocity;
 
         switch (_type)
         {
@@ -77,7 +76,7 @@ public sealed class AsteroidBuilder
                 speedX = _random.Next(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
                 speedY = _random.Next(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
                 rotationSpeed = _random.Next(TinyAsteroidMinRotationSpeed, TinyAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
-                velocity = direction.ToDirection() * new Vector2(speedX, speedY);
+                velocity = direction.ToDirection() * new Vec(speedX, speedY);
                 break;
 
             case AsteroidType.Small:
@@ -85,7 +84,7 @@ public sealed class AsteroidBuilder
                 speedX = _random.Next(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
                 speedY = _random.Next(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
                 rotationSpeed = _random.Next(SmallAsteroidMinRotationSpeed, SmallAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
-                velocity = direction.ToDirection() * new Vector2(speedX, speedY);
+                velocity = direction.ToDirection() * new Vec(speedX, speedY);
                 break;
 
             case AsteroidType.Medium:
@@ -93,7 +92,7 @@ public sealed class AsteroidBuilder
                 speedX = _random.Next(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
                 speedY = _random.Next(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
                 rotationSpeed = _random.Next(MediumAsteroidMinRotationSpeed, MediumAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
-                velocity = direction.ToDirection() * new Vector2(speedX, speedY);
+                velocity = direction.ToDirection() * new Vec(speedX, speedY);
                 break;
 
             case AsteroidType.Big:
@@ -101,7 +100,7 @@ public sealed class AsteroidBuilder
                 speedX = _random.Next(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
                 speedY = _random.Next(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
                 rotationSpeed = _random.Next(BigAsteroidMinRotationSpeed, BigAsteroidMaxRotationSpeed).AsRadians() * _random.NextDouble() > 0.5 ? 1 : -1;
-                velocity = direction.ToDirection() * new Vector2(speedX, speedY);
+                velocity = direction.ToDirection() * new Vec(speedX, speedY);
                 break;
             default:
                 throw new InvalidOperationException($"Unknown asteroid type {_type}!");
@@ -113,7 +112,7 @@ public sealed class AsteroidBuilder
         //    Position = position
         //};
 
-        var asteroid = new Asteroid(_draw, _type, sprite, debri, velocity, new Vector2(GameRoot.Scale), rotationSpeed)
+        var asteroid = new Asteroid(_draw, _type, sprite, debri, velocity, new Vec(GameRoot.Scale), rotationSpeed)
         {
             Position = position
         };

@@ -2,7 +2,7 @@
 
 namespace Engine.Host;
 
-internal sealed class SceneBootstraper
+public sealed class SceneBootstraper
 {
     private readonly IServiceProvider _provider;
     private readonly Type _scene;

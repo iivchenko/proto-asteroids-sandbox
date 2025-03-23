@@ -1,17 +1,17 @@
-﻿using Engine.Assets;
+﻿using Engine;
 using Engine.Entities;
-using Engine.Graphics;
+using Engine.Services;
 
 namespace Game.Entities;
 
 public sealed class AsteroidsBuilderFactory : IEntityBuilderFactory<AsteroidBuilder>
 {
-    private readonly IPainter _draw;
-    private readonly IAssetLoader<Sprite> _spriteLoader;
+    private readonly IGraphicsService _draw;
+    private readonly IAssetService<Sprite> _spriteLoader;
 
     public AsteroidsBuilderFactory(
-       IAssetLoader<Sprite> spriteLoader,
-       IPainter draw)
+       IAssetService<Sprite> spriteLoader,
+       IGraphicsService draw)
     {
         _spriteLoader = spriteLoader;
         _draw = draw;

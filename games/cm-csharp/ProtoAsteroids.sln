@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine.Utilities", "src\Eng
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine.Math", "src\Engine.Math\Engine.Math.csproj", "{374BD7A3-B250-4F30-BC72-F55507D2490B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine.Services", "src\Engine.Services\Engine.Services.csproj", "{FC502EE5-0858-4569-8815-9BF37554A8CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{374BD7A3-B250-4F30-BC72-F55507D2490B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{374BD7A3-B250-4F30-BC72-F55507D2490B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{374BD7A3-B250-4F30-BC72-F55507D2490B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC502EE5-0858-4569-8815-9BF37554A8CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC502EE5-0858-4569-8815-9BF37554A8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC502EE5-0858-4569-8815-9BF37554A8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC502EE5-0858-4569-8815-9BF37554A8CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{CA151B7B-436F-4169-B008-D99225C56DB8} = {655709EB-8C21-489A-A0B3-BD5FBA19C915}
 		{F01E3E00-E687-4255-AD6D-93831B0652C8} = {655709EB-8C21-489A-A0B3-BD5FBA19C915}
 		{374BD7A3-B250-4F30-BC72-F55507D2490B} = {655709EB-8C21-489A-A0B3-BD5FBA19C915}
+		{FC502EE5-0858-4569-8815-9BF37554A8CA} = {655709EB-8C21-489A-A0B3-BD5FBA19C915}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98B9022C-1DB1-41E6-8687-52C5E58E53EE}

@@ -15,7 +15,7 @@ public sealed class GameBootstrapScene : IScene
             asteroidsBuilderFactory
                 .Create()
                 .WithType(AsteroidType.Medium)
-                .Build(new Vector2(0, 800), -100);
+                .Build(new Vec(0, 800), -100);
     }
 
     public void Update(float time)

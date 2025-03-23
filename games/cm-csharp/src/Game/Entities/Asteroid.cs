@@ -1,18 +1,19 @@
 ﻿//using Core.Screens.GamePlay;
+using Engine;
 using Engine.Entities;
 //using Engine.Audio;
 //using Engine.Collisions;
-using Engine.Graphics;
+using Engine.Services;
+using Engine.Utilities;
 using System;
 //using Engine.Particles;
 //using Engine.Events;
-using System.Numerics;
 
 namespace Game.Entities;
 
-public sealed class Asteroid : IEntity<Guid>, IUpdatable, IDrawable //, IBody
+public sealed class Asteroid : Entity, IUpdatable, IDrawable //, IBody
 {
-    private readonly IPainter _draw;
+    private readonly IGraphicsService _draw;
     //private readonly IAudioPlayer _player;
     //private readonly IEventPublisher _publisher;
 
@@ -22,20 +23,20 @@ public sealed class Asteroid : IEntity<Guid>, IUpdatable, IDrawable //, IBody
 
     private readonly float _rotationSpeed;
 
-    private Vector2 _velocity;
+    private Vec _velocity;
 
     private IState _state;
 
     public Asteroid(
-        IPainter draw,
+        IGraphicsService draw,
         //IAudioPlayer player,
         //IEventPublisher publisher,
         AsteroidType type,
         Sprite sprite,
         Sprite debri,
         //Sound explosion,
-        Vector2 velocity,
-        Vector2 scale,
+        Vec velocity,
+        Vec scale,
         float rotationSpeed)
     {
         _sprite = sprite;
@@ -47,11 +48,10 @@ public sealed class Asteroid : IEntity<Guid>, IUpdatable, IDrawable //, IBody
         _velocity = velocity;
         _rotationSpeed = rotationSpeed;
 
-        Id = Guid.NewGuid();
         Type = type;
-        Origin = new Vector2(_sprite.Width / 2.0f, _sprite.Height / 2.0f);
+        Origin = new Vec(_sprite.Width / 2.0f, _sprite.Height / 2.0f);
         Rotation = 0.0f;
-        Position = Vector2.Zero;
+        Position = Vec.Zero;
         Scale = scale;
         Width = _sprite.Width;
         Height = _sprite.Height;
@@ -59,16 +59,14 @@ public sealed class Asteroid : IEntity<Guid>, IUpdatable, IDrawable //, IBody
         _state = new AliveState(this);
     }
 
-    public Guid Id { get; }
-    public IEnumerable<string> Tags => new[] { GameTags.Enemy };
-    public Vector2 Position { get; set; }
-    public Vector2 Origin { get; set; }
-    public Vector2 Scale { get; set; }
+    public Vec Position { get; set; }
+    public Vec Origin { get; set; }
+    public Vec Scale { get; set; }
     public float Rotation { get; set; }
     public float Width { get; set; }
     public float Height { get; set; }
     public AsteroidType Type { get; set; }
-    public Vector2 Velocity => _velocity;
+    public Vec Velocity => _velocity;
     public AsteroidState State
     {
         get => _state switch
@@ -79,6 +77,8 @@ public sealed class Asteroid : IEntity<Guid>, IUpdatable, IDrawable //, IBody
             _ => throw new NotImplementedException()
         };
     }
+    int IUpdatable.Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    int IDrawable.Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     void IUpdatable.Update(float time)
     {

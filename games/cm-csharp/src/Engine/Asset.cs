@@ -1,4 +1,4 @@
-﻿namespace Engine.Assets;
+﻿namespace Engine;
 
 public abstract class Asset
 {

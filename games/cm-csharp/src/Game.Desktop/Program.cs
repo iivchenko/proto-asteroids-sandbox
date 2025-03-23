@@ -1,4 +1,5 @@
 ﻿using Engine.Host;
+using Engine.Backends.Raylib;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Game.Desktop;
@@ -16,12 +17,10 @@ public static class Program
         var game =
             GameBuilder
                 .CreateBuilder()
-                 //.WithRayLibBackend() // TODO: Thinks on moving backend application to the builder level
+                .WithRayLibBackend()
                 .WithServices(services =>
                 {
                     services
-                        .WithRayLibBackend() // TODO: Thinks on moving backend application to the builder level
-                        .WithHostServices()
                         .WithGameServices();
                 })
                 .WithConfiguration(config =>

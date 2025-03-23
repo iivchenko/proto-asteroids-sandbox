@@ -7,11 +7,11 @@ namespace Engine.Math;
 // and introduce Angle extensions
 public static class MathExtensions
 {
-    public static Vector2 ToDirection(this float angle)
+    public static Vec ToDirection(this float angle)
     {
-        var direction = new Vector2(MathF.Sin(angle), -MathF.Cos(angle));
+        var direction = Vector2.Normalize(new Vector2(MathF.Sin(angle), -MathF.Cos(angle)));
 
-        return Vector2.Normalize(direction);
+        return new Vec(direction.X, direction.Y);
     }
 
     public static float AsRadians(this float angle) // TODO: Think of using this new feature for Math where static interfaces are used
