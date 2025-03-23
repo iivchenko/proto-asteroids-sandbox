@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Engine.Services;
+﻿namespace Engine.Services;
 
 public interface IGraphicsService
 {

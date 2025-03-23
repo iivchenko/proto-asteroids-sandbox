@@ -1,5 +1,5 @@
 ﻿using Engine;
-using Engine.Entities;
+using Engine.EIS;
 using Engine.Services;
 
 namespace Game.Entities;

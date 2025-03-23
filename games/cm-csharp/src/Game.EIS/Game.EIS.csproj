@@ -11,11 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Engine.EIS\Engine.EIS.csproj" />
     <ProjectReference Include="..\Engine.Math\Engine.Math.csproj" />
     <ProjectReference Include="..\Engine.Services\Engine.Services.csproj" />
     <ProjectReference Include="..\Engine.Utilities\Engine.Utilities.csproj" />
-    <ProjectReference Include="..\Engine\Engine.csproj" />
-    <ProjectReference Include="..\Engine.Entities\Engine.Entities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿//using Core.Screens.GamePlay;
 using Engine;
-using Engine.Entities;
+using Engine.EIS;
 //using Engine.Audio;
 //using Engine.Collisions;
 using Engine.Services;

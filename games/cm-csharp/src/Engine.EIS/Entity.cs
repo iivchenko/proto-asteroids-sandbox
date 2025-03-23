@@ -1,4 +1,4 @@
-﻿namespace Engine.Entities
+﻿namespace Engine.EIS
 {
     public abstract class Entity : IEntity
     {

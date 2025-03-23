@@ -1,4 +1,4 @@
-﻿using Engine.Entities;
+﻿using Engine.EIS;
 using Game.Entities;
 
 namespace Microsoft.Extensions.DependencyInjection;
