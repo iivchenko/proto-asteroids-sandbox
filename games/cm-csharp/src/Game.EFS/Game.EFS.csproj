@@ -15,8 +15,7 @@
     <ProjectReference Include="..\Engine.Math\Engine.Math.csproj" />
     <ProjectReference Include="..\Engine.Services\Engine.Services.csproj" />
     <ProjectReference Include="..\Engine.Utilities\Engine.Utilities.csproj" />
+    <ProjectReference Include="..\Game.Assets\Game.Assets.csproj" />
   </ItemGroup>
-
-  <Import Project="..\Game.Assets\Game.Assets.projitems" Label="Shared" />
 
 </Project>

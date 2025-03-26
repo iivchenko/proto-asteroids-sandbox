@@ -29,9 +29,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine.Backends.Sfml", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Desktop.Sfml", "src\Platform.Desktop.Sfml\Platform.Desktop.Sfml.csproj", "{CB3C4338-089F-4A89-85DE-E47C791CA77C}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Game.Assets", "src\Game.Assets\Game.Assets.shproj", "{25C24658-E98E-4165-8D4A-3DD5800A0EF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine.Assets.SourceGenerators", "src\Engine.Assets.SourceGenerators\Engine.Assets.SourceGenerators.csproj", "{EA1D48A8-7760-48DF-23B4-5F264F85B41A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSourceGen", "src\TestSourceGen\TestSourceGen.csproj", "{FB8B1E2B-5983-4418-AAB1-62FAF8D4B353}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.Assets", "src\Game.Assets\Game.Assets.csproj", "{7478466E-B2E5-4533-ACCE-E684299145B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +83,14 @@ Global
 		{CB3C4338-089F-4A89-85DE-E47C791CA77C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB3C4338-089F-4A89-85DE-E47C791CA77C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB3C4338-089F-4A89-85DE-E47C791CA77C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB8B1E2B-5983-4418-AAB1-62FAF8D4B353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB8B1E2B-5983-4418-AAB1-62FAF8D4B353}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB8B1E2B-5983-4418-AAB1-62FAF8D4B353}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB8B1E2B-5983-4418-AAB1-62FAF8D4B353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA1D48A8-7760-48DF-23B4-5F264F85B41A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA1D48A8-7760-48DF-23B4-5F264F85B41A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA1D48A8-7760-48DF-23B4-5F264F85B41A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA1D48A8-7760-48DF-23B4-5F264F85B41A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7478466E-B2E5-4533-ACCE-E684299145B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7478466E-B2E5-4533-ACCE-E684299145B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7478466E-B2E5-4533-ACCE-E684299145B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7478466E-B2E5-4533-ACCE-E684299145B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,12 +104,9 @@ Global
 		{983F4B7D-2D41-44B2-A5D8-974BBF5D3F5B} = {5DE90B9F-CF2E-4FF4-BC8F-D2FDC264936D}
 		{7C541212-E99F-4BB7-BF0E-CDDCD0ECFDE6} = {655709EB-8C21-489A-A0B3-BD5FBA19C915}
 		{10EC258F-5B43-411A-AA6F-FB72A72AD172} = {5DE90B9F-CF2E-4FF4-BC8F-D2FDC264936D}
+		{EA1D48A8-7760-48DF-23B4-5F264F85B41A} = {655709EB-8C21-489A-A0B3-BD5FBA19C915}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98B9022C-1DB1-41E6-8687-52C5E58E53EE}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\Game.Assets\Game.Assets.projitems*{25c24658-e98e-4165-8d4a-3dd5800a0ef5}*SharedItemsImports = 13
-		src\Game.Assets\Game.Assets.projitems*{90c2e790-6326-4b84-a667-dd7f32d57ba4}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

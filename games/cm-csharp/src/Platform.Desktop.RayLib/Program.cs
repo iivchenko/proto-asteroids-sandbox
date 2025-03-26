@@ -4,43 +4,6 @@ using Game.EFS;
 
 namespace Platform.Desktop.RayLib;
 
-
-public static class AssetsG
-{
-    public static SpritesG Sprites { get; } = new SpritesG();
-}
-
-public class SpritesG
-{
-    public AsteroidsG Asteroids { get; } = new AsteroidsG();
-}
-
-public class AsteroidsG
-{
-    public BigG Big { get; } = new BigG();
-
-    public MediumG Medium { get; } = new MediumG();
-
-    public string[] Plain()
-    {
-        return
-        [
-            Big.AsteroidBig01,
-            Medium.AsteroidMedium01
-        ];
-    }
-}
-
-public class BigG
-{
-    public string AsteroidBig01 { get; } = "Assets/Sprites/Asteroids/Big/AsteroidBig01.png";
-}
-
-public class MediumG
-{
-    public string AsteroidMedium01 { get; } = "Assets/Sprites/Asteroids/Big/AsteroidMedium01.png";
-}
-
 // Simple
 // Modular
 // Extensible
@@ -72,8 +35,6 @@ public static class Program
 {
     public static void Main()
     {
-        var a = AssetsG.Sprites.Asteroids.Big.AsteroidBig01;
-
         var game =
             GameBuilder
                 .CreateBuilder()

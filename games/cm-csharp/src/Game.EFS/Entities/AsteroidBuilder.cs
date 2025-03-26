@@ -69,10 +69,12 @@ public sealed class AsteroidBuilder
         int rotationSpeed;
         Vec velocity;
 
+        var asteroidSprites = GameAssets.AssetAssets.Sprites.Asteroids;
+
         switch (_type)
         {
             case AsteroidType.Tiny:
-                sprite = _spriteLoader.Load("Assets/Sprites/Asteroids/Tiny/AsteroidTiny01.png");
+                sprite = _spriteLoader.Load(asteroidSprites.Tiny.AsteroidTiny01_png.Path);
                 speedX = _random.Next(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
                 speedY = _random.Next(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
                 var tmpAngle1 = new Angle
@@ -86,7 +88,7 @@ public sealed class AsteroidBuilder
                 break;
 
             case AsteroidType.Small:
-                sprite = _spriteLoader.Load("Assets/Sprites/Asteroids/Small/AsteroidSmall01.png");
+                sprite = _spriteLoader.Load(asteroidSprites.Small.AsteroidSmall01_png.Path);
                 speedX = _random.Next(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
                 speedY = _random.Next(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
                 var tmpAngle2 = new Angle
@@ -100,7 +102,7 @@ public sealed class AsteroidBuilder
                 break;
 
             case AsteroidType.Medium:
-                sprite = _spriteLoader.Load("Assets/Sprites/Asteroids/Medium/AsteroidMedium01.png");
+                sprite = _spriteLoader.Load(asteroidSprites.Medium.AsteroidMedium01_png.Path);
                 speedX = _random.Next(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
                 speedY = _random.Next(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
                 var tmpAngle3 = new Angle
@@ -113,7 +115,7 @@ public sealed class AsteroidBuilder
                 break;
 
             case AsteroidType.Big:
-                sprite = _spriteLoader.Load("Assets/Sprites/Asteroids/Big/AsteroidBig01.png");
+                sprite = _spriteLoader.Load(asteroidSprites.Big.AsteroidBig01_png.Path);
                 speedX = _random.Next(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
                 speedY = _random.Next(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
                 var tmpAngle4 = new Angle
@@ -127,7 +129,7 @@ public sealed class AsteroidBuilder
             default:
                 throw new InvalidOperationException($"Unknown asteroid type {_type}!");
         }
-        var debri = _spriteLoader.Load("Assets/Sprites/Asteroids/Tiny/AsteroidTiny01.png"); // TODO: Create own asteroid debri
+        var debri = _spriteLoader.Load(asteroidSprites.Tiny.AsteroidTiny01_png.Path); // TODO: Create own asteroid debri
 
         //var asteroid = new Asteroid(_draw, _player, _publisher, type, sprite, debri, _explosion, velocity, new Vector2(GameRoot.Scale), rotationSpeed)
         //{
