@@ -1,4 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Engine.Assets.SourceGenerators;
 
@@ -11,138 +13,71 @@ namespace Engine.Assets.SourceGenerators;
 [Generator]
 public sealed class AssetStaticPathGenerator : IIncrementalGenerator
 {
-    public const string Root = "Assets";
-
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var pipeline =
+        var rootProvider = context.SyntaxProvider.CreateSyntaxProvider(
+            predicate: (node, _) =>
+                (node is ClassDeclarationSyntax @class) &&
+                @class
+                    .Modifiers
+                    .Any(modifier => modifier.IsKind(SyntaxKind.StaticKeyword)) &&
+                @class
+                    .AttributeLists
+                    .SelectMany(attrList => attrList.Attributes)
+                    .Select(attr => attr.Name.ToString())
+                    .Any(attr => 
+                        attr == typeof(AssetsAttribute).Name || 
+                        attr == typeof(AssetsAttribute).Name.Substring(0, typeof(AssetsAttribute).Name.IndexOf("Attribute")) ||
+                        $"{attr}Attribute" == typeof(AssetsAttribute).Name)
+            ,
+            transform: (ctx, _) =>
+            {
+                var @class = (ClassDeclarationSyntax)ctx.Node;
+                var @attribute =
+                    @class
+                        .AttributeLists
+                        .SelectMany(attrList => attrList.Attributes)
+                        .First(attr =>
+                        {
+                            var name = attr.Name.ToString();
+
+                            return
+                                name == typeof(AssetsAttribute).Name ||
+                                name == typeof(AssetsAttribute).Name.Substring(0, typeof(AssetsAttribute).Name.IndexOf("Attribute")) ||
+                                $"{name}Attribute" == typeof(AssetsAttribute).Name;
+                        });
+
+                return (@class, attribute);
+            });
+
+        var assetsProviders =
             context
                 .AdditionalTextsProvider
-                .Where(text => text.Path.Contains(Root))
-                .Select((asset, _) =>
-                {
-                    var index = asset.Path.IndexOf("\\" + Root + "\\");
+                .Select((asset, _) => asset.Path)
+                .Collect();       
 
-                    return asset.Path.Substring(index + Root.Length + 2);
-                })
-                .Collect();
+        var compilationProvider = context.CompilationProvider.Combine(rootProvider.Collect().Combine(assetsProviders));
 
-        context
-            .RegisterSourceOutput(
-                pipeline,
-                (context, paths) =>
-                {
-                    var tree = new AssetNode(Root, null);
-
-                    foreach (var path in paths)
-                    {
-                        ProcessFile(tree, new Queue<string>(path.Split('/', '\\')));
-                    }
-
-                    context.AddSource($"GameAssets.g.cs", tree.GenerateSource(0));
-                });
+        context.RegisterSourceOutput(compilationProvider, Execute);
     }
 
-    private AssetNode? ProcessFile(AssetNode node, Queue<string> items)
+    private void Execute(SourceProductionContext context, (Compilation Left, (System.Collections.Immutable.ImmutableArray<(ClassDeclarationSyntax @class, AttributeSyntax attribute)> Left, System.Collections.Immutable.ImmutableArray<string> Right) Right) tuple)
     {
-        if (items.Count == 0)
+        var (_, (classes, paths)) = tuple;
+
+        foreach (var (@class, @attribute) in classes)
         {
-            return node;
+            var classPath = Path.GetDirectoryName(@class.SyntaxTree.FilePath);
+            var classDirectory = new DirectoryInfo(classPath).Name;
+            var namespaceSyntax = @class.Parent as BaseNamespaceDeclarationSyntax;  
+
+            var tree = AssetNode.BuildTree(
+                classDirectory,
+                paths
+                    .Where(path => path.StartsWith(classPath))
+                    .Select(path => path.Substring(classPath.Length + 1)));
+
+            context.AddSource($"{@class.Identifier.Text}.g.cs", tree.GenerateSource(namespaceSyntax.Name.ToString(), @class.Identifier.Text));            
         }
-
-        var item = items.Dequeue();
-
-        var child = node.Children.FirstOrDefault(x => x.Value == item);
-        if (child is null)
-        {
-            child = new AssetNode(item, node);
-            node.Children.Add(child);
-        }
-
-        ProcessFile(child, items);
-
-
-        return node;
-    }
-}
-
-internal sealed class AssetNode
-{
-    public AssetNode(string value, AssetNode? parent)
-    {
-        Value = value;
-        Parent = parent;
-    }
-
-    public bool IsBuild { get; set; } = false;
-
-    public string Value { get; }
-
-    public AssetNode? Parent { get; }
-
-    public List<AssetNode> Children { get; } = new List<AssetNode>();
-
-    public string GenerateSource(int identation)
-    {
-        var ident = new string('\t', identation);
-        var namespa = identation == 0 ? "namespace GameAssets;\n" : string.Empty;
-        var classType = identation == 0 ? "static" : "sealed";
-        var className = "Asset" + Value.Replace(".", "_");
-        var propertyType = identation == 0 ? "static" : string.Empty;
-
-        if (Children.Any())
-        {
-            return $$"""
-                {{namespa}}
-                {{ident}}public {{classType}} class {{className}}
-                {{ident}}{
-                {{GenerateProperties(identation)}}
-                {{GenerateChildrenSource(identation)}}
-                {{ident}}}
-                """;
-        }
-        else
-        {
-            var path = BuildPath(this.Parent, Value);
-
-            return $$"""
-                {{namespa}}
-                {{ident}}public {{classType}} class {{className}}
-                {{ident}}{
-                    {{ident}}public{{propertyType}} string Path { get; } = "{{path}}";
-                {{ident}}}
-                """;
-        }
-    }
-
-    private string GenerateProperties(int identation)
-    {
-        var ident = new string('\t', identation + 1);
-        var namespa = identation == 0 ? "namespace GameAssets;\n" : string.Empty;
-        var classType = identation == 0 ? "static" : "sealed";
-        var toClassName = (string name) => "Asset" + name.Replace(".", "_");
-        var propertyType = identation == 0 ? "static" : string.Empty;
-        var toPropertyName = (string name) => name.Replace(".", "_");
-
-        var properties =
-            Children
-                .Select(x => $$"""{{ident}}public {{propertyType}} {{toClassName(x.Value)}} {{toPropertyName(x.Value)}} { get; } = new {{toClassName(x.Value)}}();""");
-
-        return string.Join(Environment.NewLine, properties);
-
-    }
-
-    private string GenerateChildrenSource(int identation)
-    {
-        return string.Join(
-            Environment.NewLine,
-            Children.Select(x => x.GenerateSource(identation + 1)));
-    }
-
-    private string BuildPath(AssetNode? node, string path)
-    {
-        return node is null
-            ? path
-            : BuildPath(node.Parent, node.Value + "/" + path);
     }
 }

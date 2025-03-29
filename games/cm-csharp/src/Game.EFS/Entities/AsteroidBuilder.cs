@@ -2,6 +2,7 @@
 using Engine.Utilities;
 using Engine.Services;
 using Engine;
+using Game.Assets;
 
 namespace Game.EFS.Entities;
 
@@ -69,7 +70,7 @@ public sealed class AsteroidBuilder
         int rotationSpeed;
         Vec velocity;
 
-        var asteroidSprites = GameAssets.AssetAssets.Sprites.Asteroids;
+        var asteroidSprites = AssetStore.Sprites.Asteroids;
 
         switch (_type)
         {
