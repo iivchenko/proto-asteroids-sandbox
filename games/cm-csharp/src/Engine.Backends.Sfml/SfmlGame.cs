@@ -33,6 +33,8 @@ public sealed partial class SfmlGame : IGame
         var stopwatch = new Stopwatch();
         var delta = 0L;
 
+        _window.SetFramerateLimit(60);
+
         stopwatch.Start();
 
         while (_window.IsOpen)

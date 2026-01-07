@@ -25,19 +25,28 @@ public sealed class RayLibGame : IGame
 
         var scene = _bootstraper.Create();
         var stopwatch = new Stopwatch();
-        var frame = (long) (1.0 / 60.0) * 1000;
-        var delta = 0L;
+        var frame = (1.0f / 60.0f) * 1000.0f;
+        var start = 0.0f;
+        var end = 0.0f;
+        var wait = 0.0f;
+        var delta = 0.0f;
 
         stopwatch.Start();
 
         while (!Raylib_cs.Raylib.WindowShouldClose())
         {
-            var start = stopwatch.ElapsedMilliseconds;
+            start = end;
             
             scene.Process(delta / 1000.0f);
             _graphicsSystem.Commit();
-
-            delta = stopwatch.ElapsedMilliseconds - start;
+            
+            end = stopwatch.ElapsedMilliseconds;
+            delta = end - start;
+            wait = frame - delta;
+            if (wait > 0.0f)
+            {
+                Thread.Sleep((int)wait);
+            }
         }
 
         stopwatch.Stop();
