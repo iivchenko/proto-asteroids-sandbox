@@ -1,0 +1,20 @@
+﻿using Engine.EFS.Faces;
+using Engine.Utilities;
+
+namespace Engine.EFS.Systems;
+
+public sealed class MoveSystem : ISystem
+{
+    public void Process(IEnumerable<IEntity> faces, float delta)
+    {
+        faces
+           .Where(face => face is not null)
+           .Where(face => face is IMovableFace)
+           .Cast<IMovableFace>()
+           .Iter(face =>
+           {
+               face.Position += face.Velocity * delta;
+               face.Rotation += face.RotationSpeed * delta;
+           });
+    }
+}

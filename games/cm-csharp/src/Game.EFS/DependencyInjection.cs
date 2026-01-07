@@ -1,5 +1,8 @@
 ﻿using Engine.EFS;
+using Engine.EFS.Systems;
+using Engine.Services;
 using Game.EFS.Entities;
+using Game.EFS.Systems;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Game.EFS;
@@ -9,9 +12,13 @@ public static class DependencyInjection
     public static IServiceCollection WithGameServices(this IServiceCollection services)
     {
         services
-            .AddSingleton<IEntityBuilderFactory<AsteroidBuilder>, AsteroidsBuilderFactory>();
+            .AddSingleton<IRandomService, RandomService>()
+            .AddSingleton<IEntityBuilderFactory<AsteroidBuilder>, AsteroidsBuilderFactory>()
+            .AddTransient<ISystem, DrawSystem>()
+            .AddTransient<ISystem, MoveSystem>()
+            .AddTransient<ISystem, OutOfScreenSystem>()
+            .AddTransient<IWorld, World>();
 
         return services;
     }
 }
-

@@ -10,5 +10,7 @@ namespace Engine.Collisions
         public float Rotation { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
+
+        void OnCollision<TCollider>(TCollider collider) where TCollider : IBody;
     }
 }

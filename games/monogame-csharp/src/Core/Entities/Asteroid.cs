@@ -98,6 +98,16 @@ namespace Core.Entities
             _state = new DestroyState(this);
         }
 
+        public void OnCollision<TCollider>(TCollider collider) where TCollider : IBody
+        {
+            if (collider is Asteroid)
+            {
+
+            }
+
+            throw new NotImplementedException();
+        }
+
         private interface IState
         {
             void Update(float time);

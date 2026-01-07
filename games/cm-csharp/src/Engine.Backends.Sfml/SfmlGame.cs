@@ -39,7 +39,7 @@ public sealed partial class SfmlGame : IGame
         {
             var start = stopwatch.ElapsedMilliseconds;
 
-            scene.Update(delta / 1000.0f);
+            scene.Process(delta / 1000.0f);
 
             _window.DispatchEvents();
 

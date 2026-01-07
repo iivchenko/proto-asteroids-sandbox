@@ -6,12 +6,12 @@ namespace Engine.Backends.Raylib;
 public sealed class RayLibGame : IGame
 {
     private readonly GameConfiguration _configuration;
-    private readonly RayLibGraphicsSystem _graphicsSystem;
+    private readonly RayLibGame_GraphicsService _graphicsSystem;
     private readonly SceneBootstraper _bootstraper;
 
     public RayLibGame(
         GameConfiguration configuration,
-        RayLibGraphicsSystem graphicsSystem,
+        RayLibGame_GraphicsService graphicsSystem,
         SceneBootstraper bootstraper)
     {
         _configuration = configuration;
@@ -34,15 +34,10 @@ public sealed class RayLibGame : IGame
         {
             var start = stopwatch.ElapsedMilliseconds;
             
-            scene.Update(delta / 1000.0f);
+            scene.Process(delta / 1000.0f);
             _graphicsSystem.Commit();
 
             delta = stopwatch.ElapsedMilliseconds - start;
-            var wait = delta - frame;
-            if (wait > 0)
-            {
-                Thread.Sleep((int)wait);
-            }
         }
 
         stopwatch.Stop();

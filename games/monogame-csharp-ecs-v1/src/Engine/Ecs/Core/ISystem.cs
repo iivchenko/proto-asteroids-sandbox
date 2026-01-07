@@ -2,5 +2,5 @@
 
 public interface ISystem
 {
-    public void Run(IEnumerable<IEntity> entities);
+    public void Process(IEnumerable<IEntity> entities, float delta);
 }

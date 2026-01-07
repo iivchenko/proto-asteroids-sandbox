@@ -2,5 +2,5 @@
 
 public interface IScene
 {
-    void Process(float time);
+    public void Process(float delta);
 }

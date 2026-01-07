@@ -4,21 +4,18 @@ using Engine.Services;
 
 namespace Game.EFS.Entities;
 
-public sealed class AsteroidsBuilderFactory : IEntityBuilderFactory<AsteroidBuilder>
+public sealed class AsteroidsBuilderFactory(
+   IAssetService<Sprite> spriteLoader,
+   IRandomService randomService,
+   IViewService viewService) 
+    : IEntityBuilderFactory<AsteroidBuilder>
 {
-    private readonly IGraphicsService _draw;
-    private readonly IAssetService<Sprite> _spriteLoader;
-
-    public AsteroidsBuilderFactory(
-       IAssetService<Sprite> spriteLoader,
-       IGraphicsService draw)
-    {
-        _spriteLoader = spriteLoader;
-        _draw = draw;
-    }
+    private readonly IAssetService<Sprite> _spriteLoader = spriteLoader;
+    private readonly IRandomService _randomService = randomService;
+    private readonly IViewService _viewService = viewService;
 
     public AsteroidBuilder Create()
     {
-        return new AsteroidBuilder(_spriteLoader, _draw);
+        return new AsteroidBuilder(_spriteLoader, _randomService, _viewService);
     }
 }

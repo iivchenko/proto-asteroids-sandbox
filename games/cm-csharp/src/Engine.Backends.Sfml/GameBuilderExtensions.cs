@@ -14,6 +14,7 @@ public static class GameBuilderExtensions
             services.AddSingleton<IGame>(x => x.GetRequiredService<SfmlGame>());
             services.AddSingleton<IAssetService<Sprite>>(x => x.GetRequiredService<SfmlGame>());
             services.AddSingleton<IGraphicsService>(x => x.GetRequiredService<SfmlGame>());
+            services.AddSingleton<IViewService>(x => x.GetRequiredService<SfmlGame>());
         });
 
         return builder;

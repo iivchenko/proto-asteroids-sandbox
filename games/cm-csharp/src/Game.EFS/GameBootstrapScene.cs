@@ -1,26 +1,38 @@
 ﻿using Engine;
 using Engine.EFS;
-using Engine.EFS.Faces;
 using Game.EFS.Entities;
 
 namespace Game.EFS;
 
 public sealed class GameBootstrapScene : IScene
 {
-    private Asteroid _asteroid;
+    private readonly IWorld _world;
+    private readonly IEntityBuilderFactory<AsteroidBuilder> _asteroidBuilderFactory;
 
-    public GameBootstrapScene(IEntityBuilderFactory<AsteroidBuilder> asteroidsBuilderFactory)
+    public GameBootstrapScene(
+        IEntityBuilderFactory<AsteroidBuilder> asteroidsBuilderFactory, 
+        IWorld world)
     {
-        _asteroid = 
-            asteroidsBuilderFactory
-                .Create()
-                .WithType(AsteroidType.Medium)
-                .Build(new Vec(0, 800), new Angle(-100, AngleType.Degrees));
+        _world = world;
+        _asteroidBuilderFactory = asteroidsBuilderFactory;
+
+        _world.AddEntity(CreateRandomAsteroid());
+        _world.AddEntity(CreateRandomAsteroid());
+        _world.AddEntity(CreateRandomAsteroid());
     }
 
-    public void Update(float time)
+    public void Process(float time)
     {
-        ((IUpdatable)_asteroid).Update(time);
-        ((IDrawable)_asteroid).Draw(time);
+        _world.Process(time);
+    }
+
+    private Asteroid CreateRandomAsteroid()
+    {
+        return _asteroidBuilderFactory
+                .Create()
+                .WithRandomType()
+                .WithRandomPosition()
+                .WithRandomDirection()
+                .Build();
     }
 }

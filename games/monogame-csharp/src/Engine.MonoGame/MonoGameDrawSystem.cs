@@ -32,7 +32,7 @@ namespace Engine.MonoGame
         }
 
         public void Draw(Sprite sprite, Vector2 position, Vector2 origin, Vector2 scale, float rotation, Color color)
-        {
+        {  
             var texture = _content.GetTexture(sprite);
             _batch
                 .Draw(

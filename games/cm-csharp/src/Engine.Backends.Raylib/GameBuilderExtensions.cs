@@ -10,9 +10,10 @@ public static class GameBuilderExtensions
     {
         builder.WithServices(services =>
         {
-            services.AddSingleton<RayLibGraphicsSystem>();
-            services.AddSingleton<IAssetService<Sprite>>(x => x.GetRequiredService<RayLibGraphicsSystem>());
-            services.AddSingleton<IGraphicsService>(x => x.GetRequiredService<RayLibGraphicsSystem>());
+            services.AddSingleton<RayLibGame_GraphicsService>();
+            services.AddSingleton<IAssetService<Sprite>>(x => x.GetRequiredService<RayLibGame_GraphicsService>());
+            services.AddSingleton<IGraphicsService>(x => x.GetRequiredService<RayLibGame_GraphicsService>());
+            services.AddSingleton<IViewService, RayLibGame_ViewService>();
             services.AddSingleton<IGame, RayLibGame>();
         });
 

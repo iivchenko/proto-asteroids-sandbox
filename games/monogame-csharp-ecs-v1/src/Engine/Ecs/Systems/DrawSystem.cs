@@ -8,7 +8,7 @@ public sealed class DrawSystem(IDrawService drawService) : ISystem
 {
     private readonly IDrawService _drawService = drawService;
 
-    public void Run(IEnumerable<IEntity> entities)
+    public void Process(IEnumerable<IEntity> entities, float delta)
     {
         foreach (var entity in entities.Where(entity => entity.WithComponents<SpriteComponent, TransformComponent>()))
         {

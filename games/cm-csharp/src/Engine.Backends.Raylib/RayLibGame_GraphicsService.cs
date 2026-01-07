@@ -1,9 +1,10 @@
 ﻿using Engine.Services;
 using Raylib_cs;
+using System.Numerics;
 
 namespace Engine.Backends.Raylib;
 
-public sealed class RayLibGraphicsSystem : IGraphicsService, IAssetService<Sprite>
+public sealed class RayLibGame_GraphicsService : IGraphicsService, IAssetService<Sprite>
 {
     private sealed record SpriteDescriptor(
         Sprite Sprite,
@@ -24,8 +25,13 @@ public sealed class RayLibGraphicsSystem : IGraphicsService, IAssetService<Sprit
         foreach (var sprite in _sprites)
         {
             var texture = _textures[sprite.Sprite.Id];
+            var source = new Rectangle(0, 0, texture.width, texture.height);
+            var target = new Rectangle(sprite.Position.X, sprite.Position.Y, texture.width, texture.height);
+            var origin = new Vector2(sprite.Origin.X, sprite.Origin.Y);
+            var color = new Raylib_cs.Color(sprite.Color.Red, sprite.Color.Green, sprite.Color.Blue, sprite.Color.Alpha); 
 
-            Raylib_cs.Raylib.DrawTexture(texture, (int)sprite.Position.X, (int)sprite.Position.Y, Raylib_cs.Color.WHITE);
+            // TODO: Standartize rotation to Degrees or Radians
+            Raylib_cs.Raylib.DrawTexturePro(texture, source, target, origin, sprite.Rotation, color);
         }
 
         Raylib_cs.Raylib.EndDrawing();
