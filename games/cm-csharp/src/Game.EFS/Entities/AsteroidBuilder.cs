@@ -95,7 +95,8 @@ public sealed class AsteroidBuilder(
                         AngleType.Degrees
                     );
 
-                rotationSpeed = tmpAngle1.Value * (_random.NextDouble() > 0.5 ? 1 : -1);
+
+                rotationSpeed = tmpAngle1.Value * (_randomService.NextDouble() > 0.5 ? 1 : -1);
                 velocity = _direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
@@ -109,7 +110,7 @@ public sealed class AsteroidBuilder(
                     AngleType.Degrees
                 );
 
-                rotationSpeed = tmpAngle2.Value * (_random.NextDouble() > 0.5 ? 1 : -1);
+                rotationSpeed = tmpAngle2.Value * (_randomService.NextDouble() > 0.5 ? 1 : -1);
                 velocity = _direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
@@ -122,7 +123,7 @@ public sealed class AsteroidBuilder(
                    _randomService.RandomInt(MediumAsteroidMinRotationSpeed, MediumAsteroidMaxRotationSpeed),
                     AngleType.Degrees
                 );
-                rotationSpeed = tmpAngle3.Value * (_random.NextDouble() > 0.5 ? 1 : -1);
+                rotationSpeed = tmpAngle3.Value * (_randomService.NextDouble() > 0.5 ? 1 : -1);
                 velocity = _direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
@@ -135,7 +136,7 @@ public sealed class AsteroidBuilder(
                     _randomService.RandomInt(BigAsteroidMinRotationSpeed, BigAsteroidMaxRotationSpeed),
                     AngleType.Degrees
                 );
-                rotationSpeed = tmpAngle4.Value * (_random.NextDouble() > 0.5 ? 1 : -1);
+                rotationSpeed = tmpAngle4.Value * (_randomService.NextDouble() > 0.5 ? 1 : -1);
                 velocity = _direction.ToVector() * new Vec(speedX, speedY);
                 break;
             default:
