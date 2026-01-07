@@ -6,7 +6,7 @@ public sealed class GameBuilder
 {
     private readonly ServiceCollection _container;
     private readonly GameConfiguration _configuration;
-    private Type _scene;
+    private Type _scene; // TODO: I think to set this up with default scene which will show message "No scene configured"
 
     private GameBuilder()
     {

@@ -2,7 +2,7 @@
 
 public static class EnumerableExtensions
 {
-    private static Random Random = new Random();
+    private static Random Random = new Random(); // TODO: Either replace wiht RandomService or move its method to RandomService
 
     public static void Iter<T>(this IEnumerable<T> source, Action<T> action)
     {

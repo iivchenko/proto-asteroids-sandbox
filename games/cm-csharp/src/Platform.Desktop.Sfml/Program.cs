@@ -8,7 +8,7 @@ public static class Program
 {
     public static void Main()
     {
-        var game =
+        using var game =
             GameBuilder
                 .CreateBuilder()
                 .WithSfmlBackend()
@@ -29,9 +29,6 @@ public static class Program
                 .WithBootstrapScene<GameBootstrapScene>()
                 .Build();
 
-        using (game)
-        {
-            game.Run();
-        }
+        game.Run();
     }
 }

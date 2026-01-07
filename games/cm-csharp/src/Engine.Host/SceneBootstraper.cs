@@ -2,16 +2,10 @@
 
 namespace Engine.Host;
 
-public sealed class SceneBootstraper
+public sealed class SceneBootstraper(IServiceProvider provider, Type scene)
 {
-    private readonly IServiceProvider _provider;
-    private readonly Type _scene;
-
-    public SceneBootstraper(IServiceProvider provider, Type scene)
-    {
-        _provider = provider;
-        _scene = scene;
-    }
+    private readonly IServiceProvider _provider = provider;
+    private readonly Type _scene = scene;
 
     public IScene Create()
     {

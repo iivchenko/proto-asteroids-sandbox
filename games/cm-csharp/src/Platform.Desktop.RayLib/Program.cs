@@ -26,9 +26,7 @@ Use Interfaces to specialize functionality of the GameObjects (IBody  for collis
 Use Systems to consume this Interfaces and proivce outside the GameObject functionality
 What about IEntity to have OnMsg method so any system can send a message or event to an entity for instance Collision System will send msgs/events about collision with other objects
 
-TODO:
-- Introduce Source Generators to wrap assets pathes and make it Compile Time Access
-- Implement JavaScript backend
+TODO: Implement JavaScript backend
   
  */
 public static class Program

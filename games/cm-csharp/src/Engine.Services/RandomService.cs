@@ -1,5 +1,6 @@
 ﻿namespace Engine.Services;
 
+// TODO: It is a bit strange here. I think I need to split low level services and game services
 public sealed class RandomService : IRandomService
 {
     private readonly Random _random = new();

@@ -20,7 +20,7 @@ public sealed class OutOfScreenSystem(IViewService viewService) : ISystem
             .Where(face => face is ICollidableFace)
             .Cast<ICollidableFace>()
             .Where(face => IsOutOfScreen(face, view))
-            .Iter(face => MoveBack(face, view));
+            .Iter(face => WarpToTheOtherSide(face, view));
     }
 
     private static bool IsOutOfScreen(ICollidableFace face, View view)
@@ -32,7 +32,7 @@ public sealed class OutOfScreenSystem(IViewService viewService) : ISystem
             face.Position.Y - face.Height / 2.0 > view.Height;
     }
 
-    private static void MoveBack(ICollidableFace face, View view)
+    private static void WarpToTheOtherSide(ICollidableFace face, View view)
     {
         var x = face.Position.X;
         var y = face.Position.Y;
