@@ -13,10 +13,12 @@ public static class DependencyInjection
     {
         services
             .AddSingleton<IRandomService, RandomService>()
+            .AddSingleton<IEntityBuilderFactory<PlayerBuilder>, PlayerBuilderFactory>()
             .AddSingleton<IEntityBuilderFactory<AsteroidBuilder>, AsteroidsBuilderFactory>()
             .AddTransient<ISystem, DrawSystem>()
             .AddTransient<ISystem, MoveSystem>()
             .AddTransient<ISystem, OutOfScreenSystem>()
+            .AddTransient<ISystem, PlayerControlSystem>()
             .AddTransient<IWorld, World>();
 
         return services;

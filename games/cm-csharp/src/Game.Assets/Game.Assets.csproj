@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <AdditionalFiles Include="Assets\Sprites\Asteroids\Big\AsteroidBig01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -18,6 +18,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AdditionalFiles>
     <AdditionalFiles Include="Assets\Sprites\Asteroids\Tiny\AsteroidTiny01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Sprites\PlayerShips\PlayerShip01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Sprites\PlayerShips\PlayerShip02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AdditionalFiles>
   </ItemGroup>
