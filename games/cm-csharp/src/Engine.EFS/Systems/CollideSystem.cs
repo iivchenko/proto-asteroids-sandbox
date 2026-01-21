@@ -4,7 +4,7 @@ namespace Engine.EFS.Systems;
 
 public sealed class CollideSystem : ISystem
 {
-    public void Process(IEnumerable<IEntity> faces, float delta)
+    public IEnumerable<IWorldCommand> Process(IEnumerable<IEntity> faces, float delta)
     {
         var collidables = faces
             .Where(face => face is not null)
@@ -29,6 +29,8 @@ public sealed class CollideSystem : ISystem
                 }
             }
         }
+
+        return [];
     }
 
     private static bool IsColliding(ICollidableFace face1, ICollidableFace face2)

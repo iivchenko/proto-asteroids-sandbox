@@ -21,6 +21,7 @@ public sealed class RayLibGame_KeyboardService : IKeyboardService
             Keys.ArrowUp => Raylib_cs.KeyboardKey.KEY_UP,
             Keys.ArrowRight => Raylib_cs.KeyboardKey.KEY_RIGHT,
             Keys.ArrowDown => Raylib_cs.KeyboardKey.KEY_DOWN,
+            Keys.Space => Raylib_cs.KeyboardKey.KEY_SPACE,
             _ => throw new ArgumentOutOfRangeException(nameof(key), $"Not expected key value: {key}") // TODO: Finishe all the other mappings
         };
 

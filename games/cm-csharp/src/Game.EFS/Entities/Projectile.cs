@@ -1,26 +1,25 @@
 ﻿using Engine;
 using Engine.EFS;
 using Engine.EFS.Faces;
-using Game.EFS.Faces;
 
 namespace Game.EFS.Entities;
 
-public sealed class Asteroid(
+public sealed class Projectile(
     Sprite sprite,
     Vec velocity,
     Vec scale,
-    Angle rotationSpeed,
-    Vec position) : 
+    Angle rotation,
+    Vec position) :
         Entity,
         IDrawableFace,
-        IMovableFace, 
+        IMovableFace,
         ICollidableFace
 {
     private Sprite _sprite = sprite;
     private Vec _position = position;
     private Vec _scale = scale;
-    private Angle _rotation = Angle.Zero;
-    private Angle _rotationSpeed = rotationSpeed;
+    private Angle _rotation = rotation;
+    private Angle _rotationSpeed = Angle.Zero;
     private Vec _velocity = velocity;
     private bool _isCollidable = true;
     private bool _isVisible = true;
@@ -35,7 +34,7 @@ public sealed class Asteroid(
 
     public void OnCollide(ICollidableFace face)
     {
-        if (face is IPlayerFace || face is Projectile) // TODO: THink oin using face instead of entity for Projectile
+        if (face is Asteroid) // TODO: THink on using face here
         {
             _isCollidable = false;
             _isVisible = false;

@@ -8,7 +8,7 @@ public sealed class DrawSystem(IGraphicsService graphicsService) : ISystem
 {
     public readonly IGraphicsService _graphicsService = graphicsService;
 
-    public void Process(IEnumerable<IEntity> faces, float delta)
+    public IEnumerable<IWorldCommand> Process(IEnumerable<IEntity> faces, float delta)
     {
         faces
             .Where(face => face is not null)
@@ -25,5 +25,7 @@ public sealed class DrawSystem(IGraphicsService graphicsService) : ISystem
                        face.Rotation,
                        Colors.White);
             });
+
+        return [];
     }
 }

@@ -2,5 +2,5 @@
 
 public interface ISystem
 {
-    void Process(IEnumerable<IEntity> faces, float delta);
+    IEnumerable<IWorldCommand> Process(IEnumerable<IEntity> faces, float delta);
 }

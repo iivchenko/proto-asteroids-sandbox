@@ -14,6 +14,7 @@ public static class DependencyInjection
         services
             .AddSingleton<IRandomService, RandomService>()
             .AddSingleton<IEntityBuilderFactory<PlayerBuilder>, PlayerBuilderFactory>()
+            .AddSingleton<IEntityBuilderFactory<ProjectileBuilder>, ProjectileBuilderFactory>()
             .AddSingleton<IEntityBuilderFactory<AsteroidBuilder>, AsteroidsBuilderFactory>()
             .AddTransient<ISystem, CollideSystem>()
             .AddTransient<ISystem, DrawSystem>()

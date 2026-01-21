@@ -5,21 +5,29 @@ using Engine.EFS.Systems;
 using Engine.Math;
 using Engine.Services.Keyboard;
 using Engine.Utilities;
+using Game.EFS.Entities;
 using Game.EFS.Faces;
 
 namespace Game.EFS.Systems;
 
-public sealed class PlayerControlSystem(IKeyboardService keyboardService) : ISystem
+public sealed class PlayerControlSystem(
+    IKeyboardService keyboardService,
+    IEntityBuilderFactory<ProjectileBuilder> projectileBuilderFactory
+    ) : ISystem
 {
+    private const float LaserCooldown = 0.5f;
     private readonly IKeyboardService _keyboardService = keyboardService;
+    private readonly IEntityBuilderFactory<ProjectileBuilder> _projectileBuilderFactory = projectileBuilderFactory;
 
-    public void Process(IEnumerable<IEntity> faces, float delta)
+    public IEnumerable<IWorldCommand> Process(IEnumerable<IEntity> faces, float delta)
     {
+        return
         faces
            .Where(entity => entity is not null)
            .Where(entity => entity is IPlayerFace && entity is IMovableFace)
-           .Iter(entity =>
+           .SelectMany(entity =>
            {
+               var commands = new List<IWorldCommand>();
                var player = (IPlayerFace)entity;
                var movable = (IMovableFace)entity;
 
@@ -51,6 +59,28 @@ public sealed class PlayerControlSystem(IKeyboardService keyboardService) : ISys
 
                    movable.LinearVelocity = velocity.Length() > player.MaxSpeed ? velocity.Normalize() * player.MaxSpeed : velocity;
                }
+
+               if (_keyboardService.IsKeyDown(Keys.Space) && player.LaserCooldown <= 0.0f)
+               {
+                   var projectile =
+                    _projectileBuilderFactory
+                        .Create()
+                        .WithPosition(movable.Position)
+                        .WithRotation(movable.Rotation)
+                        .WithDirection(movable.Rotation.ToVector().Normalize())
+                        .Build();
+
+                   player.LaserCooldown = LaserCooldown;
+
+                   commands.Add(new AddEntityCommand(projectile));
+               }
+
+               if (player.LaserCooldown > 0)
+               {
+                   player.LaserCooldown -= delta;
+               }
+
+               return commands;
            });
     }
 }

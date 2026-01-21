@@ -5,7 +5,7 @@ namespace Engine.EFS.Systems;
 
 public sealed class MoveSystem : ISystem
 {
-    public void Process(IEnumerable<IEntity> faces, float delta)
+    public IEnumerable<IWorldCommand> Process(IEnumerable<IEntity> faces, float delta)
     {
         faces
            .Where(face => face is not null)
@@ -16,5 +16,7 @@ public sealed class MoveSystem : ISystem
                face.Position += face.LinearVelocity * delta;
                face.Rotation += face.RotationVelocity * delta;
            });
+
+        return [];
     }
 }

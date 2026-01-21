@@ -5,5 +5,6 @@ public enum Keys
     ArrowLeft,
     ArrowUp,
     ArrowRight,
-    ArrowDown
+    ArrowDown,
+    Space
 }

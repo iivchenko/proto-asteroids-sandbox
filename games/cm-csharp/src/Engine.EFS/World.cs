@@ -14,11 +14,25 @@ public sealed class World(IEnumerable<ISystem> systems) : IWorld
 
     public void Process(float delta)
     {
+        var commands = new List<IWorldCommand>();
+
         foreach (var system in _systems)
         {
-            system.Process(_entities, delta);
+            commands.AddRange(system.Process(_entities, delta));
         }
 
+        foreach (var command in commands)
+        {
+
+            switch (command)
+            {
+                case AddEntityCommand worldCommand:
+                    _entities.Add(worldCommand.Entity);
+                    break;
+            }
+        }
+
+        commands.Clear();
         _entities.RemoveAll(entity => !entity.IsAlive);
     }
 }

@@ -10,4 +10,5 @@ public interface IPlayerFace
     Angle MaxAngularVelocity { get; set; }
     Angle MaxRotation { get; set; }
     Angle AngularVelocity { get; set; }
+    float LaserCooldown { get; set; }
 }

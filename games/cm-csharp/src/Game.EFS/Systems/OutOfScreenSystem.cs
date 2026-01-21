@@ -4,6 +4,7 @@ using Engine.EFS.Faces;
 using Engine.EFS.Systems;
 using Engine.Services;
 using Engine.Utilities;
+using Game.EFS.Entities;
 
 namespace Game.EFS.Systems;
 
@@ -11,16 +12,23 @@ public sealed class OutOfScreenSystem(IViewService viewService) : ISystem
 {
     private readonly IViewService _viewService = viewService;
 
-    public void Process(IEnumerable<IEntity> faces, float delta)
+    public IEnumerable<IWorldCommand> Process(IEnumerable<IEntity> faces, float delta)
     {
         var view = _viewService.GetView();
 
         faces
-            .Where(face => face is not null)
+            .Where(face => face is Projectile)
+            .Cast<Projectile>()
+            .Where(face => IsOutOfScreen(face, view))
+            .Iter(face => face.IsAlive = false);
+
+        faces
             .Where(face => face is ICollidableFace)
             .Cast<ICollidableFace>()
             .Where(face => IsOutOfScreen(face, view))
             .Iter(face => WarpToTheOtherSide(face, view));
+
+        return [];
     }
 
     private static bool IsOutOfScreen(ICollidableFace face, View view)

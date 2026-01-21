@@ -35,6 +35,7 @@ public sealed class Player(
     private Vec _velocity = velocity;
     private bool _isCollidable = true;
     private bool _isVisible = true;
+    private float _laserCooldown = 0.0f;
 
     float IPlayerFace.MaxSpeed { get => _maxSpeed; set => _maxSpeed = value; }
     float IPlayerFace.MaxAcceleration { get => _maxAcceleration; set => _maxAcceleration = value; }
@@ -65,4 +66,6 @@ public sealed class Player(
     Vec IMovableFace.LinearVelocity { get => _velocity; set => _velocity = value; }
     Angle IMovableFace.Rotation { get => _rotation; set => _rotation = value; }
     Angle IMovableFace.RotationVelocity { get => _rotationSpeed; set => _rotationSpeed = value; }
+
+    public float LaserCooldown { get => _laserCooldown; set => _laserCooldown = value; }
 }
