@@ -33,14 +33,17 @@ public sealed class Asteroid(
     Angle ICollidableFace.Rotation { get => _rotation; set => _rotation = value; }
     public bool IsCollidable { get => _isCollidable; set => _isCollidable = value; }
 
-    public void OnCollide(ICollidableFace face)
+    public IWorldCommand OnCollide(ICollidableFace face)
     {
         if (face is IPlayerFace || face is Projectile) // TODO: THink oin using face instead of entity for Projectile
         {
             _isCollidable = false;
             _isVisible = false;
-            IsAlive = false;
+            
+            return new RemoveEntityCommand(this);
         }
+
+        return EmptyEntityCommand.Empty;
     }
 
     Sprite IDrawableFace.Sprite { get => _sprite; set => _sprite = value; }

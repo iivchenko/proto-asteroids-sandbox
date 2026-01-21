@@ -6,6 +6,7 @@ public sealed class CollideSystem : ISystem
 {
     public IEnumerable<IWorldCommand> Process(IEnumerable<IEntity> faces, float delta)
     {
+        var commands = new List<IWorldCommand>();
         var collidables = faces
             .Where(face => face is not null)
             .Where(face => face is ICollidableFace)
@@ -24,13 +25,13 @@ public sealed class CollideSystem : ISystem
                 if (IsColliding(face1, face2))
                 {
                     // TODO: Implement Pixel Perfect Collision Detection
-                    face1.OnCollide(face2);
-                    face2.OnCollide(face1);
+                    commands.Add(face1.OnCollide(face2));
+                    commands.Add(face2.OnCollide(face1));
                 }
             }
         }
 
-        return [];
+        return commands;
     }
 
     private static bool IsColliding(ICollidableFace face1, ICollidableFace face2)

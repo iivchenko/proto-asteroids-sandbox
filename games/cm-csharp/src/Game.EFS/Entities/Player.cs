@@ -51,8 +51,9 @@ public sealed class Player(
     Vec ICollidableFace.Scale { get => _scale; set => _scale = value; }
     Angle ICollidableFace.Rotation { get => _rotation; set => _rotation = value; }
     public bool IsCollidable { get => _isCollidable; set => _isCollidable = value; }
-    public void OnCollide(ICollidableFace face)
+    public IWorldCommand OnCollide(ICollidableFace face)
     {
+        return EmptyEntityCommand.Empty;
     }
 
     Sprite IDrawableFace.Sprite { get => _sprite; set => _sprite = value; }

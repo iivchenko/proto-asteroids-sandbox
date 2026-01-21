@@ -10,5 +10,5 @@ public interface ICollidableFace
     Vec Scale { get; set; }
     bool IsCollidable { get; set; }
 
-    void OnCollide(ICollidableFace face);
+    IWorldCommand OnCollide(ICollidableFace face);
 }
