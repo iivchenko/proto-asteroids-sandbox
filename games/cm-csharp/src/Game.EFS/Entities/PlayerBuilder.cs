@@ -23,7 +23,7 @@ public sealed class PlayerBuilder(
             sprite,
             Vec.Zero,
             Vec.One,
-            0.0f,
+            Angle.Zero,
             position);
     }
 }

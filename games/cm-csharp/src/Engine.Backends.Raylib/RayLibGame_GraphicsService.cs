@@ -39,9 +39,9 @@ public sealed class RayLibGame_GraphicsService : IGraphicsService, IAssetService
         _sprites.Clear();
     }
 
-    public void Draw(Sprite sprite, Vec position, Vec origin, Vec scale, float rotation, Color color)
+    public void Draw(Sprite sprite, Vec position, Vec origin, Vec scale, Angle rotation, Color color)
     {
-        _sprites.Add(new SpriteDescriptor(sprite, position, origin, scale, rotation, color));
+        _sprites.Add(new SpriteDescriptor(sprite, position, origin, scale, rotation.ToDegrees(), color));
     }
 
     public Sprite Load(string path)

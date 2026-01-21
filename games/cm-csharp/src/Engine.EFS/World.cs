@@ -18,5 +18,7 @@ public sealed class World(IEnumerable<ISystem> systems) : IWorld
         {
             system.Process(_entities, delta);
         }
+
+        _entities.RemoveAll(entity => !entity.IsAlive);
     }
 }

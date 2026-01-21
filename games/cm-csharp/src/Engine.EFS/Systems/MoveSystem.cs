@@ -13,8 +13,8 @@ public sealed class MoveSystem : ISystem
            .Cast<IMovableFace>()
            .Iter(face =>
            {
-               face.Position += face.Velocity * delta;
-               face.Rotation += face.RotationSpeed * delta;
+               face.Position += face.LinearVelocity * delta;
+               face.Rotation += face.RotationVelocity * delta;
            });
     }
 }

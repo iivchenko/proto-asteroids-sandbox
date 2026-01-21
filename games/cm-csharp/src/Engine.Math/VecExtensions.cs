@@ -8,4 +8,9 @@ public static class VecExtensions
 
         return new Vec(vec.X * scalar, vec.Y * scalar);
     }
+
+    public static float Length(this Vec vec)
+    {
+        return MathF.Sqrt((vec.X * vec.X) + (vec.Y * vec.Y));
+    }
 }

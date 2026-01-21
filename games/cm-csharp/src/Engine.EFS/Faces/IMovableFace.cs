@@ -3,7 +3,7 @@
 public interface IMovableFace
 {
     Vec Position { get; set; }
-    Vec Velocity { get; set; }
-    float Rotation { get; set; }
-    float RotationSpeed { get; set; }
+    Vec LinearVelocity { get; set; }
+    Angle Rotation { get; set; }
+    Angle RotationVelocity { get; set; }
 }

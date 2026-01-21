@@ -8,5 +8,7 @@
         }
 
         public Guid Id { get; }
+
+        public bool IsAlive { get; set; } = true;
     }
 }

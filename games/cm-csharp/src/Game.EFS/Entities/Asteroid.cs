@@ -1,6 +1,7 @@
 ﻿using Engine;
 using Engine.EFS;
 using Engine.EFS.Faces;
+using Game.EFS.Faces;
 
 namespace Game.EFS.Entities;
 
@@ -8,32 +9,49 @@ public sealed class Asteroid(
     Sprite sprite,
     Vec velocity,
     Vec scale,
-    float rotationSpeed,
+    Angle rotationSpeed,
     Vec position) : 
-        Entity, 
-        IDrawableFace, 
+        Entity,
+        IDrawableFace,
         IMovableFace, 
         ICollidableFace
 {
     private Sprite _sprite = sprite;
     private Vec _position = position;
     private Vec _scale = scale;
-    private float _rotation = 0.0f;
-    private float _rotationSpeed = rotationSpeed;
+    private Angle _rotation = Angle.Zero;
+    private Angle _rotationSpeed = rotationSpeed;
     private Vec _velocity = velocity;
+    private bool _isCollidable = true;
+    private bool _isVisible = true;
 
     Vec ICollidableFace.Position { get => _position; set => _position = value; }
     float ICollidableFace.Width { get => _sprite.Width; set { } }
     float ICollidableFace.Height { get => _sprite.Height; set { } }
+    Vec ICollidableFace.Origin { get => new(_sprite.Width / 2.0f, _sprite.Height / 2.0f); set { } }
+    Vec ICollidableFace.Scale { get => _scale; set => _scale = value; }
+    Angle ICollidableFace.Rotation { get => _rotation; set => _rotation = value; }
+    public bool IsCollidable { get => _isCollidable; set => _isCollidable = value; }
+
+    public void OnCollide(ICollidableFace face)
+    {
+        if (face is IPlayerFace)
+        {
+            _isCollidable = false;
+            _isVisible = false;
+            IsAlive = false;
+        }
+    }
 
     Sprite IDrawableFace.Sprite { get => _sprite; set => _sprite = value; }
     Vec IDrawableFace.Position { get => _position; set => _position = value; }
     Vec IDrawableFace.Origin { get => new(_sprite.Width / 2.0f, _sprite.Height / 2.0f); set { } }
     Vec IDrawableFace.Scale { get => _scale; set => _scale = value; }
-    float IDrawableFace.Rotation { get => _rotation; set => _rotation = value; }
+    Angle IDrawableFace.Rotation { get => _rotation; set => _rotation = value; }
+    public bool IsVisible { get => _isVisible; set => _isVisible = value; }
 
     Vec IMovableFace.Position { get => _position; set => _position = value; }
-    Vec IMovableFace.Velocity { get => _velocity; set => _velocity = value; }
-    float IMovableFace.Rotation { get => _rotation; set => _rotation = value; }
-    float IMovableFace.RotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
+    Vec IMovableFace.LinearVelocity { get => _velocity; set => _velocity = value; }
+    Angle IMovableFace.Rotation { get => _rotation; set => _rotation = value; }
+    Angle IMovableFace.RotationVelocity { get => _rotationSpeed; set => _rotationSpeed = value; }
 }

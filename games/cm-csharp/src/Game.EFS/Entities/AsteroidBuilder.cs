@@ -37,7 +37,7 @@ public sealed class AsteroidBuilder(
 
     private AsteroidType _type = AsteroidType.Tiny;
     private Vec _position = Vec.Zero;
-    private Angle _direction = new(0, AngleType.Degrees);
+    private Angle _direction = Angle.Zero;
 
     public AsteroidBuilder WithType(AsteroidType type)
     {
@@ -69,7 +69,7 @@ public sealed class AsteroidBuilder(
 
     public AsteroidBuilder WithRandomDirection()
     {
-        _direction = new Angle(_randomService.RandomInt(0, 360), AngleType.Degrees);
+        _direction = Angle.FromDegrees(_randomService.RandomInt(0, 360));
         return this;
     }
 
@@ -78,7 +78,7 @@ public sealed class AsteroidBuilder(
         Sprite sprite;
         int speedX;
         int speedY;
-        float rotationSpeed;
+        Angle rotationSpeed;
         Vec velocity;
 
         var asteroidSprites = AssetStore.Sprites.Asteroids;
@@ -89,14 +89,9 @@ public sealed class AsteroidBuilder(
                 sprite = _spriteLoader.Load(asteroidSprites.Tiny.AsteroidTiny01_png.Path);
                 speedX = _randomService.RandomInt(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
                 speedY = _randomService.RandomInt(TinyAsteroidMinSpeed, TinyAsteroidMaxSpeed);
-                var tmpAngle1 = new Angle
-                    (
-                        _randomService.RandomInt(TinyAsteroidMinRotationSpeed, TinyAsteroidMaxRotationSpeed),
-                        AngleType.Degrees
-                    );
+                var tmpAngle1 = Angle.FromDegrees(_randomService.RandomInt(TinyAsteroidMinRotationSpeed, TinyAsteroidMaxRotationSpeed));
 
-
-                rotationSpeed = tmpAngle1.Value * (_randomService.NextDouble() > 0.5 ? 1 : -1);
+                rotationSpeed = tmpAngle1 * (_randomService.NextDouble() > 0.5 ? 1 : -1);
                 velocity = _direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
@@ -104,13 +99,9 @@ public sealed class AsteroidBuilder(
                 sprite = _spriteLoader.Load(asteroidSprites.Small.AsteroidSmall01_png.Path);
                 speedX = _randomService.RandomInt(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
                 speedY = _randomService.RandomInt(SmallAsteroidMinSpeed, SmallAsteroidMaxSpeed);
-                var tmpAngle2 = new Angle
-                (
-                    _randomService.RandomInt(SmallAsteroidMinRotationSpeed, SmallAsteroidMaxRotationSpeed),
-                    AngleType.Degrees
-                );
+                var tmpAngle2 = Angle.FromDegrees(_randomService.RandomInt(SmallAsteroidMinRotationSpeed, SmallAsteroidMaxRotationSpeed));
 
-                rotationSpeed = tmpAngle2.Value * (_randomService.NextDouble() > 0.5 ? 1 : -1);
+                rotationSpeed = tmpAngle2 * (_randomService.NextDouble() > 0.5 ? 1 : -1);
                 velocity = _direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
@@ -118,12 +109,9 @@ public sealed class AsteroidBuilder(
                 sprite = _spriteLoader.Load(asteroidSprites.Medium.AsteroidMedium01_png.Path);
                 speedX = _randomService.RandomInt(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
                 speedY = _randomService.RandomInt(MediumAsteroidMinSpeed, MediumAsteroidMaxSpeed);
-                var tmpAngle3 = new Angle
-                (
-                   _randomService.RandomInt(MediumAsteroidMinRotationSpeed, MediumAsteroidMaxRotationSpeed),
-                    AngleType.Degrees
-                );
-                rotationSpeed = tmpAngle3.Value * (_randomService.NextDouble() > 0.5 ? 1 : -1);
+                var tmpAngle3 = Angle.FromDegrees(_randomService.RandomInt(MediumAsteroidMinRotationSpeed, MediumAsteroidMaxRotationSpeed));
+
+                rotationSpeed = tmpAngle3 * (_randomService.NextDouble() > 0.5 ? 1 : -1);
                 velocity = _direction.ToVector() * new Vec(speedX, speedY);
                 break;
 
@@ -131,12 +119,9 @@ public sealed class AsteroidBuilder(
                 sprite = _spriteLoader.Load(asteroidSprites.Big.AsteroidBig01_png.Path);
                 speedX = _randomService.RandomInt(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
                 speedY = _randomService.RandomInt(BigAsteroidMinSpeed, BigAsteroidMaxSpeed);
-                var tmpAngle4 = new Angle
-                (
-                    _randomService.RandomInt(BigAsteroidMinRotationSpeed, BigAsteroidMaxRotationSpeed),
-                    AngleType.Degrees
-                );
-                rotationSpeed = tmpAngle4.Value * (_randomService.NextDouble() > 0.5 ? 1 : -1);
+                var tmpAngle4 = Angle.FromDegrees(_randomService.RandomInt(BigAsteroidMinRotationSpeed, BigAsteroidMaxRotationSpeed));
+
+                rotationSpeed = tmpAngle4 * (_randomService.NextDouble() > 0.5 ? 1 : -1);
                 velocity = _direction.ToVector() * new Vec(speedX, speedY);
                 break;
             default:

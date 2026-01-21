@@ -6,5 +6,6 @@ public interface IDrawableFace
     Vec Position { get; set; }
     Vec Origin { get; set; }
     Vec Scale { get; set; }
-    float Rotation { get; set; }
+    Angle Rotation { get; set; }
+    bool IsVisible { get; set; }
 }

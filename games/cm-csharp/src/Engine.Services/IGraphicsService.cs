@@ -2,5 +2,5 @@
 
 public interface IGraphicsService
 {
-    void Draw(Sprite sprite, Vec position, Vec origin, Vec scale, float rotation, Color color);
+    void Draw(Sprite sprite, Vec position, Vec origin, Vec scale, Angle rotation, Color color);
 }
