@@ -6,6 +6,7 @@ using Game.EFS.Faces;
 namespace Game.EFS.Entities;
 
 public sealed class Asteroid(
+    AsteroidType asteroidType,
     Sprite sprite,
     Vec velocity,
     Vec scale,
@@ -16,6 +17,8 @@ public sealed class Asteroid(
         IMovableFace, 
         ICollidableFace
 {
+    private readonly AsteroidType _asteroidType = asteroidType;
+
     private Sprite _sprite = sprite;
     private Vec _position = position;
     private Vec _scale = scale;
@@ -24,6 +27,8 @@ public sealed class Asteroid(
     private Vec _velocity = velocity;
     private bool _isCollidable = true;
     private bool _isVisible = true;
+
+    public AsteroidType Type => _asteroidType;
 
     Vec ICollidableFace.Position { get => _position; set => _position = value; }
     float ICollidableFace.Width { get => _sprite.Width; set { } }

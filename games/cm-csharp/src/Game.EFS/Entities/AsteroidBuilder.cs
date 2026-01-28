@@ -60,8 +60,16 @@ public sealed class AsteroidBuilder(
     public AsteroidBuilder WithRandomPosition()
     {
         var view = _viewService.GetView();
-        var x = _randomService.RandomInt(0, (int)view.Width);
-        var y = _randomService.RandomInt(0, (int)view.Height);
+
+        var (x, y) = _randomService.RandomInt(0, 1) switch
+        {
+            // Vertical
+            0 => (_randomService.RandomInt(0, (int)view.Width), _randomService.RandomPick(0, (int)view.Width)),
+            // Horizontal
+            1 => (_randomService.RandomPick(0, (int)view.Height), _randomService.RandomInt(0, (int)view.Height)),
+            _ => throw new NotImplementedException()
+        };
+
         _position = new Vec(x, y);
 
         return this;
@@ -128,14 +136,6 @@ public sealed class AsteroidBuilder(
                 throw new InvalidOperationException($"Unknown asteroid type {_type}!");
         }
 
-        return new Asteroid(sprite, velocity, Vec.One, rotationSpeed, _position);
+        return new Asteroid(_type, sprite, velocity, Vec.One, rotationSpeed, _position);
     }
-}
-
-public enum AsteroidType
-{
-    Tiny,
-    Small,
-    Medium,
-    Big
 }

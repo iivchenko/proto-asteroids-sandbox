@@ -4,7 +4,6 @@ using Engine.EFS.Faces;
 using Engine.EFS.Systems;
 using Engine.Math;
 using Engine.Services.Keyboard;
-using Engine.Utilities;
 using Game.EFS.Entities;
 using Game.EFS.Faces;
 
@@ -34,7 +33,7 @@ public sealed class PlayerControlSystem(
                if (_keyboardService.IsKeyDown(Keys.ArrowLeft))
                {
                    var angularVelocity = player.AngularVelocity - player.MaxAngularAcceleration;
-                   player.AngularVelocity = Angle.Max(player.MaxRotation * -1, angularVelocity);//  Angle. Math.Abs(angularVelocity) > player.MaxRotation ? -player.MaxRotation : angularVelocity;
+                   player.AngularVelocity = Angle.Max(player.MaxRotation * -1, angularVelocity);
 
                    movable.RotationVelocity = player.AngularVelocity;
 
@@ -42,7 +41,7 @@ public sealed class PlayerControlSystem(
                else if (_keyboardService.IsKeyDown(Keys.ArrowRight))
                {
                    var angularVelocity = player.AngularVelocity + player.MaxAngularAcceleration;
-                   player.AngularVelocity = Angle.Min(player.MaxRotation, angularVelocity); //Math.Abs(angularVelocity) > player.MaxRotation ? player.MaxRotation : angularVelocity;
+                   player.AngularVelocity = Angle.Min(player.MaxRotation, angularVelocity);
 
                    movable.RotationVelocity = player.AngularVelocity;
                }
@@ -74,8 +73,7 @@ public sealed class PlayerControlSystem(
 
                    commands.Add(new AddEntityCommand(projectile));
                }
-
-               if (player.LaserCooldown > 0)
+               else if (player.LaserCooldown > 0)
                {
                    player.LaserCooldown -= delta;
                }

@@ -6,4 +6,9 @@ public interface IRandomService
 
     // TODO: It was a quick hack to fix build issues. Think proper on the interface of this service
     double NextDouble();
+
+    T RandomPick<T>(params T[] items);
+
+    T RandomPick<T>(IEnumerable<T> items);
+
 }
