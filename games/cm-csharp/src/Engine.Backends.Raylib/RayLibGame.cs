@@ -3,21 +3,14 @@ using System.Diagnostics;
 
 namespace Engine.Backends.Raylib;
 
-public sealed class RayLibGame : IGame
+public sealed class RayLibGame(
+    GameConfiguration configuration,
+    RayLibGame_GraphicsService graphicsSystem,
+    SceneBootstraper bootstraper) : IGame
 {
-    private readonly GameConfiguration _configuration;
-    private readonly RayLibGame_GraphicsService _graphicsSystem;
-    private readonly SceneBootstraper _bootstraper;
-
-    public RayLibGame(
-        GameConfiguration configuration,
-        RayLibGame_GraphicsService graphicsSystem,
-        SceneBootstraper bootstraper)
-    {
-        _configuration = configuration;
-        _graphicsSystem = graphicsSystem;
-        _bootstraper = bootstraper;
-    }
+    private readonly GameConfiguration _configuration = configuration;
+    private readonly RayLibGame_GraphicsService _graphicsSystem = graphicsSystem;
+    private readonly SceneBootstraper _bootstraper = bootstraper;
 
     public void Run()
     {

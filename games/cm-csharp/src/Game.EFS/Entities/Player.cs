@@ -21,6 +21,7 @@ public sealed class Player(
     //const float MaxSpeed = 600.0f;
     //const float Acceleration = 20.0f;
 
+    private PlayerState _state = PlayerState.Alive;
     private float _maxSpeed = 600.0f;
     private float _maxAcceleration = 20.0f;
     private Angle _maxAngularAcceleration = Angle.FromDegrees(30.0f);
@@ -36,6 +37,8 @@ public sealed class Player(
     private bool _isCollidable = true;
     private bool _isVisible = true;
     private float _laserCooldown = 0.0f;
+
+    public PlayerState State { get => _state; set => _state = value; }
 
     float IPlayerFace.MaxSpeed { get => _maxSpeed; set => _maxSpeed = value; }
     float IPlayerFace.MaxAcceleration { get => _maxAcceleration; set => _maxAcceleration = value; }
@@ -53,6 +56,13 @@ public sealed class Player(
     public bool IsCollidable { get => _isCollidable; set => _isCollidable = value; }
     public IWorldCommand OnCollide(ICollidableFace face)
     {
+        if (face is Asteroid)
+        {
+            _isCollidable = false;
+            _isVisible = false;
+            _state = PlayerState.Killed;
+        }
+
         return EmptyEntityCommand.Empty;
     }
 
@@ -61,7 +71,7 @@ public sealed class Player(
     Vec IDrawableFace.Origin { get => new(_sprite.Width / 2.0f, _sprite.Height / 2.0f); set { } }
     Vec IDrawableFace.Scale { get => _scale; set => _scale = value; }
     Angle IDrawableFace.Rotation { get => _rotation; set => _rotation = value; }
-    public bool IsVisible { get => _isVisible; set => _isVisible = value; }
+    bool IDrawableFace.IsVisible { get => _isVisible; set => _isVisible = value; }
 
     Vec IMovableFace.Position { get => _position; set => _position = value; }
     Vec IMovableFace.LinearVelocity { get => _velocity; set => _velocity = value; }
@@ -69,4 +79,12 @@ public sealed class Player(
     Angle IMovableFace.RotationVelocity { get => _rotationSpeed; set => _rotationSpeed = value; }
 
     public float LaserCooldown { get => _laserCooldown; set => _laserCooldown = value; }
+}
+
+public enum PlayerState
+{
+    Alive,
+    Killed,
+    Respawning,
+    Dead
 }

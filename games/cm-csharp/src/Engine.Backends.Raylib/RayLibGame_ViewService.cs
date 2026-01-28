@@ -17,11 +17,11 @@ public sealed class RayLibGame_KeyboardService : IKeyboardService
     {
         var raylibKey = key switch
         {
-            Keys.ArrowLeft => Raylib_cs.KeyboardKey.KEY_LEFT,
-            Keys.ArrowUp => Raylib_cs.KeyboardKey.KEY_UP,
-            Keys.ArrowRight => Raylib_cs.KeyboardKey.KEY_RIGHT,
-            Keys.ArrowDown => Raylib_cs.KeyboardKey.KEY_DOWN,
-            Keys.Space => Raylib_cs.KeyboardKey.KEY_SPACE,
+            Keys.ArrowLeft => Raylib_cs.KeyboardKey.Left,
+            Keys.ArrowUp => Raylib_cs.KeyboardKey.Up,
+            Keys.ArrowRight => Raylib_cs.KeyboardKey.Right,
+            Keys.ArrowDown => Raylib_cs.KeyboardKey.Down,
+            Keys.Space => Raylib_cs.KeyboardKey.Space,
             _ => throw new ArgumentOutOfRangeException(nameof(key), $"Not expected key value: {key}") // TODO: Finishe all the other mappings
         };
 

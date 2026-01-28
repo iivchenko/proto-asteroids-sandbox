@@ -21,6 +21,7 @@ public static class DependencyInjection
             .AddTransient<ISystem, MoveSystem>()
             .AddTransient<ISystem, OutOfScreenSystem>()
             .AddTransient<ISystem, PlayerControlSystem>()
+            .AddTransient<ISystem, PlayerRespawnSystem>()
             .AddTransient<ISystem, AsteroidSpawnSystem>()
             .AddTransient<IWorld, World>();
 

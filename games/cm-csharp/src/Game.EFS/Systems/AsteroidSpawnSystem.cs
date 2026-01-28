@@ -16,7 +16,7 @@ public sealed class AsteroidSpawnSystem : ISystem
 
     private readonly IEntityBuilderFactory<AsteroidBuilder> _asteroidBuilderFactory;
     private readonly IRandomService _randomService;
-    private readonly IDictionary<AsteroidType, int> _asteroids;
+    private readonly Dictionary<AsteroidType, int> _asteroids;
 
     private float _cooldown = MaxCooldown;
 

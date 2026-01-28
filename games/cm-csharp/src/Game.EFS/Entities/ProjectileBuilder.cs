@@ -4,10 +4,7 @@ using Game.Assets;
 
 namespace Game.EFS.Entities;
 
-public sealed class ProjectileBuilder(
-    IAssetService<Sprite> spriteLoader,
-    IRandomService randomService,
-    IViewService viewService)
+public sealed class ProjectileBuilder(IAssetService<Sprite> spriteLoader)
 {
     private const float Speed = 1200.0f;
 

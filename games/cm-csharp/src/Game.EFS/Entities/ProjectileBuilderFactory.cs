@@ -4,18 +4,13 @@ using Engine.Services;
 
 namespace Game.EFS.Entities;
 
-public sealed class ProjectileBuilderFactory(
-   IAssetService<Sprite> spriteLoader,
-   IRandomService randomService,
-   IViewService viewService)
+public sealed class ProjectileBuilderFactory(IAssetService<Sprite> spriteLoader)
     : IEntityBuilderFactory<ProjectileBuilder>
 {
     private readonly IAssetService<Sprite> _spriteLoader = spriteLoader;
-    private readonly IRandomService _randomService = randomService;
-    private readonly IViewService _viewService = viewService;
 
     public ProjectileBuilder Create()
     {
-        return new ProjectileBuilder(_spriteLoader, _randomService, _viewService);
+        return new ProjectileBuilder(_spriteLoader);
     }
 }

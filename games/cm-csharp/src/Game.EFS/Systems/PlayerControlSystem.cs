@@ -24,11 +24,13 @@ public sealed class PlayerControlSystem(
         faces
            .Where(entity => entity is not null)
            .Where(entity => entity is IPlayerFace && entity is IMovableFace)
+           .Select(entity => ((IPlayerFace)entity, (IMovableFace)entity))
+           .Where(entity => entity.Item1.State == PlayerState.Alive)
            .SelectMany(entity =>
            {
+               var player = entity.Item1;
+               var movable = entity.Item2;
                var commands = new List<IWorldCommand>();
-               var player = (IPlayerFace)entity;
-               var movable = (IMovableFace)entity;
 
                if (_keyboardService.IsKeyDown(Keys.ArrowLeft))
                {

@@ -14,19 +14,19 @@ public sealed class RayLibGame_GraphicsService : IGraphicsService, IAssetService
         float Rotation,
         Color Color);
 
-    private readonly IDictionary<Guid, Texture2D> _textures = new Dictionary<Guid, Texture2D>();
-    private readonly List<SpriteDescriptor> _sprites = new List<SpriteDescriptor>();
+    private readonly Dictionary<Guid, Texture2D> _textures = [];
+    private readonly List<SpriteDescriptor> _sprites = [];
 
     public void Commit()
     {
         Raylib_cs.Raylib.BeginDrawing();
-        Raylib_cs.Raylib.ClearBackground(Raylib_cs.Color.WHITE);
+        Raylib_cs.Raylib.ClearBackground(Raylib_cs.Color.White);
 
         foreach (var sprite in _sprites)
         {
             var texture = _textures[sprite.Sprite.Id];
-            var source = new Rectangle(0, 0, texture.width, texture.height);
-            var target = new Rectangle(sprite.Position.X, sprite.Position.Y, texture.width, texture.height);
+            var source = new Rectangle(0, 0, texture.Width, texture.Height);
+            var target = new Rectangle(sprite.Position.X, sprite.Position.Y, texture.Width, texture.Height);
             var origin = new Vector2(sprite.Origin.X, sprite.Origin.Y);
             var color = new Raylib_cs.Color(sprite.Color.Red, sprite.Color.Green, sprite.Color.Blue, sprite.Color.Alpha); 
 
@@ -47,7 +47,7 @@ public sealed class RayLibGame_GraphicsService : IGraphicsService, IAssetService
     public Sprite Load(string path)
     {
         var texture = Raylib_cs.Raylib.LoadTexture(path);
-        var sprite = new Sprite(texture.width, texture.height);
+        var sprite = new Sprite(texture.Width, texture.Height);
 
         _textures.Add(sprite.Id, texture);
 
